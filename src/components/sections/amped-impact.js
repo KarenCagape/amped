@@ -1,6 +1,5 @@
 import * as React from 'react';
 import 'twin.macro';
-import _ from 'lodash';
 import Button from '../button';
 
 import AmpedStoryMap from '../amped-story-map';

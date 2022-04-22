@@ -35,7 +35,6 @@ export default function IndexPage(props) {
   const poweringYourPossibilitiesData = _.get(sectionsData, '[3]', null);
   const noCompromisesData = _.get(sectionsData, '[4]', null);
   const ampedImpactData = _.get(sectionsData, '[5]', null);
-  const extraData = _.get(sectionsData, '[6]', null);
 
   return (
     <Layout pageTitle="Home">

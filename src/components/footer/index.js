@@ -4,7 +4,6 @@ import LinkCategory from "./link-category";
 import { Link } from "gatsby";
 import Copyright from "./copyright";
 import { WhiteLogo } from "../_/logo";
-import WowSolar from "../wowsolar";
 
 function CategorizedLink({ name = "", links = [] }) {
   if (!links.length) {

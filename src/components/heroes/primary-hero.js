@@ -5,7 +5,6 @@ import Hero from '../hero';
 import { graphql, useStaticQuery } from 'gatsby';
 
 import BackgroundImage from 'gatsby-background-image';
-import _ from 'lodash';
 
 const { Caption } = Hero;
 

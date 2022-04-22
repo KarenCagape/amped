@@ -1,13 +1,8 @@
 import * as React from 'react';
 import 'twin.macro';
-import _ from 'lodash';
 import { StaticImage } from 'gatsby-plugin-image';
 
 export function MeetTheSolutions(props) {
-  const heading1 = _.get(props, 'data.headings[0].text.text');
-  const heading2 = _.get(props, 'data.headings[1].text.text');
-  const imageBlock1 = _.get(props, 'data.images[0]');
-  const imageBlock2 = _.get(props, 'data.images[1]');
 
   return (
     <div tw="pt-12 lg:pt-48 pb-24">

@@ -4,7 +4,6 @@ import Slider from 'react-slick';
 import ProductCardLandscape from './product-card-landscape';
 import { StaticImage } from 'gatsby-plugin-image';
 import WowSolar from './wowsolar';
-import GlobalStyles from './global-styles';
 import Button from './_/button';
 import SliderButton from './btn-slider-arrow';
 
