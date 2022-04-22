@@ -3,7 +3,6 @@ import 'twin.macro';
 import UpgradeCard from './upgrade-card';
 import { StaticImage } from 'gatsby-plugin-image';
 import SliderArrow from './btn-slider-arrow';
-import get from '../helpers/get';
 
 export function UpgradeSteps2() {
   return (

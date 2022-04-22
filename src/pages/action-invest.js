@@ -6,10 +6,6 @@ import Layout from '../components/layout';
 import Banner from '../components/heroes/invest';
 import { SubHeader } from '../components/_/header';
 import SliderButton from '../components/btn-slider-arrow';
-import PlayIcon from '../assets/ico-play_video.svg';
-import Button from '../components/_/button';
-import WowSolar from '../components/wowsolar';
-import BuyWowSolar from '../components/sections/buy-wowsolar';
 import ReachOut from '../components/sections/reach-out';
 
 const sliderOverride = css`
@@ -115,28 +111,6 @@ function ContentSlider({
   );
 }
 
-function StorySliderContent({ media, caption, author }) {
-  return (
-    <div tw="mx-0 lg:mx-8 min-h-full flex flex-col justify-between">
-      <div tw="w-full h-80 ">{media}</div>
-      <div tw="text-px21 p-8 my-10 bg-sitegray rounded">{caption}</div>
-      <div>{author}</div>
-    </div>
-  );
-}
-
-function StoryAuthor({ image, name, address }) {
-  return (
-    <div tw="flex items-center">
-      <div tw="rounded-full w-24 h-24 bg-gray-200 mr-4">{image}</div>
-      <div>
-        <div tw="text-px28">{name}</div>
-        <div tw="text-px16 text-secondary">{address}</div>
-      </div>
-    </div>
-  );
-}
-
 function DownloadableContent({ media, title, actions }) {
   return (
     <div tw="mx-8">
@@ -157,32 +131,8 @@ function DownloadableContent({ media, title, actions }) {
   );
 }
 
-function PlayButton({ ...rest }) {
-  return (
-    <button {...rest}>
-      <PlayIcon />
-    </button>
-  );
-}
-
 export default function AmpedStory() {
-  const slider1Ref = React.useRef();
-  const slider2Ref = React.useRef();
   const slider3Ref = React.useRef();
-  const [customerExperiencePlayed, setCustomerExperiencePlayed] =
-    React.useState({
-      v1: false,
-      v2: false,
-      v3: false,
-      v4: false,
-    });
-  const [distributorExperiencePlayed, setDistributorExperiencePlayed] =
-    React.useState({
-      v1: false,
-      v2: false,
-      v3: false,
-      v4: false,
-    });
 
   return (
     <Layout pageTitle="Invest">

@@ -1,14 +1,9 @@
 import * as React from 'react';
 import 'twin.macro';
-import _ from 'lodash';
 import Button from '../button';
 import { StaticImage } from 'gatsby-plugin-image';
 
 export function HowWeDoIt(props) {
-  const caption = _.get(props, 'data.captions[0].text.text');
-  const heading1 = _.get(props, 'data.headings[0].text.text');
-  const heading2 = _.get(props, 'data.headings[1].text.text');
-  const howWeDoItButtonLink = _.get(props, 'data.links[0]');
 
   return (
     <div tw="rounded px-4 py-16 lg:py-48 bg-default">

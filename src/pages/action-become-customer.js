@@ -6,7 +6,6 @@ import Layout from '../components/layout';
 import Banner from '../components/heroes/become-customer';
 import { SubHeader } from '../components/_/header';
 import SliderButton from '../components/btn-slider-arrow';
-import PlayIcon from '../assets/ico-play_video.svg';
 import Button from '../components/button';
 import WowSolar from '../components/wowsolar';
 import BuyWowSolar2 from '../components/sections/buy-wowsolar2';
@@ -156,32 +155,9 @@ function DownloadableContent({ media, title, actions }) {
   );
 }
 
-function PlayButton({ ...rest }) {
-  return (
-    <button {...rest}>
-      <PlayIcon />
-    </button>
-  );
-}
-
 export default function AmpedStory() {
   const slider1Ref = React.useRef();
-  const slider2Ref = React.useRef();
   const slider3Ref = React.useRef();
-  const [customerExperiencePlayed, setCustomerExperiencePlayed] =
-    React.useState({
-      v1: false,
-      v2: false,
-      v3: false,
-      v4: false,
-    });
-  const [distributorExperiencePlayed, setDistributorExperiencePlayed] =
-    React.useState({
-      v1: false,
-      v2: false,
-      v3: false,
-      v4: false,
-    });
 
   return (
     <Layout pageTitle="Customer Experience">

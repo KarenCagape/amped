@@ -5,7 +5,6 @@ import Television from '../components/heroes/television';
 import { SubHeader } from '../components/_/header';
 import WowSolar from '../components/wowsolar';
 import SvgCard from '../components/svg-card';
-import styled from 'styled-components';
 
 import SvgOnGrid from '../assets/ico-on_grid.svg';
 import SvgLongerPlay from '../assets/ico-longer_play.svg';

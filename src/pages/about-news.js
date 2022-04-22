@@ -1,77 +1,11 @@
 import * as React from "react";
-import { css } from "twin.macro";
+import "twin.macro";
 import Slider from "react-slick";
 import { StaticImage } from "gatsby-plugin-image";
 import Layout from "../components/layout";
 import Banner from "../components/heroes/news";
-import { SubHeader } from "../components/_/header";
 import SliderButton from "../components/btn-slider-arrow";
-import PlayIcon from "../assets/ico-play_video.svg";
 import Button from "../components/button";
-
-const sliderOverride = css`
-  & .slick-list,
-  & .slick-track {
-    display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-  }
-
-  & .slick-slide > div {
-    height: 100%;
-  }
-`;
-
-const galleryImages = [
-  <StaticImage
-    alt=""
-    loading="eager"
-    placeholder="none"
-    src="../images/instagram-1.jpg"
-  />,
-  <StaticImage
-    alt=""
-    loading="eager"
-    placeholder="none"
-    src="../images/instagram-2.jpg"
-  />,
-  <StaticImage
-    alt=""
-    loading="eager"
-    placeholder="none"
-    src="../images/instagram-3.jpg"
-  />,
-  <StaticImage
-    alt=""
-    loading="eager"
-    placeholder="none"
-    src="../images/instagram-4.jpg"
-  />,
-  <StaticImage
-    alt=""
-    loading="eager"
-    placeholder="none"
-    src="../images/instagram-5.jpg"
-  />,
-  <StaticImage
-    alt=""
-    loading="eager"
-    placeholder="none"
-    src="../images/instagram-6.jpg"
-  />,
-  <StaticImage
-    alt=""
-    loading="eager"
-    placeholder="none"
-    src="../images/instagram-7.jpg"
-  />,
-  <StaticImage
-    alt=""
-    loading="eager"
-    placeholder="none"
-    src="../images/instagram-8.jpg"
-  />,
-];
 
 function ContentSlider({
   sliderRef,
@@ -112,28 +46,6 @@ function ContentSlider({
   );
 }
 
-function StorySliderContent({ media, caption, author }) {
-  return (
-    <div tw="mx-0 lg:mx-8 min-h-full flex flex-col justify-between">
-      <div tw="w-full h-80 ">{media}</div>
-      <div tw="text-px21 p-8 my-10 bg-sitegray rounded">{caption}</div>
-      <div>{author}</div>
-    </div>
-  );
-}
-
-function StoryAuthor({ image, name, address }) {
-  return (
-    <div tw="flex items-center">
-      <div tw="rounded-full w-24 h-24 bg-gray-200 mr-4">{image}</div>
-      <div>
-        <div tw="text-px28">{name}</div>
-        <div tw="text-px16 text-secondary">{address}</div>
-      </div>
-    </div>
-  );
-}
-
 function DownloadableContent({ media, title, actions }) {
   return (
     <div tw="mx-8">
@@ -154,32 +66,8 @@ function DownloadableContent({ media, title, actions }) {
   );
 }
 
-function PlayButton({ ...rest }) {
-  return (
-    <button {...rest}>
-      <PlayIcon />
-    </button>
-  );
-}
-
 export default function AmpedStory() {
-  const slider1Ref = React.useRef();
-  const slider2Ref = React.useRef();
   const slider3Ref = React.useRef();
-  const [customerExperiencePlayed, setCustomerExperiencePlayed] =
-    React.useState({
-      v1: false,
-      v2: false,
-      v3: false,
-      v4: false,
-    });
-  const [distributorExperiencePlayed, setDistributorExperiencePlayed] =
-    React.useState({
-      v1: false,
-      v2: false,
-      v3: false,
-      v4: false,
-    });
 
   return (
     <Layout pageTitle="Customer Experience">
@@ -226,6 +114,7 @@ export default function AmpedStory() {
                     <a
                       href="https://fincaventures.com/why-we-invested-amped-innovation/"
                       target="_blank"
+                      rel="noreferrer"
                     >
                       Read More
                     </a>
@@ -247,6 +136,7 @@ export default function AmpedStory() {
                     <a
                       href="https://www.sv2.org/introducing-our-newest-impact-investee-amped-innovation/"
                       target="_blank"
+                      rel="noreferrer"
                     >
                       Read More
                     </a>
@@ -268,6 +158,7 @@ export default function AmpedStory() {
                     <a
                       href="https://energycapitalpower.com/edfi-electrifi-6-million-to-support-amped-innovations-african-projects/"
                       target="_blank"
+                      rel="noreferrer"
                     >
                       Read More
                     </a>
@@ -289,6 +180,7 @@ export default function AmpedStory() {
                     <a
                       href="https://www.sv2.org/introducing-our-newest-impact-investee-amped-innovation/"
                       target="_blank"
+                      rel="noreferrer"
                     >
                       Read More
                     </a>

@@ -2,7 +2,6 @@ import * as React from 'react';
 import Slick from 'react-slick';
 import { css } from 'twin.macro';
 import { StaticImage } from 'gatsby-plugin-image';
-import _ from 'lodash';
 import Button from '../button';
 import WowSolar from '../wowsolar';
 
@@ -79,8 +78,6 @@ function Card({ img, heading, text, button, ...rest }) {
 
 export function PoweringYourPossibilities(props) {
   const slickRef = React.useRef();
-  const heading1 = _.get(props, 'data.headings[0].text.text');
-  const heading2 = _.get(props, 'data.headings[1].text.text');
 
   function handleArrowClick() {
     slickRef.current.slickNext();

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import 'twin.macro';
-import _ from 'lodash';
 import Slick from 'react-slick';
 import { StaticImage } from 'gatsby-plugin-image';
 import BtnSliderArrow from '../btn-slider-arrow';
@@ -38,8 +37,6 @@ function Slider({ slickRef, contents = [] }) {
 export function NoCompromises(props) {
   const slider1Ref = React.useRef();
   const slider2Ref = React.useRef();
-  const heading1 = _.get(props, 'data.headings[0].text.text');
-  const heading2 = _.get(props, 'data.headings[1].text.text');
 
   function handleSliderClick(ref) {
     ref.current.slickNext();

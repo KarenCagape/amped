@@ -1,7 +1,6 @@
 import * as React from "react";
 import SelectOption from "../../components/select-option";
 import IcoPhone from "../../assets/ico-phone.svg";
-import TeamMap from "../../assets/team-map.svg";
 import "twin.macro";
 import wowSolarCountries from "./wowsolar-countries";
 

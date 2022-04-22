@@ -12,7 +12,6 @@ import { css } from "twin.macro";
 import Slider from "react-slick";
 
 import SliderButton from "../components/btn-slider-arrow";
-import PlayIcon from "../assets/ico-play_video.svg";
 
 const sliderOverride = css`
   & .slick-list,
@@ -108,14 +107,6 @@ function DownloadableContent({ media, title, actions }) {
   );
 }
 
-function PlayButton({ ...rest }) {
-  return (
-    <button {...rest}>
-      <PlayIcon />
-    </button>
-  );
-}
-
 const galleryImages = [
   <StaticImage
     alt=""
@@ -169,22 +160,7 @@ const galleryImages = [
 
 export default function AmpedStory() {
   const slider1Ref = React.useRef();
-  const slider2Ref = React.useRef();
   const slider3Ref = React.useRef();
-  const [customerExperiencePlayed, setCustomerExperiencePlayed] =
-    React.useState({
-      v1: false,
-      v2: false,
-      v3: false,
-      v4: false,
-    });
-  const [distributorExperiencePlayed, setDistributorExperiencePlayed] =
-    React.useState({
-      v1: false,
-      v2: false,
-      v3: false,
-      v4: false,
-    });
 
   return (
     <Layout pageTitle="Become Distributor">

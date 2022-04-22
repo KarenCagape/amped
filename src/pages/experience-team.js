@@ -17,19 +17,6 @@ function EmployeeCard({ avatar, name, position }) {
   );
 }
 
-function EmptyAvatar() {
-  return (
-    <div tw="rounded-full bg-sitegray w-32 h-32 mx-auto">
-      <StaticImage
-        alt=""
-        loading="eager"
-        placeholder="none"
-        src="../images/team-default.png"
-      />
-    </div>
-  );
-}
-
 export default function AmpedStory() {
   return (
     <Layout pageTitle="Team">
