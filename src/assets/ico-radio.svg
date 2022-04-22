@@ -1,0 +1,34 @@
+<svg id="ico-radio" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+  <rect id="Rectangle_528" data-name="Rectangle 528" width="40" height="40" fill="none"/>
+  <g id="Group_821" data-name="Group 821" transform="translate(3.472 6.6)">
+    <g id="Group_825" data-name="Group 825" transform="translate(0 0)">
+      <line id="Line_183" data-name="Line 183" x1="24.325" y2="9.256" transform="translate(2.25)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_184" data-name="Line 184" y2="17.879" transform="translate(12.661 9.256)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <g id="Group_824" data-name="Group 824" transform="translate(15.275 15.392)">
+        <g id="Group_821-2" data-name="Group 821">
+          <rect id="Rectangle_565" data-name="Rectangle 565" width="1.884" height="1.884" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <rect id="Rectangle_566" data-name="Rectangle 566" width="1.884" height="1.884" transform="translate(3.974)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <rect id="Rectangle_567" data-name="Rectangle 567" width="1.884" height="1.884" transform="translate(7.947)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Group_822" data-name="Group 822" transform="translate(0 3.855)">
+          <rect id="Rectangle_568" data-name="Rectangle 568" width="1.884" height="1.884" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <rect id="Rectangle_569" data-name="Rectangle 569" width="1.884" height="1.884" transform="translate(3.974)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <rect id="Rectangle_570" data-name="Rectangle 570" width="1.884" height="1.884" transform="translate(7.947)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Group_823" data-name="Group 823" transform="translate(0 7.71)">
+          <rect id="Rectangle_571" data-name="Rectangle 571" width="1.884" height="1.884" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <rect id="Rectangle_572" data-name="Rectangle 572" width="1.884" height="1.884" transform="translate(3.974)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <rect id="Rectangle_573" data-name="Rectangle 573" width="1.884" height="1.884" transform="translate(7.947)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+      </g>
+      <rect id="Rectangle_574" data-name="Rectangle 574" width="27.135" height="17.879" rx="3" transform="translate(0 9.256)" fill="none" stroke="#7a96a0" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    </g>
+    <g id="Group_826" data-name="Group 826" transform="translate(23.386 3.846)">
+      <line id="Line_185" data-name="Line 185" x2="1.37" y2="1.37" transform="translate(6.359 7.96)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_186" data-name="Line 186" x2="1.937" transform="translate(7.393 5.465)" fill="none" stroke="#7a96a0" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_187" data-name="Line 187" y1="1.37" x2="1.37" transform="translate(6.359 1.601)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_188" data-name="Line 188" y1="1.937" transform="translate(3.865)" fill="none" stroke="#7a96a0" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_189" data-name="Line 189" x1="1.37" y1="1.37" transform="translate(0 1.601)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

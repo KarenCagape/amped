@@ -1,0 +1,10 @@
+<svg id="ico-power-output" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+  <rect id="Rectangle_575" data-name="Rectangle 575" width="40" height="40" fill="none"/>
+  <g id="Group_830" data-name="Group 830" transform="translate(8.001 9)">
+    <path id="Path_516" data-name="Path 516" d="M6264.423,3638.874h-12.06l-11.22,13.828h7.29l-5.82,7.172,17.41-9.68h-4.786Z" transform="translate(-6241.143 -3638.874)" fill="none" stroke="#7a96a0" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <g id="Group_829" data-name="Group 829" transform="translate(8.066 5.386)">
+      <path id="Path_517" data-name="Path 517" d="M6266.574,3645.029l3.036,3.076-3.037,3.076" transform="translate(-6252.675 -3645.029)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_190" data-name="Line 190" x1="16.934" transform="translate(0 3.076)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

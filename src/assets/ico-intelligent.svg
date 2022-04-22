@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">
+  <g id="ico-intelligent_security" transform="translate(-6029.756 -2272.223)">
+    <line id="Line_209" data-name="Line 209" y1="12.111" transform="translate(6063.323 2314.586)" fill="#fff" stroke="#7a96a0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line id="Line_210" data-name="Line 210" x2="12.722" transform="translate(6067.505 2310.403)" fill="#fff" stroke="#7a96a0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <g id="Group_924" data-name="Group 924">
+      <g id="Group_923" data-name="Group 923">
+        <path id="Path_526" data-name="Path 526" d="M6050.978,2353.658v-22.34c0-3.078-2.343-10.4-2.343-19.152a25.378,25.378,0,0,1,50.756,0l7.487,16.571h-8.738v9.519a5.075,5.075,0,0,1-5.076,5.075h-7.136v10.327h-22.762v-18.6" fill="none" stroke="#7a96a0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <circle id="Ellipse_909" data-name="Ellipse 909" cx="4.183" cy="4.183" r="4.183" transform="translate(6059.14 2326.697)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <rect id="Rectangle_619" data-name="Rectangle 619" width="96" height="96" transform="translate(6029.756 2272.223)" fill="none"/>
+    </g>
+    <circle id="Ellipse_910" data-name="Ellipse 910" cx="4.183" cy="4.183" r="4.183" transform="translate(6080.228 2306.22)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <circle id="Ellipse_911" data-name="Ellipse 911" cx="4.183" cy="4.183" r="4.183" transform="translate(6059.14 2306.22)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g>
+</svg>

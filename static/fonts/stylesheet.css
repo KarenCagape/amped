@@ -1,0 +1,59 @@
+@font-face {
+  font-family: "Circular-Light";
+  src: url("Circular-Light.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Circular-Light";
+  src: url("Circular-Light.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Circular-Book";
+  src: url("Circular-Book.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Circular-Book";
+  src: url("Circular-Book.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Circular-Regular";
+  src: url("Circular-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Circular-Regular";
+  src: url("Circular-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Circular-Bold";
+  src: url("Circular-Bold.woff") format("woff2");
+}
+
+@font-face {
+  font-family: "Circular-Bold";
+  src: url("Circular-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SF-Compact-Rounded-Light";
+  src: url("SF-Compact-Rounded-Light.woff") format("woff");
+}
+
+@font-face {
+  font-family: "SF-Compact-Text-Bold";
+  src: url("SF-Compact-Text-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "SF-Compact-Text-Regular";
+  src: url("SF-Compact-Text-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "SF-Compact-Text-Light";
+  src: url("SF-Compact-Text-Light.woff") format("woff");
+}

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">
+  <g id="ico-fan_longer_runtimes" transform="translate(-6366.49 -2270.628)">
+    <g id="Group_951" data-name="Group 951">
+      <g id="Group_947" data-name="Group 947">
+        <path id="Path_529" data-name="Path 529" d="M6414.49,2301.886c0-4.224-2.035-5.03-4.646-5.03s-8.64,2.577-8.64,10.29c0,10.363,13.286,11.482,13.286,11.482Z" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Path_530" data-name="Path 530" d="M6397.748,2318.628c-4.224,0-5.031,2.036-5.031,4.647s2.578,8.64,10.291,8.64c10.362,0,11.482-13.287,11.482-13.287Z" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Path_531" data-name="Path 531" d="M6414.49,2335.371c0,4.224,2.035,5.03,4.647,5.03s8.64-2.577,8.64-10.29c0-10.363-13.287-11.483-13.287-11.483Z" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Path_532" data-name="Path 532" d="M6431.233,2318.628c4.224,0,5.03-2.035,5.03-4.646s-2.577-8.64-10.29-8.64c-10.363,0-11.483,13.286-11.483,13.286Z" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Group_950" data-name="Group 950">
+        <g id="Group_949" data-name="Group 949">
+          <g id="Group_948" data-name="Group 948">
+            <path id="Path_533" data-name="Path 533" d="M6449.932,2318.628a35.443,35.443,0,0,1-35.442,35.443" fill="none" stroke="#7a96a0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke-dasharray="6"/>
+            <path id="Path_534" data-name="Path 534" d="M6414.49,2354.071" fill="none" stroke="#7a96a0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+            <path id="Path_535" data-name="Path 535" d="M6404.341,2352.6a35.448,35.448,0,1,1,44.1-44.171" fill="none" stroke="#7a96a0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          </g>
+        </g>
+      </g>
+    </g>
+    <rect id="Rectangle_625" data-name="Rectangle 625" width="96" height="96" transform="translate(6366.49 2270.628)" fill="none"/>
+  </g>
+</svg>

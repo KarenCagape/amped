@@ -1,0 +1,13 @@
+<svg id="ico-torch" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+  <rect id="Rectangle_539" data-name="Rectangle 539" width="40" height="40" fill="none"/>
+  <g id="Group_732" data-name="Group 732" transform="translate(5.714 5.698)">
+    <g id="Group_731" data-name="Group 731">
+      <path id="Path_503" data-name="Path 503" d="M5177.6,3513.882c-2.445,2.345-4.569,4.624-4.569,4.624l.217,1.423-2.07,1.986v.729l-7.372,7.071-1.056.284-3.781,3.626a4.856,4.856,0,0,0,1.639,3.077,5.258,5.258,0,0,0,3.208,1.573l3.781-3.626.3-1.013,7.371-7.071h.76l2.07-1.986,1.484.208,5.008-3.924" transform="translate(-5158.973 -3510.385)" fill="none" stroke="#7a96a0" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <circle id="Ellipse_530" data-name="Ellipse 530" cx="1.553" cy="1.553" r="1.553" transform="translate(15.476 7.578)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_164" data-name="Line 164" x2="4.524" y2="4.524" transform="translate(12.099 11.854)" fill="#fff" stroke="#7a96a0" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line id="Line_165" data-name="Line 165" x2="4.524" y2="4.524" transform="translate(4.794 18.862)" fill="#fff" stroke="#7a96a0" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <path id="Path_504" data-name="Path 504" d="M5205.683,3508.259l-3.236,3.236a12.485,12.485,0,0,1,7.248,7.248l3.236-3.236C5214.638,3513.8,5207.39,3506.552,5205.683,3508.259Z" transform="translate(-5184.209 -3508.001)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <path id="Path_505" data-name="Path 505" d="M5162.539,3569.871s-1.506,2.479,4.627,2.479h7.765c3.522,0,3.615-2.231.143-2.231s-5.488,2.231-7.908,2.231" transform="translate(-5160.724 -3543.795)" fill="none" stroke="#fc3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

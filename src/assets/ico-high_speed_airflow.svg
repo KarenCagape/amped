@@ -1,0 +1,17 @@
+<svg id="ico-high_speed_airflow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="96" height="96" viewBox="0 0 96 96">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_703" data-name="Rectangle 703" width="96" height="96" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Group_1178" data-name="Group 1178" clip-path="url(#clip-path)">
+    <path id="Path_1360" data-name="Path 1360" d="M52.241,43.337S58.177,32,54.109,22.467c-3.33-7.807-10.55-11.4-14.62-5.3" fill="none" stroke="#7a96a0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_1361" data-name="Path 1361" d="M47.7,41.7S43.883,29.491,34.265,25.626c-7.876-3.165-15.523-.6-14.089,6.586" fill="none" stroke="#fb3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_1362" data-name="Path 1362" d="M43.337,43.759S32,37.823,22.467,41.891c-7.807,3.33-11.4,10.55-5.3,14.62" fill="none" stroke="#7a96a0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_1363" data-name="Path 1363" d="M41.7,48.3S29.491,52.117,25.626,61.735c-3.165,7.876-.6,15.523,6.586,14.089" fill="none" stroke="#fb3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_1364" data-name="Path 1364" d="M43.759,52.663S37.823,64,41.891,73.533c3.33,7.807,10.55,11.4,14.62,5.305" fill="none" stroke="#7a96a0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_1365" data-name="Path 1365" d="M48.3,54.3s3.818,12.213,13.436,16.078c7.876,3.165,15.523.6,14.089-6.586" fill="none" stroke="#fb3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_1366" data-name="Path 1366" d="M52.663,52.241S64,58.177,73.533,54.109c7.807-3.33,11.4-10.55,5.305-14.62" fill="none" stroke="#7a96a0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_1367" data-name="Path 1367" d="M54.3,47.7s12.213-3.818,16.078-13.436c3.165-7.876.6-15.523-6.586-14.089" fill="none" stroke="#fb3f07" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g>
+</svg>
