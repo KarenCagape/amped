@@ -45,7 +45,7 @@ const StyledBackgroundSection = styled(BackgroundSection)`
 export function Vision() {
   return (
     <StyledBackgroundSection>
-      <div tw="h-full font-circular-bold text-px28 lg:text-px36 flex justify-center items-center text-center">
+      <div tw="container px-4 mx-auto h-full font-circular-bold text-px28 lg:text-px36 flex justify-center items-center text-center">
         <div>
           <span tw="leading-tight">Amped</span>{' '}
           <span tw="leading-tight font-circular-light">Innovation,</span>{' '}

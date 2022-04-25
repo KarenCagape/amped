@@ -34,6 +34,7 @@
     "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-source-contentful": "^6.1.4",
     "gatsby-source-filesystem": "^4.2.0",
+    "gatsby-transformer-remark": "^5.12.1",
     "gatsby-transformer-sharp": "^4.5.0",
     "gbimage-bridge": "^0.2.1",
     "intersection-observer": "^0.12.0",

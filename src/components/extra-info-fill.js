@@ -16,7 +16,7 @@ export function ExtraInfoFill({ caption }) {
           <Logo />
         </div>
       </div>
-      <div tw="text-lg lg:text-px28 text-center items-center justify-center p-4 lg:py-24 lg:px-32">
+      <div tw="text-lg lg:text-px28 text-center items-center justify-center p-4 py-14 lg:py-24 lg:px-32">
         {caption}
       </div>
     </div>
