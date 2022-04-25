@@ -22,7 +22,7 @@ export function MeetTheSolutions({ heading, imageCopies }) {
                 {imageCopies.map(({ heading, subText, image }, idx) => (
                     <div key={idx} tw="grid grid-cols-1 lg:grid-cols-2 gap-2 items-center" css={[idx !== 0 ? tw`mt-10 lg:mt-10` : ""]}>
                         <div tw="mb-4 lg:mb-0" css={[idx % 2 === 0 ? tw`lg:order-first` : tw`lg:order-last`]}>
-                            <GatsbyImage image={image?.gatsbyImageData} alt={image?.title} />
+                            {image?.gatsbyImageData ? <GatsbyImage image={image?.gatsbyImageData} alt={image?.title} /> : ""}
                         </div>
                         <div>
                             <div tw="text-px24 lg:text-px54 mb-8 font-sf-regular">

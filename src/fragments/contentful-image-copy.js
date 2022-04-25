@@ -18,5 +18,8 @@ export const query = graphql`
         imageMobile {
             ...Image
         }
+        cta {
+            ...Button
+        }
     }
 `;

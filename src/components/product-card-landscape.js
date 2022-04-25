@@ -3,11 +3,11 @@ import "twin.macro";
 
 export function ProductCardLandscape({ img, title, caption, action }) {
   return (
-    <div class="lg:w-1050" tw="block bg-sitegray rounded">
-      <div class="lg:w-440 lg:h-440" tw="inline-block align-top">{img}</div>
-      <div tw="min-w-max inline-block pt-28 pr-32 ml-16">
+    <div className="lg:w-1050" tw="block bg-sitegray rounded py-10 px-8 lg:p-0">
+      <div className="lg:w-440 lg:h-440" tw="inline-block align-top mb-10 lg:mb-0">{img}</div>
+      <div tw="lg:min-w-max lg:inline-block lg:pt-28 lg:pr-32 lg:ml-16 text-center lg:text-left">
         <div tw="font-bold text-px18 lg:text-px32 mb-6">{title}</div>
-        <div tw="max-w-md text-px16 lg:text-px18 mb-16 font-circular-regular">
+        <div tw="lg:max-w-md text-px16 lg:text-px18 mb-10 lg:mb-16 font-circular-regular">
           {caption}
         </div>
         <div>{action}</div>

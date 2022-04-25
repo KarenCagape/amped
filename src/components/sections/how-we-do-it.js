@@ -32,12 +32,16 @@ export function HowWeDoIt({ heading, subText, button, cards }) {
                                     )}
                                 </div>
                                 <div css={[index === 1 ? tw`opacity-50` : ""]}>
-                                    <GatsbyImage image={image?.gatsbyImageData} alt={image?.title} />
+                                    {image?.gatsbyImageData ? <GatsbyImage image={image?.gatsbyImageData} alt={image?.title} /> : ""}
                                 </div>
                                 <div tw="mt-5 lg:mt-10 flex gap-4 mb-4 lg:mb-5">
                                     {icons.map((icon, idx) => (
                                         <div tw="inline-block" key={idx}>
-                                            <GatsbyImage image={icon?.gatsbyImageData} alt={icon?.title} tw="max-w-[32px] lg:max-w-[60px]" />
+                                            {icon?.gatsbyImageData ? (
+                                                <GatsbyImage image={icon?.gatsbyImageData} alt={icon?.title} tw="max-w-[32px] lg:max-w-[60px]" />
+                                            ) : (
+                                                ""
+                                            )}
                                         </div>
                                     ))}
                                 </div>

@@ -93,7 +93,13 @@ export function PoweringYourPossibilities({ heading, categories }) {
                                     {categories.map(({ name, slug, summary, thumbnail }, idx) => (
                                         <div tw="px-4 lg:px-8 h-full mb-4 lg:mb-0" key={idx}>
                                             <Card
-                                                img={<GatsbyImage image={thumbnail?.gatsbyImageData} alt={thumbnail?.title} />}
+                                                img={
+                                                    thumbnail?.gatsbyImageData ? (
+                                                        <GatsbyImage image={thumbnail?.gatsbyImageData} alt={thumbnail?.title} />
+                                                    ) : (
+                                                        ""
+                                                    )
+                                                }
                                                 heading={<div tw="text-center">{name}</div>}
                                                 text={
                                                     <div tw="text-center">
@@ -121,7 +127,13 @@ export function PoweringYourPossibilities({ heading, categories }) {
                                         ? categories.map(({ name, slug, summary, thumbnail }, idx) => (
                                               <div tw="px-4 lg:px-8 h-full mb-4 lg:mb-0" key={idx}>
                                                   <Card
-                                                      img={<GatsbyImage image={thumbnail?.gatsbyImageData} alt={thumbnail?.title} />}
+                                                      img={
+                                                          thumbnail?.gatsbyImageData ? (
+                                                              <GatsbyImage image={thumbnail?.gatsbyImageData} alt={thumbnail?.title} />
+                                                          ) : (
+                                                              ""
+                                                          )
+                                                      }
                                                       heading={<div tw="text-center">{name}</div>}
                                                       text={
                                                           <div tw="text-center">
