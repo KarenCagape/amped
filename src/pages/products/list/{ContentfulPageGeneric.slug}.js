@@ -174,7 +174,7 @@ export default function ProductWowsolar60(props) {
   );
 }
 
-export const query = graphql`
+/* export const query = graphql`
   query ($id: String!) {
     contentfulPageGeneric(id: { eq: $id }) {
       banner {
@@ -241,4 +241,4 @@ export const query = graphql`
       }
     }
   }
-`;
+`; */

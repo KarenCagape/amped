@@ -1,226 +1,109 @@
-import * as React from 'react';
-import 'twin.macro';
-import _ from 'lodash';
-import { graphql } from 'gatsby';
-import Layout from '../components/layout';
-import PrimaryHero from '../components/heroes/primary-hero';
-import Brands from '../components/brands';
-import HowWeDoIt from '../components/sections/how-we-do-it';
-import MeetTheSolutions from '../components/sections/meet-the-solutions';
-import PoweringYourPossibilities from '../components/sections/powering-your-possiblities';
-import NoCompromises from '../components/sections/no-compromises';
-import AmpedImpact from '../components/sections/amped-impact';
-import ExtraInfoFill from '../components/extra-info-fill';
+import * as React from "react";
+import "twin.macro";
+import { graphql } from "gatsby";
+import Layout from "../components/layout";
+import PrimaryHero from "../components/heroes/primary-hero";
+import Brands from "../components/brands";
+import HowWeDoIt from "../components/sections/how-we-do-it";
+import MeetTheSolutions from "../components/sections/meet-the-solutions";
+import PoweringYourPossibilities from "../components/sections/powering-your-possiblities";
+import NoCompromises from "../components/sections/no-compromises";
+import AmpedImpact from "../components/sections/amped-impact";
+import ClimateImpact from "../components/home/climate-impact";
 
-function MetricCard({ value, label }) {
-  return (
-    <div tw="bg-white px-8 pt-16 pb-8 rounded-md font-circular-bold">
-      <div tw="text-px72 mb-8">{value}</div>
-      <div tw="text-px16">{label}</div>
-    </div>
-  );
-}
+export default function IndexPage({ data }) {
+    const { contentfulHomeTemplate } = data;
+    const {
+        name,
+        heroBanner,
+        logos,
+        headingOffGridProducts,
+        copyCtaOffGridProducts,
+        cardsOffGridProducts,
+        headingSolutions,
+        imageCopySolutions,
+        headingProductSlider,
+        productSlider,
+        headingShowcase,
+        copySliderShowcase,
+        ampedImpact,
+        mapImagesAmpedImpacts,
+        climateImpact,
+    } = contentfulHomeTemplate;
 
-export default function IndexPage(props) {
-  const bannerData = _.get(
-    props,
-    'data.allContentfulPageHome.edges[0].node.banner'
-  );
-  const sectionsData = _.get(
-    props,
-    'data.allContentfulPageHome.edges[0].node.sections'
-  );
-  const howWeDoItData = _.get(sectionsData, '[1]', null);
-  const meetTheSolutionsData = _.get(sectionsData, '[2]', null);
-  const poweringYourPossibilitiesData = _.get(sectionsData, '[3]', null);
-  const noCompromisesData = _.get(sectionsData, '[4]', null);
-  const ampedImpactData = _.get(sectionsData, '[5]', null);
-
-  return (
-    <Layout pageTitle="Home">
-      <PrimaryHero data={bannerData} />
-      <Brands />
-      <HowWeDoIt data={howWeDoItData} />
-      <MeetTheSolutions data={meetTheSolutionsData} />
-      <PoweringYourPossibilities data={poweringYourPossibilitiesData} />
-      <NoCompromises data={noCompromisesData} />
-      <AmpedImpact data={ampedImpactData} />
-      <div tw="pb-16 lg:pb-48">
-        <div tw="w-full lg:w-9/12 m-auto">
-          <ExtraInfoFill
-            caption={
-              <div>
-                <div tw="text-px54 mb-16 font-sf-regular">
-                  Our Climate Impact
-                </div>
-                <p tw="text-px21 mb-16 font-circular-regular leading-normal">
-                  The climate crisis is an existential threat. Our innovations
-                  that drives a reliable solar experience enables communities to
-                  transform themselves from fossil and forests fuels to solar
-                  energy radically reducing carbon emissions while growing their
-                  economic potential. The climate crisis is our business.
-                </p>
-
-                <div>
-                  <div tw="grid grid-cols-1 lg:grid-cols-3 w-full lg:w-11/12 m-auto gap-8">
-                    <MetricCard
-                      value={
-                        <div>
-                          <span tw="text-primary ">100</span>
-                          <sup tw="text-secondary">k</sup>
-                        </div>
-                      }
-                      label={'Tons Black Carbon Averted'}
-                    />
-                    <MetricCard
-                      value={
-                        <div>
-                          <span tw="text-primary">100</span>
-                          <sup tw="text-secondary">mil</sup>
-                        </div>
-                      }
-                      label={'Tons CO2 Averted'}
-                    />
-                    <MetricCard
-                      value={
-                        <div>
-                          <span tw="text-primary">300</span>
-                          <sup tw="text-secondary">k</sup>
-                        </div>
-                      }
-                      label={'Whr Clean Energy Generated'}
-                    />
-                  </div>
-                </div>
-              </div>
-            }
-          />
-        </div>
-      </div>
-    </Layout>
-  );
+    return (
+        <Layout pageTitle={name}>
+            <PrimaryHero {...heroBanner} />
+            <Brands logos={logos} />
+            <HowWeDoIt
+                heading={headingOffGridProducts}
+                subText={copyCtaOffGridProducts?.subText}
+                button={copyCtaOffGridProducts?.cta}
+                cards={cardsOffGridProducts}
+            />
+            <MeetTheSolutions heading={headingSolutions} imageCopies={imageCopySolutions} />
+            <PoweringYourPossibilities heading={headingProductSlider} categories={productSlider} />
+            <NoCompromises heading={headingShowcase} copySliders={copySliderShowcase} />
+            <AmpedImpact {...ampedImpact} images={mapImagesAmpedImpacts} />
+            <ClimateImpact {...climateImpact} />
+        </Layout>
+    );
 }
 
 export const query = graphql`
-  {
-    allContentfulPageHome {
-      edges {
-        node {
-          id
-          banner {
-            id
-            banner
-            captions {
-              id
-              text {
-                text
-              }
+    query {
+        contentfulHomeTemplate(name: { eq: "Home" }) {
+            name
+            heroBanner {
+                ...ImageCopy
             }
-            headings {
-              id
-              text {
-                id
-                text
-              }
+            logos {
+                ...LinkedImage
             }
-          }
-          sections {
-            id
-            block {
-              block {
-                block {
-                  headings {
-                    text {
-                      text
-                    }
-                  }
-                  links {
-                    label
-                    link
-                    path {
-                      path
-                    }
-                  }
+            headingOffGridProducts {
+                childMarkdownRemark {
+                    html
                 }
-                captions {
-                  text {
-                    text
-                  }
-                }
-                headings {
-                  heading
-                  text {
-                    text
-                  }
-                }
-              }
-              captions {
-                text {
-                  text
-                }
-                caption
-              }
-              headings {
-                text {
-                  text
-                }
-              }
             }
-            captions {
-              caption
-              text {
-                text
-              }
+            copyCtaOffGridProducts {
+                ...CopyCta
             }
-            headings {
-              heading
-              text {
-                text
-              }
+            cardsOffGridProducts {
+                ...Card
             }
-            images {
-              headings {
-                heading
-                text {
-                  text
+            headingSolutions {
+                childMarkdownRemark {
+                    html
                 }
-              }
-              image
             }
-            links {
-              path {
-                path
-              }
-              link
-              label
+            imageCopySolutions {
+                ...ImageCopy
             }
-            slider {
-              contents {
-                id
-                headings {
-                  heading
-                  text {
-                    text
-                  }
+            headingProductSlider {
+                childMarkdownRemark {
+                    html
                 }
-                sliderContent
-              }
-              slider
             }
-            statistics {
-              extra
-              value
-              captions {
-                text {
-                  text
+            productSlider {
+                ...ProductCategory
+            }
+            headingShowcase {
+                childMarkdownRemark {
+                    html
                 }
-                caption
-              }
-              statistics
             }
-          }
+            copySliderShowcase {
+                ...CopySlider
+            }
+            ampedImpact {
+                ...CopyKeyStats
+            }
+            mapImagesAmpedImpacts {
+                ...Image
+            }
+            climateImpact {
+                ...CopyKeyStats
+            }
         }
-      }
     }
-  }
 `;
