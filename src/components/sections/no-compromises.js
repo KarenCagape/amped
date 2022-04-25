@@ -62,7 +62,7 @@ export function NoCompromises({ heading, copySliders }) {
                         >
                             <div tw="lg:col-span-2" css={[idx % 2 === 0 ? tw`lg:pr-16` : tw`lg:pl-16`]}>
                                 <div tw="relative">
-                                    <BtnSliderArrow 
+                                    <BtnSliderArrow
                                         flipX={idx % 2 !== 0}
                                         onClick={() => {
                                             if (idx % 2 === 0) {
@@ -77,7 +77,7 @@ export function NoCompromises({ heading, copySliders }) {
                                     <Slider slickRef={sliderRef}>
                                         {images.map((image, index) => (
                                             <div tw="p-4" key={index}>
-                                                <GatsbyImage image={image?.gatsbyImageData} alt={image?.title} />
+                                                {image?.gatsbyImageData ? <GatsbyImage image={image?.gatsbyImageData} alt={image?.title} /> : ""}
                                             </div>
                                         ))}
                                     </Slider>

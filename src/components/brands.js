@@ -44,7 +44,7 @@ export function Brands({ logos }) {
                     {logos?.map(({ title, url, image }, index) => (
                         <Link key={index} href={url}>
                             <div tw="px-3">
-                                <GatsbyImage image={image.gatsbyImageData} alt={title || image.title} />
+                                {image.gatsbyImageData ? <GatsbyImage image={image.gatsbyImageData} alt={title || image.title} /> : ""}
                             </div>
                         </Link>
                     ))}
@@ -54,7 +54,7 @@ export function Brands({ logos }) {
                 <div tw="flex flex-nowrap justify-between items-center gap-[8.333%]">
                     {logos?.map(({ title, url, image }, index) => (
                         <Link key={index} href={url}>
-                            <GatsbyImage image={image.gatsbyImageData} alt={title || image.title} />
+                            {image.gatsbyImageData ? <GatsbyImage image={image.gatsbyImageData} alt={title || image.title} /> : ""}
                         </Link>
                     ))}
                 </div>

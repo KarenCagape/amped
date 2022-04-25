@@ -4,7 +4,7 @@ import 'twin.macro';
 export function Section({ bgColor, children, ...rest }) {
   return (
     <div tw="py-12 lg:py-48" css={[bgColor && { background: bgColor }]}>
-      <div tw="w-9/12 mx-auto" {...rest}>
+      <div tw="container px-4 mx-auto" {...rest}>
         {children}
       </div>
     </div>

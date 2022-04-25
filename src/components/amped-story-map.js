@@ -93,7 +93,7 @@ export default function AmpedStoryMap({ images, ...rest }) {
                 tw="p-1 w-1/2 pointer-events-none ease-out duration-500 -translate-x-1/2 -translate-y-1/2 absolute bg-sitegray rounded-md"
                 style={{ opacity: 0 }}
             >
-                {images[currentDotIdx - 1] ? (
+                {images[currentDotIdx - 1] && images[currentDotIdx - 1]?.gatsbyImageDat ? (
                     <GatsbyImage image={images[currentDotIdx - 1]?.gatsbyImageData} alt={images[currentDotIdx - 1]?.title} />
                 ) : (
                     ""

@@ -1,25 +1,16 @@
 import { graphql } from "gatsby";
 
 export const query = graphql`
-    fragment ImageCopy on ContentfulImageCopy {
-        heading {
+    fragment TableContent on ContentfulTableContent {
+        title {
             childMarkdownRemark {
                 html
             }
         }
-        subText {
+        secondContent {
             childMarkdownRemark {
                 html
             }
-        }
-        image {
-            ...Image
-        }
-        imageMobile {
-            ...Image
-        }
-        cta {
-            ...Button
         }
     }
 `;
