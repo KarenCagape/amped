@@ -33,7 +33,7 @@ const sliderOverride = css`
     }
 `;
 
-export default function ProductLightingAndPhoneCharging({ data }) {
+export default function ProductCategory({ data }) {
     const { contentfulProductCategory, products } = data;
     const {
         name,
