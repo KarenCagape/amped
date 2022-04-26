@@ -69,6 +69,10 @@ export function LightingSlider({ heading, reverse = false, products, ...rest }) 
                                                             font-style: normal;
                                                             ${tw`font-circular-light`}
                                                         }
+                                                        del {
+                                                            text-decoration: none;
+                                                            ${tw`font-kallisto font-bold`}
+                                                        }
                                                     `,
                                                 ]}
                                                 dangerouslySetInnerHTML={{ __html: node?.name?.childMarkdownRemark?.html }}

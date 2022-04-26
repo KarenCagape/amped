@@ -1,11 +1,13 @@
 import * as React from "react";
 import tw, { css } from "twin.macro";
-import Hero from "../hero";
 import BackgroundImage from "gatsby-background-image";
 import { graphql, useStaticQuery } from "gatsby";
 import styled from "styled-components";
-import { GatsbyImage } from "gatsby-plugin-image";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { convertToBgImage } from "gbimage-bridge";
+
 import useWindowSize from "../../helpers/window-size";
+import Hero from "../hero";
 
 const BackgroundSection = ({ className, children }) => {
     const data = useStaticQuery(
@@ -13,16 +15,12 @@ const BackgroundSection = ({ className, children }) => {
             query {
                 desktop: file(relativePath: { eq: "banner-background-new.png" }) {
                     childImageSharp {
-                        fluid(quality: 90, maxWidth: 1920) {
-                            ...GatsbyImageSharpFluid_withWebp
-                        }
+                        gatsbyImageData(placeholder: BLURRED)
                     }
                 }
                 mobile: file(relativePath: { eq: "mobile-banner-solar_generato.png" }) {
                     childImageSharp {
-                        fluid(quality: 90, maxWidth: 1200) {
-                            ...GatsbyImageSharpFluid_withWebp
-                        }
+                        gatsbyImageData(placeholder: BLURRED)
                     }
                 }
             }
@@ -31,14 +29,16 @@ const BackgroundSection = ({ className, children }) => {
     const windowSize = useWindowSize();
     const { desktop, mobile } = data;
 
-    let imageData = desktop?.childImageSharp?.fluid;
+    let imageGatsby = getImage(desktop);
 
     if (windowSize.width < 1024) {
-        imageData = mobile?.childImageSharp?.fluid;
+        imageGatsby = getImage(mobile);
     }
 
+    const bgImage = convertToBgImage(imageGatsby);
+
     return (
-        <BackgroundImage Tag="section" className={className} fluid={imageData} backgroundColor={`#040e18`}>
+        <BackgroundImage Tag="section" className={className} {...bgImage} backgroundColor={`#040e18`}>
             {children}
         </BackgroundImage>
     );
