@@ -82,6 +82,9 @@ export default function ProductCategory({ data }) {
                                                 font-style: normal;
                                                 ${tw`font-circular-light`}
                                             }
+                                            p {
+                                               ${tw`mb-6`}
+                                            }
                                         `,
                                     ]}
                                     dangerouslySetInnerHTML={{ __html: overview?.childMarkdownRemark?.html }}
@@ -148,25 +151,50 @@ export default function ProductCategory({ data }) {
                     </div>
                 </div>
             </div>
-            <div tw="pb-12 pt-12 lg:pt-0 px-4 lg:px-0 lg:pb-48">
-                <div tw="container px-4 mx-auto">
-                    <SubHeader tw="mb-6 lg:mb-16">Products</SubHeader>
+
+            {/* Product List */}
+            {products?.edges ? (
+                <div tw="pb-12 pt-12 lg:pt-0 px-4 lg:px-0 lg:pb-48">
+                    <div tw="container px-4 mx-auto">
+                        <SubHeader tw="mb-6 lg:mb-16">Products</SubHeader>
+                    </div>
+                    <LightingSlider products={products?.edges} />
                 </div>
-                <LightingSlider products={products?.edges} />
-            </div>
-            <div tw="bg-sitegray lg:py-48 py-16">
-                <div tw="container px-4 mx-auto">
-                    <SubHeader tw="font-sf-light mb-10 lg:mb-24">Comparison</SubHeader>
-                    <div css={[tableContainer]}>
-                        <ComparisonTableLighting headers={comparisonTableHeader} rows={comparisonTableBody} />
+            ) : (
+                ""
+            )}
+
+            {/* Comparison Table */}
+            {comparisonTableBody ? (
+                <div tw="bg-sitegray lg:py-48 py-16">
+                    <div tw="container px-4 mx-auto">
+                        <SubHeader tw="font-sf-light mb-10 lg:mb-24">Comparison</SubHeader>
+                        <div css={[tableContainer]}>
+                            <ComparisonTableLighting headers={comparisonTableHeader} rows={comparisonTableBody} />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div tw="py-16 lg:py-48">
-                <div tw="container px-4 mx-auto">
-                    <SubHeader tw="mb-10 lg:mb-24 font-sf-light">Upgrades</SubHeader>
-                    <UpgradeSteps2 cards={upgrades} />
-                    <div tw="pt-16 lg:pt-36">
+            ) : (
+                ""
+            )}
+
+            {/* Upgrades & Text Banner */}
+            {upgrades ? (
+                <div tw="pt-16 lg:pt-48">
+                    <div tw="container px-4 mx-auto">
+                        <SubHeader tw="mb-10 lg:mb-24 font-sf-light">Upgrades</SubHeader>
+                        <UpgradeSteps2 cards={upgrades} />
+                    </div>
+                </div>
+            ) : (
+                ""
+            )}
+
+            {/* Text Banner */}
+
+            {textBanner?.childMarkdownRemark?.html ? (
+                <div tw="py-16 lg:py-36">
+                    <div tw="container px-4 mx-auto">
                         <ExtraInfoLight
                             caption={
                                 <div
@@ -187,17 +215,27 @@ export default function ProductCategory({ data }) {
                         />
                     </div>
                 </div>
-            </div>
-            <div tw="bg-sitegray lg:py-48 py-12">
-                <div tw="container px-4 mx-auto">
-                    <InFieldGallery
-                        images={gallery?.map((image, idx) =>
-                            image?.gatsbyImageData ? <GatsbyImage key={idx} image={image?.gatsbyImageData} alt={image?.title} /> : ""
-                        )}
-                    />
+            ) : (
+                ""
+            )}
+
+            {/* Gallery */}
+            {gallery ? (
+                <div tw="bg-sitegray lg:py-48 py-12">
+                    <div tw="container px-4 mx-auto">
+                        <InFieldGallery
+                            images={gallery?.map((image, idx) =>
+                                image?.gatsbyImageData ? <GatsbyImage key={idx} image={image?.gatsbyImageData} alt={image?.title} /> : ""
+                            )}
+                        />
+                    </div>
                 </div>
-            </div>
-            <BecomeDistributor {...imageCopy} />
+            ) : (
+                ""
+            )}
+
+            {/* Image - Copy Banner */}
+            {imageCopy ? <BecomeDistributor {...imageCopy} /> : ""}
         </Layout>
     );
 }
