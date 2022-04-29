@@ -24,7 +24,7 @@ const svgSliderSettings = {
 };
 
 export default function Product({ data }) {
-    const { contentfulProduct, products } = data;
+    const { contentfulProduct } = data;
     const {
         name,
         pageTitle,
@@ -38,11 +38,18 @@ export default function Product({ data }) {
         headingWhatsIncluded,
         cardsWhatsIncluded,
         footnoteWhatsIncluded,
+        relatedProducts,
         textBanner,
         imagecopyBanner,
     } = contentfulProduct;
+    const [products, setProducts] = React.useState();
 
     const detailRef = React.useRef();
+    React.useEffect(() => {
+        if (relatedProducts) {
+            setProducts(() => relatedProducts.map((item) => ({ node: { ...item } })));
+        }
+    }, [relatedProducts]);
 
     return (
         <Layout pageTitle={pageTitle}>
@@ -139,7 +146,7 @@ export default function Product({ data }) {
                                 </div>
                             }
                         />
-                        <div tw="lg:mb-32 mb-8 mt-14">
+                        <div tw="lg:mb-32 mb-8 mt-14 lg:w-1/2">
                             <div tw="text-px16 lg:text-px28 lg:mb-16 mb-8">
                                 <span
                                     css={[
@@ -163,7 +170,7 @@ export default function Product({ data }) {
                             {cardsConfigurations?.map(({ title, subText, icons }, idx) => (
                                 <div key={idx}>
                                     <SvgCardLandscape
-                                        tw="lg:w-1/2 mb-8"
+                                        tw="mb-8"
                                         title={
                                             <span
                                                 css={[
@@ -193,10 +200,10 @@ export default function Product({ data }) {
                                 </div>
                             ))}
                         </div>
-                        <div tw="py-10 lg:py-0">
+                        <div tw="lg:w-1/2 py-10 lg:py-0">
                             <div tw="text-2xl lg:text-px28 lg:mb-16 mb-8">{headingWhatsIncluded}</div>
 
-                            <div tw="hidden lg:grid grid-cols-1 lg:grid-cols-3 gap-8 lg:w-1/2 lg:mb-16 mb-6">
+                            <div tw="hidden lg:grid grid-cols-1 lg:grid-cols-3 gap-8 lg:mb-16 mb-6">
                                 {cardsWhatsIncluded?.map(({ title, image }, idx) => (
                                     <SvgCard
                                         tw="w-full h-full"
@@ -215,7 +222,7 @@ export default function Product({ data }) {
                             <div tw="lg:hidden">
                                 <Slider
                                     {...svgSliderSettings}
-                                    tw="w-8/12 lg:w-1/2 lg:mb-16 mb-6 -mx-2 lg:-mx-4"
+                                    tw="w-8/12 lg:mb-16 mb-6 -mx-2 lg:-mx-4"
                                     css={[
                                         css`
                                             .slick-list {
@@ -252,13 +259,13 @@ export default function Product({ data }) {
                                 </Slider>
                             </div>
 
-                            <div tw="text-secondary text-px14 lg:text-px16 lg:w-1/2">{footnoteWhatsIncluded}</div>
+                            <div tw="text-secondary text-px14 lg:text-px16">{footnoteWhatsIncluded}</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div tw="pb-24 lg:pb-48">
+            <div tw="pb-24" css={[products ? tw`lg:pb-48` : ""]}>
                 <div tw="container px-4 mx-auto">
                     <ExtraInfoFill
                         caption={
@@ -287,21 +294,25 @@ export default function Product({ data }) {
                 </div>
             </div>
 
-            <div>
-                <LightingSlider
-                    css={[
-                        css`
-                            .product-card {
-                                ${tw`bg-white`}
-                            }
-                        `,
-                    ]}
-                    products={products?.edges}
-                    heading={<div tw="container px-4 mx-auto font-sf-light text-px24 lg:text-px54 lg:mb-12">Other similar products</div>}
-                    reverse={true}
-                    tw="lg:py-48 py-16"
-                />
-            </div>
+            {products ? (
+                <div>
+                    <LightingSlider
+                        css={[
+                            css`
+                                .product-card {
+                                    ${tw`bg-white`}
+                                }
+                            `,
+                        ]}
+                        products={products}
+                        heading={<div tw="container px-4 mx-auto font-sf-light text-px24 lg:text-px54 lg:mb-12">Other similar products</div>}
+                        reverse={true}
+                        tw="lg:py-48 py-16"
+                    />
+                </div>
+            ) : (
+                ""
+            )}
             <div>
                 <BecomeDistributor {...imagecopyBanner} />
             </div>
@@ -310,7 +321,7 @@ export default function Product({ data }) {
 }
 
 export const query = graphql`
-    query ($id: String!, $category__id: String) {
+    query ($id: String!) {
         contentfulProduct(id: { eq: $id }) {
             name {
                 childMarkdownRemark {
@@ -351,6 +362,22 @@ export const query = graphql`
                 ...CardSimple
             }
             footnoteWhatsIncluded
+            relatedProducts {
+                name {
+                    childMarkdownRemark {
+                        html
+                    }
+                }
+                summary {
+                    childMarkdownRemark {
+                        html
+                    }
+                }
+                thumbnail {
+                    ...Image
+                }
+                slug
+            }
             textBanner {
                 childMarkdownRemark {
                     html
@@ -358,26 +385,6 @@ export const query = graphql`
             }
             imagecopyBanner {
                 ...ImageCopy
-            }
-        }
-        products: allContentfulProduct(filter: { category: { id: { eq: $category__id } }, id: { ne: $id } }) {
-            edges {
-                node {
-                    name {
-                        childMarkdownRemark {
-                            html
-                        }
-                    }
-                    summary {
-                        childMarkdownRemark {
-                            html
-                        }
-                    }
-                    thumbnail {
-                        ...Image
-                    }
-                    slug
-                }
             }
         }
     }
