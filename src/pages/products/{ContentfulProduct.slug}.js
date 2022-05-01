@@ -137,11 +137,18 @@ export default function Product({ data }) {
                                 />
                             }
                             actions={
-                                <div tw="grid grid-cols-2 gap-4">
+                                <div tw="flex gap-4">
                                     {ctAsIntro?.map(({ title, url }, idx) => (
-                                        <Button key={idx} css={[idx % 2 !== 0 ? tw`bg-secondary` : ""]} as="a" href={url}>
-                                            {title}
-                                        </Button>
+                                        <div tw="w-auto">
+                                            <Button
+                                                key={idx}
+                                                css={[idx % 2 !== 0 ? tw`bg-secondary` : ""]}
+                                                as="a"
+                                                href={url}
+                                            >
+                                                {title}
+                                            </Button>
+                                        </div>
                                     ))}
                                 </div>
                             }
@@ -273,6 +280,7 @@ export default function Product({ data }) {
                                 <div
                                     css={[
                                         css`
+                                            ${tw`leading-snug`}
                                             strong {
                                                 ${tw`font-circular-bold`}
                                             }

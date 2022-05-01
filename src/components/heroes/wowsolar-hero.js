@@ -64,7 +64,7 @@ export function WowsolarHero({ detailRef, wowsolar, bannerLogo, caption, image, 
                                 detailRef.current.scrollIntoView();
                             }}
                         >
-                            <BannerArrowDown tw="max-h-[51px] lg:max-h-0" />
+                            <BannerArrowDown tw="max-h-[51px] lg:max-h-full" />
                         </button>
                     </div>
                 </div>

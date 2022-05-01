@@ -50,6 +50,10 @@ export function ComparisonTableLighting({ headers, rows }) {
                                                         font-style: normal;
                                                         ${tw`font-circular-light`}
                                                     }
+                                                    del {
+                                                        text-decoration: none;
+                                                        ${tw`font-kallisto font-bold`}
+                                                    }
                                                 `,
                                             ]}
                                             dangerouslySetInnerHTML={{ __html: title?.childMarkdownRemark?.html }}

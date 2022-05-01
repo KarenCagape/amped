@@ -153,7 +153,7 @@ export default function ProductCategory({ data }) {
             </div>
 
             {/* Product List */}
-            {products?.edges ? (
+            {products?.edges?.length ? (
                 <div tw="pb-12 pt-12 lg:pt-0 px-4 lg:px-0 lg:pb-48">
                     <div tw="container px-4 mx-auto">
                         <SubHeader tw="mb-6 lg:mb-16">Products</SubHeader>
