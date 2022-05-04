@@ -80,9 +80,15 @@ export function LightingSlider({ heading, reverse = false, products, ...rest }) 
                                         }
                                         caption={<div dangerouslySetInnerHTML={{ __html: node?.summary?.childMarkdownRemark?.html }} />}
                                         action={
-                                            <Button tw="text-px16" as="a" href={node?.slug}>
-                                                VIEW PRODUCT
-                                            </Button>
+                                            node.notAvailable ? (
+                                                <Button tw="bg-secondary text-px16" as="a">
+                                                    COMING SOON
+                                                </Button>
+                                            ) : (
+                                                <Button tw="text-px16" as="a" href={node?.slug}>
+                                                    VIEW PRODUCT
+                                                </Button>
+                                            )
                                         }
                                     />
                                 </div>
