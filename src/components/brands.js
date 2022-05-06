@@ -41,20 +41,18 @@ export function Brands({ logos }) {
         <div tw="container px-4 mx-auto">
             <div css={[sliderOverride]} tw="lg:hidden">
                 <Slider tw="flex justify-between items-center py-4" {...productSliderSettings}>
-                    {logos?.map(({ title, url, image }, index) => (
+                    {logos?.map(({ url, image }, index) => (
                         <Link key={index} href={url}>
-                            <div tw="px-3">
-                                {image.gatsbyImageData ? <GatsbyImage image={image.gatsbyImageData} alt={title || image.title} /> : ""}
-                            </div>
+                            <div tw="px-3">{image.gatsbyImageData ? <GatsbyImage image={image.gatsbyImageData} alt={image.title} /> : ""}</div>
                         </Link>
                     ))}
                 </Slider>
             </div>
             <div tw="hidden lg:block px-2 py-6 lg:px-0 lg:py-16">
                 <div tw="flex flex-nowrap justify-between items-center gap-[8.333%]">
-                    {logos?.map(({ title, url, image }, index) => (
-                        <Link key={index} href={url}>
-                            {image.gatsbyImageData ? <GatsbyImage image={image.gatsbyImageData} alt={title || image.title} /> : ""}
+                    {logos?.map(({ url, image }, index) => (
+                        <Link key={index} href={url} tw="flex-1">
+                            {image.gatsbyImageData ? <GatsbyImage image={image.gatsbyImageData} alt={image.title} /> : ""}
                         </Link>
                     ))}
                 </div>

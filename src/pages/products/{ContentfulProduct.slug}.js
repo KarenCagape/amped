@@ -254,9 +254,9 @@ export default function Product({ data }) {
                                                 tw="w-full h-full"
                                                 icon={
                                                     image?.gatsbyImageData ? (
-                                                        <GatsbyImage image={image?.gatsbyImageData} alt={image?.title} tw="max-w-[72px]" />
+                                                        <GatsbyImage image={image?.gatsbyImageData} alt={image?.title} tw="w-[54px] lg:w-[72px]" />
                                                     ) : (
-                                                        <img src={image?.file?.url} alt={image?.title} tw="max-w-[72px]" />
+                                                        <img src={image?.file?.url} alt={image?.title} tw="w-[54px] lg:w-[72px]" />
                                                     )
                                                 }
                                                 content={title}

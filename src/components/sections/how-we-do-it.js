@@ -26,7 +26,7 @@ export function HowWeDoIt({ heading, subText, button, cards }) {
                             <div key={index}>
                                 <div tw="h-12 flex items-center mb-12">
                                     {logo?.gatsbyImageData ? (
-                                        <GatsbyImage image={logo?.gatsbyImageData} alt={logo?.title} tw="max-w-[160px]" />
+                                        <GatsbyImage image={logo?.gatsbyImageData} alt={logo?.title} tw="max-w-[160px] flex-auto" />
                                     ) : (
                                         <div tw="text-px21 text-white">Other Products</div>
                                     )}
@@ -38,7 +38,11 @@ export function HowWeDoIt({ heading, subText, button, cards }) {
                                     {icons.map((icon, idx) => (
                                         <div tw="inline-block" key={idx}>
                                             {icon?.gatsbyImageData ? (
-                                                <GatsbyImage image={icon?.gatsbyImageData} alt={icon?.title} tw="max-w-[32px] lg:max-w-[60px]" />
+                                                <GatsbyImage
+                                                    image={icon?.gatsbyImageData}
+                                                    alt={icon?.title}
+                                                    tw="w-[32px] lg:w-[60px]"
+                                                />
                                             ) : (
                                                 ""
                                             )}
