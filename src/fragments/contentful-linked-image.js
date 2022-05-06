@@ -2,10 +2,19 @@ import { graphql } from "gatsby";
 
 export const query = graphql`
     fragment LinkedImage on ContentfulLinkedImage {
-        title
+        title {
+            childMarkdownRemark {
+                html
+            }
+        }
         url
         image {
-            ...Image
+            file {
+                url
+            }
+            gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
+            id
+            title
         }
     }
 `;

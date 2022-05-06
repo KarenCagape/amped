@@ -1,32 +1,31 @@
-import * as React from 'react';
-import 'twin.macro';
-import Section from '../section';
-import Button from '../button';
-import { StaticImage } from 'gatsby-plugin-image';
+import * as React from "react";
+import "twin.macro";
+import Section from "../section";
+import Button from "../button";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 const { Content } = Section;
 
-export function Distributor2() {
-  return (
-    <Section>
-      <Content>
-        <div>
-          <Content.Title tw="mb-16">
-            Amped Innovation impacts the communities it reaches
-          </Content.Title>
-          <Button path="#" text="ABOUT INVESTMENT" />
-        </div>
-        <div tw="lg:order-last order-first mb-4 lg:mb-0">
-          <StaticImage
-            alt=""
-            loading="eager"
-            placeholder="none"
-            src="../../images/grow_business.jpg"
-          />
-        </div>
-      </Content>
-    </Section>
-  );
+export function Distributor2({ heading, image, cta }) {
+    return (
+        <Section>
+            <Content>
+                <div tw="text-center lg:text-left pb-8 lg:pb-0">
+                    {heading?.childMarkdownRemark?.html ? (
+                        <Content.Title tw="lg:mb-16">
+                            <div dangerouslySetInnerHTML={{ __html: heading?.childMarkdownRemark?.html }} />
+                        </Content.Title>
+                    ) : (
+                        ""
+                    )}
+                    {cta?.url ? <Button tw="uppercase" path={cta?.url} text={cta?.title} /> : ""}
+                </div>
+                <div tw="lg:order-last order-first mb-4 lg:mb-0 pt-8 lg:pt-0">
+                    {image?.gatsbyImageData ? <GatsbyImage tw="w-full" image={image?.gatsbyImageData} alt={image?.title} /> : ""}
+                </div>
+            </Content>
+        </Section>
+    );
 }
 
 export default Distributor2;
