@@ -2,75 +2,77 @@ import * as React from "react";
 import SelectOption from "../../components/select-option";
 import IcoPhone from "../../assets/ico-phone.svg";
 import "twin.macro";
-import wowSolarCountries from "./wowsolar-countries";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 function ContactCard({ email, contact, label }) {
-  return (
-    <div tw="bg-sitegray rounded p-8">
-      <div tw="mb-8">
-        <div>
-          <IcoPhone />
+    return (
+        <div tw="bg-sitegray rounded p-8">
+            <div tw="mb-8">
+                <div>
+                    <IcoPhone />
+                </div>
+            </div>
+            <div tw="text-px18 lg:text-px21 font-bold">
+                <div tw="mb-4 lg:mb-6">
+                    <div>{email}</div>
+                    {contact ? <div tw="mt-4">{contact}</div> : ""}
+                </div>
+            </div>
+            <div tw="text-secondary text-px16">{label}</div>
         </div>
-      </div>
-      <div tw="text-px21 font-bold">
-        <div tw="mb-6">
-          <div tw="mb-4">{email}</div>
-          <div>{contact}</div>
-        </div>
-      </div>
-      <div tw="text-secondary text-px16">{label}</div>
-    </div>
-  );
+    );
 }
 
-export function BuyWowSolarCountries() {
-  const [selectedCountry, setSelectedCountry] = React.useState(
-    wowSolarCountries[0]
-  );
+export function BuyWowSolarCountries({ heading, countries }) {
+    const [selectedCountry, setSelectedCountry] = React.useState(countries[0]);
 
-  return (
-    <div tw="px-4 lg:px-0 lg:w-9/12 mx-auto py-16 pb-48">
-      <div tw="grid grid-cols-1 lg:grid-cols-5">
-        <div tw="text-px32 font-circular-bold col-span-2 mb-8 lg:mb-0 pr-16 leading-normal">
-          Buy WowSolar&trade;
-        </div>
-        <div tw="col-span-3 text-px21">
-          <div tw="mb-8">
-            Amped works with dozens of distributors in 23 countries on the
-            Continent. Our sales team can connect you to any of our partners in
-            your country
-          </div>
-          <div tw="mb-4">
-            <div tw="mb-4">Select a Country</div>
-            <SelectOption
-              tw="w-full"
-              name="selectedCountry"
-              onChange={(e) => {
-                const selectedIndex = e.target.value;
-                setSelectedCountry(wowSolarCountries[selectedIndex]);
-              }}
-            >
-              {wowSolarCountries.map((country, i) => (
-                <option value={i}>{country.name}</option>
-              ))}
-            </SelectOption>
-            <div tw="flex justify-center items-center my-12">
-              {selectedCountry.mapImg}
+    return (
+        <div tw="px-4 container mx-auto lg:pt-16 pb-16 lg:pb-48">
+            <div tw="grid grid-cols-1 lg:grid-cols-5">
+                {heading?.heading ? (
+                    <div tw="text-px21 lg:text-px32 font-circular-bold col-span-2 mb-8 lg:mb-0 lg:pr-16 leading-normal">{heading?.heading}</div>
+                ) : (
+                    ""
+                )}
+                <div tw="col-span-3 lg:text-px21">
+                    {heading?.copy?.childMarkdownRemark?.html ? (
+                        <div tw="mb-8" dangerouslySetInnerHTML={{ __html: heading?.copy?.childMarkdownRemark?.html }} />
+                    ) : (
+                        ""
+                    )}
+                    <div tw="mb-4">
+                        <div tw="mb-4">Select a Country</div>
+                        <SelectOption
+                            tw="w-full"
+                            name="selectedCountry"
+                            onChange={(e) => {
+                                const selectedIndex = e.target.value;
+                                setSelectedCountry(countries[selectedIndex]);
+                            }}
+                        >
+                            {countries.map((country, i) => (
+                                <option key={i} value={i}>
+                                    {country.name}
+                                </option>
+                            ))}
+                        </SelectOption>
+                        <div tw="flex justify-center items-center my-12">
+                            {selectedCountry?.image?.gatsbyImageData ? (
+                                <GatsbyImage image={selectedCountry?.image?.gatsbyImageData} alt={selectedCountry?.image?.title} />
+                            ) : (
+                                ""
+                            )}
+                        </div>
+                        <div tw="grid grid-cols-1 lg:grid-cols-2 justify-between gap-8">
+                            {selectedCountry?.contacs?.map(({ name, emailAddress, phoneNumber }, i) => (
+                                <ContactCard key={i} email={emailAddress} contact={phoneNumber} label={name} />
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div tw="grid grid-cols-2 justify-between gap-8">
-              {selectedCountry.branches.map((branch) => (
-                <ContactCard
-                  email={branch.email}
-                  contact={branch.contact}
-                  label={branch.label}
-                />
-              ))}
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default BuyWowSolarCountries;
