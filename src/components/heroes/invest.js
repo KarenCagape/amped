@@ -1,32 +1,26 @@
 import * as React from "react";
-import "twin.macro";
+import tw, { css } from "twin.macro";
 import BackgroundImage from "gatsby-background-image";
-import { graphql, useStaticQuery } from "gatsby";
 import styled from "styled-components";
 import { getImage } from "gatsby-plugin-image";
 import { convertToBgImage } from "gbimage-bridge";
+import useWindowSize from "../../helpers/window-size";
 
 import Hero from "../hero";
 import StoryCaption from "../story-caption";
 
-const BackgroundSection = ({ className, children }) => {
-    const data = useStaticQuery(
-        graphql`
-            query {
-                desktop: file(relativePath: { eq: "banner-invest.png" }) {
-                    childImageSharp {
-                        gatsbyImageData(placeholder: BLURRED)
-                    }
-                }
-            }
-        `
-    );
+const BackgroundSection = ({ image, imageMobile, className, children }) => {
+    const windowSize = useWindowSize();
+    let imageGatsby = getImage(image);
 
-    const imageGatsby = getImage(data.desktop);
+    if (windowSize.width < 1024) {
+        imageGatsby = getImage(imageMobile);
+    }
+
     const bgImage = convertToBgImage(imageGatsby);
 
     return (
-        <BackgroundImage Tag="section" className={className} {...bgImage} backgroundColor={`#040e18`}>
+        <BackgroundImage Tag="section" className={className} {...bgImage} preserveStackingContext backgroundColor={`#040e18`}>
             {children}
         </BackgroundImage>
     );
@@ -43,17 +37,22 @@ const StyledBackgroundSection = styled(BackgroundSection)`
 
 const { Caption } = Hero;
 
-export function BecomeDistributor() {
+export function InvestHero({ heading, image, imageMobile }) {
     return (
-        <StyledBackgroundSection>
+        <StyledBackgroundSection image={image} imageMobile={imageMobile}>
             <Hero>
                 <Caption tw="lg:w-7/12">
                     <StoryCaption>
-                        Amped Innovation impacts the communities it reaches so successfully due in
-                        <span tw="font-bold" css={[{ color: "#FC4803" }]}>
-                            part to collaborative partners
-                        </span>{" "}
-                        who support our mission
+                        <div
+                            css={[
+                                css`
+                                    strong {
+                                        ${tw`font-bold text-primary`}
+                                    }
+                                `,
+                            ]}
+                            dangerouslySetInnerHTML={{ __html: heading?.childMarkdownRemark?.html }}
+                        />
                     </StoryCaption>
                 </Caption>
             </Hero>
@@ -61,4 +60,4 @@ export function BecomeDistributor() {
     );
 }
 
-export default BecomeDistributor;
+export default InvestHero;
