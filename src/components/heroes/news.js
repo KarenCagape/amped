@@ -47,7 +47,7 @@ export function AmpedStory() {
     return (
         <StyledBackgroundSection>
             <Hero>
-                <Caption tw="lg:w-7/12">
+                <Caption tw="lg:w-7/12 px-4 lg:px-0">
                     <StoryCaption>
                         Follow the Amped mission and story as we
                         <span tw="font-bold" css={[{ color: "#FC4803" }]}>

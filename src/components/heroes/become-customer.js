@@ -47,7 +47,7 @@ export function BecomeDistributor() {
     return (
         <StyledBackgroundSection>
             <Hero>
-                <Caption tw="lg:w-7/12">
+                <Caption tw="lg:w-7/12 px-4 lg:px-0">
                     <StoryCaption>
                         Our world is defined by our Amped looks to{" "}
                         <span tw="font-bold" css={[{ color: "#FC4803" }]}>

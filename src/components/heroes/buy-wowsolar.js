@@ -41,7 +41,7 @@ export function BuyWowSolarHero({ heading, image, imageMobile }) {
     return (
         <StyledBackgroundSection image={image} imageMobile={imageMobile}>
             <Hero>
-                <Caption tw="lg:w-7/12">
+                <Caption tw="lg:w-7/12 px-4 lg:px-0">
                     <StoryCaption>
                         <div
                             css={[
