@@ -1,32 +1,26 @@
 import * as React from "react";
-import "twin.macro";
+import tw, { css } from "twin.macro";
 import { getImage } from "gatsby-plugin-image";
 import { convertToBgImage } from "gbimage-bridge";
 
 import Hero from "../hero";
 import StoryCaption from "../story-caption";
 import BackgroundImage from "gatsby-background-image";
-import { graphql, useStaticQuery } from "gatsby";
 import styled from "styled-components";
+import useWindowSize from "../../helpers/window-size";
 
-const BackgroundSection = ({ className, children }) => {
-    const data = useStaticQuery(
-        graphql`
-            query {
-                desktop: file(relativePath: { eq: "banner-amped_story.jpg" }) {
-                    childImageSharp {
-                        gatsbyImageData(placeholder: BLURRED)
-                    }
-                }
-            }
-        `
-    );
+const BackgroundSection = ({ image, imageMobile, className, children }) => {
+    const windowSize = useWindowSize();
+    let imageGatsby = getImage(image);
 
-    const imageGatsby = getImage(data.desktop);
+    if (windowSize.width < 1024) {
+        imageGatsby = getImage(imageMobile);
+    }
+
     const bgImage = convertToBgImage(imageGatsby);
 
     return (
-        <BackgroundImage Tag="section" className={className} {...bgImage} backgroundColor={`#040e18`}>
+        <BackgroundImage Tag="section" className={className} {...bgImage} preserveStackingContext backgroundColor={`#040e18`}>
             {children}
         </BackgroundImage>
     );
@@ -43,17 +37,22 @@ const StyledBackgroundSection = styled(BackgroundSection)`
 
 const { Caption } = Hero;
 
-export function AmpedStory() {
+export function AmpedStory({ heading, image, imageMobile }) {
     return (
-        <StyledBackgroundSection>
+        <StyledBackgroundSection image={image} imageMobile={imageMobile}>
             <Hero>
                 <Caption tw="lg:w-7/12">
                     <StoryCaption>
-                        We started Amped with the{" "}
-                        <span tw="font-bold" css={[{ color: "#FC4803" }]}>
-                            vision of delivering world class appliances
-                        </span>{" "}
-                        to off-grid customers.
+                        <div
+                            css={[
+                                css`
+                                    strong {
+                                        ${tw`font-bold text-primary`}
+                                    }
+                                `,
+                            ]}
+                            dangerouslySetInnerHTML={{ __html: heading?.childMarkdownRemark?.html }}
+                        />
                     </StoryCaption>
                 </Caption>
             </Hero>

@@ -167,10 +167,14 @@ export default function InvestPage({ data }) {
                         ) : (
                             ""
                         )}
-                        <div tw="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-between items-center">
-                            {partners?.map(({ title, url, image }, idx) => (
+                        <div tw="grid grid-cols-2 lg:grid-cols-3 gap-8 justify-between items-center">
+                            {partners?.map(({ url, image }, idx) => (
                                 <a key={idx} href={url} rel="noreferrer,nofollow">
-                                    {image?.gatsbyImageData ? <GatsbyImage alt={image?.title} image={image?.gatsbyImageData} tw="w-[245px] mx-auto" /> : ""}
+                                    {image?.gatsbyImageData ? (
+                                        <GatsbyImage alt={image?.title} image={image?.gatsbyImageData} tw="w-full max-w-[245px] mx-auto" />
+                                    ) : (
+                                        ""
+                                    )}
                                 </a>
                             ))}
                         </div>

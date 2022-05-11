@@ -1,31 +1,25 @@
 import * as React from "react";
-import "twin.macro";
+import tw, { css } from "twin.macro";
 import Hero from "../hero";
 import StoryCaption from "../story-caption";
 import BackgroundImage from "gatsby-background-image";
-import { graphql, useStaticQuery } from "gatsby";
 import styled from "styled-components";
 import { getImage } from "gatsby-plugin-image";
 import { convertToBgImage } from "gbimage-bridge";
+import useWindowSize from "../../helpers/window-size";
 
-const BackgroundSection = ({ className, children }) => {
-    const data = useStaticQuery(
-        graphql`
-            query {
-                desktop: file(relativePath: { eq: "banner-team.jpg" }) {
-                    childImageSharp {
-                        gatsbyImageData(placeholder: BLURRED)
-                    }
-                }
-            }
-        `
-    );
+const BackgroundSection = ({ image, imageMobile, className, children }) => {
+    const windowSize = useWindowSize();
+    let imageGatsby = getImage(image);
 
-    const imageGatsby = getImage(data.desktop);
+    if (windowSize.width < 1024) {
+        imageGatsby = getImage(imageMobile);
+    }
+
     const bgImage = convertToBgImage(imageGatsby);
 
     return (
-        <BackgroundImage Tag="section" className={className} {...bgImage} backgroundColor={`#040e18`}>
+        <BackgroundImage Tag="section" className={className} {...bgImage} preserveStackingContext backgroundColor={`#040e18`}>
             {children}
         </BackgroundImage>
     );
@@ -42,17 +36,22 @@ const StyledBackgroundSection = styled(BackgroundSection)`
 
 const { Caption } = Hero;
 
-export function Team() {
+export function TeamHero({ heading, image, imageMobile }) {
     return (
-        <StyledBackgroundSection>
+        <StyledBackgroundSection image={image} imageMobile={imageMobile}>
             <Hero>
-                <Caption tw="lg:w-7/12">
+                <Caption tw="lg:w-7/12 px-4 lg:px-0">
                     <StoryCaption>
-                        We{" "}
-                        <span tw="font-bold" css={[{ color: "#FC4803" }]}>
-                            specialize in solar power{" "}
-                        </span>
-                        electronics and design for extreme affordability.
+                        <div
+                            css={[
+                                css`
+                                    strong {
+                                        ${tw`font-bold text-primary`}
+                                    }
+                                `,
+                            ]}
+                            dangerouslySetInnerHTML={{ __html: heading?.childMarkdownRemark?.html }}
+                        />
                     </StoryCaption>
                 </Caption>
             </Hero>
@@ -60,4 +59,4 @@ export function Team() {
     );
 }
 
-export default Team;
+export default TeamHero;
