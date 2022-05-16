@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 import tw, { css } from "twin.macro";
 import { GatsbyImage } from "gatsby-plugin-image";
 import Layout from "../components/layout";
+import _ from "lodash";
 
 function Submenu({ refs, sections }) {
     function handleClick(e, idx) {
@@ -12,27 +13,29 @@ function Submenu({ refs, sections }) {
 
     return (
         <div tw="hidden lg:block overflow-auto bg-white sticky top-20 z-10">
-            <ul tw="py-8 w-10/12 mx-auto text-px16 flex font-circular-book items-center justify-between">
-                {sections?.map(({ heading }, idx) => (
-                    <React.Fragment key={idx}>
-                        <li>
-                            <a
-                                href="#"
-                                tw="px-4 inline-block cursor-pointer hover:text-solar-100 active:text-solar-80"
-                                onClick={(e) => handleClick(e, idx)}
-                                dangerouslySetInnerHTML={{ __html: heading?.childMarkdownRemark?.html }}
-                            />
-                        </li>
-                        {idx < sections.length - 1 ? (
+            <div tw="container px-4 mx-auto">
+                <ul tw="py-8 text-px16 flex font-circular-book items-center justify-between">
+                    {sections?.map(({ heading }, idx) => (
+                        <React.Fragment key={idx}>
                             <li>
-                                <span tw="h-1 w-1 border-r-2 border-charcoal-10"></span>
+                                <a
+                                    href="#"
+                                    tw="px-4 inline-block cursor-pointer hover:text-solar-100 active:text-solar-80"
+                                    onClick={(e) => handleClick(e, idx)}
+                                    dangerouslySetInnerHTML={{ __html: heading?.childMarkdownRemark?.html }}
+                                />
                             </li>
-                        ) : (
-                            ""
-                        )}
-                    </React.Fragment>
-                ))}
-            </ul>
+                            {idx < sections.length - 1 ? (
+                                <li>
+                                    <span tw="h-1 w-1 border-r-2 border-charcoal-10"></span>
+                                </li>
+                            ) : (
+                                ""
+                            )}
+                        </React.Fragment>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 }
@@ -48,7 +51,13 @@ export default function Innovation({ data }) {
 
             {sections?.length
                 ? sections.map(({ heading, subText, image }, idx) => (
-                      <div ref={refs[idx]} key={idx} tw="py-16 lg:py-48" css={[idx % 2 === 0 ? tw`bg-sitegray` : ""]}>
+                      <div
+                          ref={refs[idx]}
+                          key={idx}
+                          id={_.kebabCase(heading?.childMarkdownRemark?.html.replace(/<[^>]+>/g, ""))}
+                          tw="py-16 lg:py-48"
+                          css={[idx % 2 === 0 ? tw`bg-sitegray` : ""]}
+                      >
                           <div tw="container mx-auto px-4">
                               <div tw="grid grid-cols-1 lg:gap-8 lg:grid-cols-5">
                                   <div

@@ -41,7 +41,7 @@ export function AmpedStory({ heading, image, imageMobile }) {
     return (
         <StyledBackgroundSection image={image} imageMobile={imageMobile}>
             <Hero>
-                <Caption tw="lg:w-7/12">
+                <Caption tw="lg:w-6/12">
                     <StoryCaption>
                         <div
                             css={[

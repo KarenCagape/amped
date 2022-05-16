@@ -8,6 +8,7 @@ import Banner from "../components/heroes/invest";
 import { SubHeader } from "../components/_/header";
 import SliderButton from "../components/btn-slider-arrow";
 import ReachOut from "../components/sections/reach-out";
+import Brands from "../components/brands";
 
 const sliderOverride = css`
     & .slick-list,
@@ -167,17 +168,7 @@ export default function InvestPage({ data }) {
                         ) : (
                             ""
                         )}
-                        <div tw="grid grid-cols-2 lg:grid-cols-3 gap-8 justify-between items-center">
-                            {partners?.map(({ url, image }, idx) => (
-                                <a key={idx} href={url} rel="noreferrer,nofollow">
-                                    {image?.gatsbyImageData ? (
-                                        <GatsbyImage alt={image?.title} image={image?.gatsbyImageData} tw="w-full max-w-[245px] mx-auto" />
-                                    ) : (
-                                        ""
-                                    )}
-                                </a>
-                            ))}
-                        </div>
+                        <Brands logos={partners} logoGrid={tw`grid grid-cols-2 lg:grid-cols-3 gap-8`} />
                     </div>
                 </div>
             </div>
@@ -197,7 +188,7 @@ export default function InvestPage({ data }) {
                     ) : (
                         ""
                     )}
-                    <div tw="gap-6 lg:gap-8 grid grid-cols-1 lg:grid-cols-4">
+                    <div tw="gap-6 lg:gap-8 grid grid-cols-2 lg:grid-cols-4">
                         {gallery.map((image, idx) => (
                             <div key={idx}>
                                 {image?.gatsbyImageData ? <GatsbyImage tw="w-full" image={image?.gatsbyImageData} alt={image?.title} /> : ""}

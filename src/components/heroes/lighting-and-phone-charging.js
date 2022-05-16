@@ -60,7 +60,7 @@ export function LightingAndPhoneCharging({ heading, subText, image }) {
             <Hero tw="!h-auto pb-16 lg:!h-screen">
                 <Caption>
                     {heading ? <Caption.Header>{heading}</Caption.Header> : ""}
-                    <Caption.Text tw="font-sf-light">
+                    <Caption.Text tw="font-sf-light mt-6">
                         <div
                             tw="text-px16 lg:text-px36 max-w-[83.333%] lg:max-w-none mx-auto"
                             css={[

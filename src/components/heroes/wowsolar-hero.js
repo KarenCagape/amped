@@ -44,11 +44,11 @@ export function WowsolarHero({ detailRef, wowsolar, bannerLogo, caption, image, 
                             </div>
                         </div>
                         <div
-                            tw="absolute hidden lg:block"
+                            tw="absolute hidden xl:block"
                             css={[
                                 {
                                     bottom: "-12%",
-                                    left: "-12%",
+                                    left: "-10%",
                                 },
                             ]}
                         >

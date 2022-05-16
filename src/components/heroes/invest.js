@@ -44,6 +44,7 @@ export function InvestHero({ heading, image, imageMobile }) {
                 <Caption tw="lg:w-7/12 px-4 lg:px-0">
                     <StoryCaption>
                         <div
+                            tw="leading-tight"
                             css={[
                                 css`
                                     strong {

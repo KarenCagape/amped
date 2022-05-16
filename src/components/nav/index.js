@@ -1,326 +1,420 @@
-import * as React from 'react';
-import tw from 'twin.macro';
-import Localization from './localization';
-import NavLink from './nav-link';
-import { Link } from 'gatsby';
-import Logo from '../_/logo';
-import SubMenu from './sub-menu';
-import SubMenuStory from './sub-menu-story';
-import SubMenuAction from './sub-menu-action';
-import Hamburger from '../hamburger';
-import Toggler from '../toggler';
-import WowSolarLink from './wowsolar-link';
+import * as React from "react";
+import tw, { css } from "twin.macro";
+// import Localization from "./localization";
+import NavLink from "./nav-link";
+import { Link, graphql, useStaticQuery } from "gatsby";
+import SubMenu from "./sub-menu";
+import SubMenuAction from "./sub-menu-action";
+import Hamburger from "../hamburger";
+import Toggler from "../toggler";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 function ToggleButton({ open, onClick }) {
-  return (
-    <button tw="text-secondary p-2 text-2xl" onClick={onClick}>
-      {!open && '+'}
-      {open && '-'}
-    </button>
-  );
+    return (
+        <button tw="text-secondary p-2 text-2xl" onClick={onClick}>
+            {!open && "+"}
+            {open && "-"}
+        </button>
+    );
+}
+
+function ToggleButtonSub({ open, onClick }) {
+    return (
+        <button tw="text-secondary p-2 text-2xl" onClick={onClick}>
+            {!open && (
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                    <path
+                        fill-rule="evenodd"
+                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                    />
+                </svg>
+            )}
+            {open && (
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                    <path
+                        fill-rule="evenodd"
+                        d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+                    />
+                </svg>
+            )}
+        </button>
+    );
 }
 
 export function Nav() {
-  const [showProductSubmenu, setShowProductSubmenu] = React.useState(false);
-  const [showExperienceSubmenu, setShowExperienceSubmenu] =
-    React.useState(false);
-  const [showSubmenAction, setShowSubmenuAction] = React.useState(false);
+    const data = useStaticQuery(graphql`
+        query {
+            contentfulGlobalSettings(name: { eq: "Amped" }) {
+                logo {
+                    ...Image
+                }
+                headerNav {
+                    name
+                    url
+                    icon {
+                        ...Image
+                    }
+                    subLinks {
+                        ... on ContentfulNavLink {
+                            label {
+                                childMarkdownRemark {
+                                    html
+                                }
+                            }
+                            url
+                            icon {
+                                ...Image
+                            }
+                        }
+                        ... on ContentfulNavGroup {
+                            name
+                            url
+                            icon {
+                                ...Image
+                            }
+                            subLinks {
+                                ... on ContentfulNavLink {
+                                    label {
+                                        childMarkdownRemark {
+                                            html
+                                        }
+                                    }
+                                    url
+                                    icon {
+                                        ...Image
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    `);
+    const { contentfulGlobalSettings } = data;
+    const { logo, headerNav } = contentfulGlobalSettings;
+    const [showSubmenu, setShowSubmenu] = React.useState(headerNav.map(() => false));
 
-  return (
-    <>
-      <div
-        role="presentation"
-        onMouseLeave={() => {
-          setShowProductSubmenu(false);
-          setShowExperienceSubmenu(false);
-          setShowSubmenuAction(false);
-        }}
-        tw="sticky top-0 z-20 bg-white hidden lg:block"
-      >
-        <div tw="w-11/12 mx-auto flex justify-between items-center">
-          <Logo />
-          <div tw="flex justify-between w-6/12">
-            <div className="group">
-              <NavLink
-                opened={showProductSubmenu}
-                text="PRODUCTS"
-                path="/"
-                onClick={(e) => e.preventDefault()}
-                onMouseOver={() => {
-                  setShowProductSubmenu(true);
-                  setShowExperienceSubmenu(false);
-                  setShowSubmenuAction(false);
+    return (
+        <>
+            <div
+                role="presentation"
+                onMouseLeave={() => {
+                    setShowSubmenu(headerNav.map(() => false));
                 }}
-              />
-              <SubMenu
-                tw="duration-500 ease-in-out"
-                css={[
-                  showProductSubmenu && tw`opacity-100 pointer-events-auto`,
-                  !showProductSubmenu && tw`opacity-0 pointer-events-none`,
-                ]}
-              />
-            </div>
-            <div>
-              <Link
-                to="/innovations"
-                tw="text-lg flex items-center lg:py-7 border-b-4 border-transparent hover:border-primary"
-                onMouseOver={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setShowExperienceSubmenu(false);
-                  setShowProductSubmenu(false);
-                  setShowSubmenuAction(false);
-                }}
-              >
-                INNOVATION
-              </Link>
-            </div>
-            <div className="group">
-              <NavLink
-                opened={showSubmenAction}
-                text="ACTION"
-                path="#/"
-                onClick={(e) => e.preventDefault()}
-                onMouseOver={() => {
-                  setShowSubmenuAction(true);
-                  setShowProductSubmenu(false);
-                  setShowExperienceSubmenu(false);
-                }}
-              />
-              <SubMenuAction
-                tw="duration-500 ease-in-out"
-                css={[
-                  showSubmenAction && tw`opacity-100 pointer-events-auto`,
-                  !showSubmenAction && tw`opacity-0 pointer-events-none`,
-                ]}
-              />
-            </div>
-            <div className="group">
-              <NavLink
-                opened={showExperienceSubmenu}
-                text="ABOUT"
-                onClick={(e) => e.preventDefault()}
-                onMouseOver={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setShowExperienceSubmenu(true);
-                  setShowProductSubmenu(false);
-                  setShowSubmenuAction(false);
-                }}
-              />
-              <SubMenuStory
-                tw="duration-500 ease-in-out"
-                css={[
-                  showExperienceSubmenu && tw`opacity-100 pointer-events-auto`,
-                  !showExperienceSubmenu && tw`opacity-0 pointer-events-none`,
-                ]}
-              />
-            </div>
-            <div>
-              <Localization
-                onMouseEnter={() => {
-                  setShowExperienceSubmenu(false);
-                  setShowProductSubmenu(false);
-                  setShowSubmenuAction(false);
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <Toggler>
-        {({ enabled: menuOpen, toggle: toggleMenuOpen }) => (
-          <div tw="lg:hidden bg-white sticky top-0 z-20">
-            <div tw="flex justify-between items-center px-4 py-4 ">
-              <Hamburger open={menuOpen} onClick={toggleMenuOpen} />
-              <Logo />
-              <Localization />
-            </div>
-            {menuOpen && (
-              <div tw="grid grid-cols-1 gap-y-2 mt-4">
-                <div tw="px-4 py-1">
-                  <Toggler>
-                    {({ enabled: productsOpen, toggle: toggleProducts }) => (
-                      <div>
-                        <div tw="flex items-center justify-between ">
-                          <NavLink text="PRODUCTS" path="/" showIcon={false} />
-                          <ToggleButton
-                            open={productsOpen}
-                            onClick={toggleProducts}
-                          />
+                tw="sticky top-0 z-20 bg-white hidden lg:block"
+            >
+                <div tw="container px-4 mx-auto">
+                    <div tw="flex justify-between items-center">
+                        <Link to="/">
+                            {logo?.gatsbyImageData ? (
+                                <GatsbyImage tw="w-full" image={logo?.gatsbyImageData} alt={logo?.title} />
+                            ) : (
+                                <img src={logo?.file?.url} alt={logo?.title} width={logo?.width} height={logo?.height} />
+                            )}
+                        </Link>
+                        <div tw="flex justify-between w-6/12">
+                            {headerNav?.length
+                                ? headerNav?.map(({ name, url, subLinks }, idx) => (
+                                      <div key={idx}>
+                                          <NavLink
+                                              opened={false}
+                                              text={name}
+                                              path={url}
+                                              onClick={!url ? (e) => e.preventDefault() : ""}
+                                              onMouseOver={() => {
+                                                  setShowSubmenu(headerNav.map((node, i) => i === idx));
+                                              }}
+                                              hasSubmenu={subLinks?.length ? true : false}
+                                          />
+                                          {subLinks?.length ? (
+                                              name === "Products" ? (
+                                                  <SubMenu
+                                                      submenu={subLinks}
+                                                      tw="duration-500 ease-in-out"
+                                                      css={[
+                                                          showSubmenu[idx] ? tw`opacity-100 pointer-events-auto` : tw`opacity-0 pointer-events-none`,
+                                                      ]}
+                                                  />
+                                              ) : (
+                                                  <SubMenuAction
+                                                      submenu={subLinks}
+                                                      tw="duration-500 ease-in-out"
+                                                      css={[
+                                                          showSubmenu[idx] ? tw`opacity-100 pointer-events-auto` : tw`opacity-0 pointer-events-none`,
+                                                      ]}
+                                                  />
+                                              )
+                                          ) : (
+                                              ""
+                                          )}
+                                      </div>
+                                  ))
+                                : ""}
+
+                            {/* <div>
+                            <Localization
+                                onMouseEnter={() => {
+                                    setShowExperienceSubmenu(false);
+                                    setShowProductSubmenu(false);
+                                    setShowSubmenuAction(false);
+                                }}
+                            />
+                        </div> */}
                         </div>
-                        {productsOpen && (
-                          <div tw="flex flex-col pl-4">
-                            <div>
-                              <Toggler>
-                                {({
-                                  enabled: lightingAndPhoneChargingOpen,
-                                  toggle: toggleLightingAndPhoneCharging,
-                                }) => (
-                                  <>
-                                    <div tw="flex justify-between items-center">
-                                      <Link to="/product-lighting-and-phone-charging">
-                                        Lighting and Phone Charging
-                                      </Link>
-                                      <ToggleButton
-                                        open={lightingAndPhoneChargingOpen}
-                                        onClick={toggleLightingAndPhoneCharging}
-                                      />
-                                    </div>
-                                    {lightingAndPhoneChargingOpen && (
-                                      <div tw="pl-4 flex flex-col justify-between">
-                                        <WowSolarLink
-                                          path="/product-wowsolar60"
-                                          number={60}
-                                        />
-                                        <WowSolarLink
-                                          path="/product-wowsolar100"
-                                          number={100}
-                                        />
-                                        <WowSolarLink
-                                          path="/product-wowsolar400"
-                                          number={400}
-                                        />
-                                      </div>
-                                    )}
-                                  </>
-                                )}
-                              </Toggler>
-                            </div>
-                            <div>
-                              <Toggler>
-                                {({
-                                  enabled: televisionOpen,
-                                  toggle: toggleTelevisionOpen,
-                                }) => (
-                                  <>
-                                    <div tw="flex justify-between items-center">
-                                      <Link to="/product-television">
-                                        Television
-                                      </Link>
-                                      <ToggleButton
-                                        open={televisionOpen}
-                                        onClick={toggleTelevisionOpen}
-                                      />
-                                    </div>
-                                    {televisionOpen && (
-                                      <div tw="pl-4">
-                                        <WowSolarLink
-                                          path="/product-wowsolartv24100"
-                                          number="TV24100"
-                                        />
-                                        <WowSolarLink
-                                          path="/product-wowsolartv32120"
-                                          number="TV32120"
-                                        />
-                                      </div>
-                                    )}
-                                  </>
-                                )}
-                              </Toggler>
-                            </div>
-                            <div tw="mb-2">
-                              <Toggler>
-                                {({
-                                  enabled: fanOpen,
-                                  toggle: togglePanOpen,
-                                }) => (
-                                  <>
-                                    <div tw="flex justify-between items-center">
-                                      <Link
-                                        to="/product-fan"
-                                        text="Solar Generator"
-                                      >
-                                        Fan
-                                      </Link>
-                                      <ToggleButton
-                                        open={fanOpen}
-                                        onClick={() => {
-                                          togglePanOpen();
-                                        }}
-                                      />
-                                    </div>
-                                    {fanOpen && (
-                                      <div tw="flex flex-col justify-between pl-4">
-                                        <WowSolarLink
-                                          path="/product-wowsolarfan16100"
-                                          number="FAN16100"
-                                        />
-                                        <WowSolarLink
-                                          path="/product-wowsolarfan16120"
-                                          number="FAN16120"
-                                        />
-                                      </div>
-                                    )}
-                                  </>
-                                )}
-                              </Toggler>
-                            </div>
-                            <Link>Grid Backup</Link>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </Toggler>
+                    </div>
                 </div>
-                <div tw="flex items-center justify-between px-4 py-1">
-                  <NavLink
-                    text="INNOVATIONS"
-                    path="/innovations"
-                    showIcon={false}
-                  />
-                </div>
-                <div tw="px-4 py-1">
-                  <Toggler>
-                    {({
-                      enabled: experienceOpen,
-                      toggle: toggleExperienceOpen,
-                    }) => (
-                      <>
-                        <div tw="flex items-center justify-between ">
-                          <NavLink
-                            text="EXPERIENCE"
-                            path="/#"
-                            showIcon={false}
-                          />
-                          <ToggleButton
-                            open={experienceOpen}
-                            onClick={toggleExperienceOpen}
-                          />
+            </div>
+            <Toggler>
+                {({ enabled: menuOpen, toggle: toggleMenuOpen }) => (
+                    <div tw="lg:hidden bg-white sticky top-0 z-20">
+                        <div tw="container px-4 mx-auto">
+                            <div tw="flex justify-between items-center px-4 py-4 ">
+                                <Link to="/">
+                                    {logo?.gatsbyImageData ? (
+                                        <GatsbyImage tw="w-full" image={logo?.gatsbyImageData} alt={logo?.title} />
+                                    ) : (
+                                        <img src={logo?.file?.url} alt={logo?.title} width={logo?.width} height={logo?.height} />
+                                    )}
+                                </Link>
+                                <Hamburger open={menuOpen} onClick={toggleMenuOpen} />
+                                {/* <Localization /> */}
+                            </div>
+                            {menuOpen && (
+                                <div tw="h-[92vh] overflow-auto">
+                                    <div tw="grid grid-cols-1 gap-y-2 mt-4">
+                                        {headerNav?.map(({ name, url, subLinks }, idx) => (
+                                            <div tw="px-4 py-4 border-b-2 border-sitegray" key={idx}>
+                                                <Toggler>
+                                                    {({ enabled: isOpen, toggle: toggleParent }) => (
+                                                        <div>
+                                                            <div tw="flex items-center justify-between ">
+                                                                <NavLink
+                                                                    tw="uppercase text-px18 font-circular-book"
+                                                                    text={name}
+                                                                    path={url}
+                                                                    showIcon={false}
+                                                                />
+                                                                {subLinks?.length ? <ToggleButton open={isOpen} onClick={toggleParent} /> : ""}
+                                                            </div>
+                                                            {isOpen && (
+                                                                <div tw="flex flex-col pl-4">
+                                                                    {subLinks?.map((subgroup, idx2) => (
+                                                                        <div key={idx2}>
+                                                                            <Toggler>
+                                                                                {({ enabled: isOpenSub, toggle: toggleSub }) => (
+                                                                                    <>
+                                                                                        <div tw="flex justify-between items-center py-2">
+                                                                                            <Link
+                                                                                                to={subgroup?.url}
+                                                                                                tw="text-px16 font-circular-book"
+                                                                                            >
+                                                                                                {subgroup?.label ? (
+                                                                                                    <span
+                                                                                                        dangerouslySetInnerHTML={{
+                                                                                                            __html: subgroup?.label
+                                                                                                                ?.childMarkdownRemark?.html,
+                                                                                                        }}
+                                                                                                    />
+                                                                                                ) : (
+                                                                                                    subgroup?.name
+                                                                                                )}
+                                                                                            </Link>
+                                                                                            {subgroup?.subLinks?.length ? (
+                                                                                                <ToggleButtonSub
+                                                                                                    open={isOpenSub}
+                                                                                                    onClick={toggleSub}
+                                                                                                />
+                                                                                            ) : (
+                                                                                                ""
+                                                                                            )}
+                                                                                        </div>
+                                                                                        {isOpenSub && subgroup?.subLinks?.length && (
+                                                                                            <div tw="flex flex-col justify-between">
+                                                                                                {subgroup?.subLinks?.map((subSubGroup, idx3) => (
+                                                                                                    <Link
+                                                                                                        tw="mb-4 items-center flex gap-4"
+                                                                                                        to={subSubGroup?.url}
+                                                                                                        key={idx3}
+                                                                                                    >
+                                                                                                        {subSubGroup?.icon?.gatsbyImageData ? (
+                                                                                                            <GatsbyImage
+                                                                                                                tw="w-[44px] rounded-full bg-sitegray"
+                                                                                                                image={
+                                                                                                                    subSubGroup?.icon?.gatsbyImageData
+                                                                                                                }
+                                                                                                                alt={subSubGroup?.icon?.title}
+                                                                                                            />
+                                                                                                        ) : (
+                                                                                                            ""
+                                                                                                        )}
+                                                                                                        <span
+                                                                                                            css={[
+                                                                                                                css`
+                                                                                                                    strong {
+                                                                                                                        ${tw`font-circular-bold`}
+                                                                                                                    }
+                                                                                                                    em {
+                                                                                                                        font-style: normal;
+                                                                                                                        ${tw`font-circular-light`}
+                                                                                                                    }
+                                                                                                                    del {
+                                                                                                                        text-decoration: none;
+                                                                                                                        ${tw`font-kallisto font-bold`}
+                                                                                                                    }
+                                                                                                                `,
+                                                                                                            ]}
+                                                                                                            dangerouslySetInnerHTML={{
+                                                                                                                __html: subSubGroup?.label
+                                                                                                                    ?.childMarkdownRemark?.html,
+                                                                                                            }}
+                                                                                                        />
+                                                                                                    </Link>
+                                                                                                ))}
+                                                                                            </div>
+                                                                                        )}
+                                                                                    </>
+                                                                                )}
+                                                                            </Toggler>
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                </Toggler>
+                                            </div>
+                                        ))}
+                                        {/* <div tw="px-4 py-1">
+                                    <Toggler>
+                                        {({ enabled: productsOpen, toggle: toggleProducts }) => (
+                                            <div>
+                                                <div tw="flex items-center justify-between ">
+                                                    <NavLink text="PRODUCTS" path="/" showIcon={false} />
+                                                    <ToggleButton open={productsOpen} onClick={toggleProducts} />
+                                                </div>
+                                                {productsOpen && (
+                                                    <div tw="flex flex-col pl-4">
+                                                        <div>
+                                                            <Toggler>
+                                                                {({
+                                                                    enabled: lightingAndPhoneChargingOpen,
+                                                                    toggle: toggleLightingAndPhoneCharging,
+                                                                }) => (
+                                                                    <>
+                                                                        <div tw="flex justify-between items-center">
+                                                                            <Link to="/product-lighting-and-phone-charging">
+                                                                                Lighting and Phone Charging
+                                                                            </Link>
+                                                                            <ToggleButton
+                                                                                open={lightingAndPhoneChargingOpen}
+                                                                                onClick={toggleLightingAndPhoneCharging}
+                                                                            />
+                                                                        </div>
+                                                                        {lightingAndPhoneChargingOpen && (
+                                                                            <div tw="pl-4 flex flex-col justify-between">
+                                                                                <WowSolarLink path="/product-wowsolar60" number={60} />
+                                                                                <WowSolarLink path="/product-wowsolar100" number={100} />
+                                                                                <WowSolarLink path="/product-wowsolar400" number={400} />
+                                                                            </div>
+                                                                        )}
+                                                                    </>
+                                                                )}
+                                                            </Toggler>
+                                                        </div>
+                                                        <div>
+                                                            <Toggler>
+                                                                {({ enabled: televisionOpen, toggle: toggleTelevisionOpen }) => (
+                                                                    <>
+                                                                        <div tw="flex justify-between items-center">
+                                                                            <Link to="/product-television">Television</Link>
+                                                                            <ToggleButton open={televisionOpen} onClick={toggleTelevisionOpen} />
+                                                                        </div>
+                                                                        {televisionOpen && (
+                                                                            <div tw="pl-4">
+                                                                                <WowSolarLink path="/product-wowsolartv24100" number="TV24100" />
+                                                                                <WowSolarLink path="/product-wowsolartv32120" number="TV32120" />
+                                                                            </div>
+                                                                        )}
+                                                                    </>
+                                                                )}
+                                                            </Toggler>
+                                                        </div>
+                                                        <div tw="mb-2">
+                                                            <Toggler>
+                                                                {({ enabled: fanOpen, toggle: togglePanOpen }) => (
+                                                                    <>
+                                                                        <div tw="flex justify-between items-center">
+                                                                            <Link to="/product-fan" text="Solar Generator">
+                                                                                Fan
+                                                                            </Link>
+                                                                            <ToggleButton
+                                                                                open={fanOpen}
+                                                                                onClick={() => {
+                                                                                    togglePanOpen();
+                                                                                }}
+                                                                            />
+                                                                        </div>
+                                                                        {fanOpen && (
+                                                                            <div tw="flex flex-col justify-between pl-4">
+                                                                                <WowSolarLink path="/product-wowsolarfan16100" number="FAN16100" />
+                                                                                <WowSolarLink path="/product-wowsolarfan16120" number="FAN16120" />
+                                                                            </div>
+                                                                        )}
+                                                                    </>
+                                                                )}
+                                                            </Toggler>
+                                                        </div>
+                                                        <Link>Grid Backup</Link>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+                                    </Toggler>
+                                </div>
+                                <div tw="flex items-center justify-between px-4 py-1">
+                                    <NavLink text="INNOVATIONS" path="/innovations" showIcon={false} />
+                                </div>
+                                <div tw="px-4 py-1">
+                                    <Toggler>
+                                        {({ enabled: experienceOpen, toggle: toggleExperienceOpen }) => (
+                                            <>
+                                                <div tw="flex items-center justify-between ">
+                                                    <NavLink text="EXPERIENCE" path="/#" showIcon={false} />
+                                                    <ToggleButton open={experienceOpen} onClick={toggleExperienceOpen} />
+                                                </div>
+                                                {experienceOpen && (
+                                                    <div tw="pl-4 flex flex-col justify-between">
+                                                        <Link tw="mb-4" to="/experience-amped-story">
+                                                            Amped Story
+                                                        </Link>
+                                                        <Link tw="mb-4" to="/experience-customer-experience">
+                                                            Customer Experience
+                                                        </Link>
+                                                        <Link tw="mb-4" to="/experience-team">
+                                                            Team
+                                                        </Link>
+                                                        <Link tw="mb-4" to="/experience-become-distributor">
+                                                            Become a Distributor
+                                                        </Link>
+                                                        <Link tw="mb-4" to="/experience-contact-us">
+                                                            Contact us
+                                                        </Link>
+                                                    </div>
+                                                )}
+                                            </>
+                                        )}
+                                    </Toggler>
+                                </div> */}
+                                    </div>
+                                </div>
+                            )}
                         </div>
-                        {experienceOpen && (
-                          <div tw="pl-4 flex flex-col justify-between">
-                            <Link tw="mb-4" to="/experience-amped-story">
-                              Amped Story
-                            </Link>
-                            <Link
-                              tw="mb-4"
-                              to="/experience-customer-experience"
-                            >
-                              Customer Experience
-                            </Link>
-                            <Link tw="mb-4" to="/experience-team">
-                              Team
-                            </Link>
-                            <Link tw="mb-4" to="/experience-become-distributor">
-                              Become a Distributor
-                            </Link>
-                            <Link tw="mb-4" to="/experience-contact-us">
-                              Contact us
-                            </Link>
-                          </div>
-                        )}
-                      </>
-                    )}
-                  </Toggler>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-      </Toggler>
-    </>
-  );
+                    </div>
+                )}
+            </Toggler>
+        </>
+    );
 }
 
 export default Nav;

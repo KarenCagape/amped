@@ -4,7 +4,7 @@ import tw from 'twin.macro';
 export function Hamburger({ open, onClick }) {
   return (
     <div
-      tw="w-8 h-8 cursor-pointer"
+      tw="w-6 h-8 cursor-pointer"
       onClick={onClick}
       onKeyDown={onClick}
       role="button"
@@ -14,10 +14,10 @@ export function Hamburger({ open, onClick }) {
         tw="h-full w-full flex-col justify-between"
         css={[{ padding: '6px 0' }, open && tw`hidden`, !open && tw`flex`]}
       >
-        <div tw="h-1 bg-default rounded" />
-        <div tw="h-1 bg-default rounded" />
+        <div tw="h-0.5 bg-default rounded" />
+        <div tw="h-0.5 bg-default rounded" />
         <div>
-          <div tw="h-1 w-1/2 bg-default rounded" />
+          <div tw="h-0.5 w-1/2 bg-default rounded" />
         </div>
       </div>
       <div
@@ -25,7 +25,7 @@ export function Hamburger({ open, onClick }) {
         css={[open && tw`block`, !open && tw`hidden`]}
       >
         <div
-          tw="h-1 w-10/12 bg-default rounded absolute -translate-y-1/2 -translate-x-1/2 rotate-45"
+          tw="h-0.5 w-10/12 bg-default rounded absolute -translate-y-1/2 -translate-x-1/2 rotate-45"
           css={[
             {
               left: '50%',
@@ -34,7 +34,7 @@ export function Hamburger({ open, onClick }) {
           ]}
         />
         <div
-          tw="h-1 w-10/12 bg-default rounded absolute -translate-y-1/2 -translate-x-1/2 -rotate-45"
+          tw="h-0.5 w-10/12 bg-default rounded absolute -translate-y-1/2 -translate-x-1/2 -rotate-45"
           css={[
             {
               left: '50%',

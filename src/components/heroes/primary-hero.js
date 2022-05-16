@@ -52,9 +52,9 @@ export function PrimaryHero({ heading, subText, image, imageMobile }) {
                                 `,
                             ]}
                         >
-                            <div dangerouslySetInnerHTML={{ __html: heading?.childMarkdownRemark?.html }} />
+                            <div tw="leading-tight" dangerouslySetInnerHTML={{ __html: heading?.childMarkdownRemark?.html }} />
                         </Caption.Header>
-                        <Caption.Text tw="pt-12 lg:pt-0">
+                        <Caption.Text tw="pt-4 lg:pt-6 lg:pb-10">
                             <div dangerouslySetInnerHTML={{ __html: subText?.childMarkdownRemark?.html }} />
                         </Caption.Text>
                     </Caption>

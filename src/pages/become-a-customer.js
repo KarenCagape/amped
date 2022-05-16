@@ -123,7 +123,7 @@ export default function BecomeADistributor({ data }) {
             <Banner {...heroBanner} />
 
             {/* COPY WITH KEY STATS */}
-            <div tw="px-4 container mx-auto py-16 pb-10 lg:py-48">
+            <div tw="px-4 container mx-auto py-16 pb-10 lg:pt-48">
                 <div tw="grid grid-cols-1 lg:grid-cols-5 lg:mb-32">
                     {copyKeyStats?.heading ? (
                         <div tw="text-px24 lg:text-px54 col-span-2 mb-4 lg:mb-0">
@@ -175,7 +175,7 @@ export default function BecomeADistributor({ data }) {
             <div tw="px-4 container mx-auto pt-10 pb-20 lg:py-16">
                 <div tw="grid grid-cols-1 lg:grid-cols-5">
                     {newsletterCopyImage?.title ? (
-                        <div tw="text-px18 lg:text-px32 font-circular-bold col-span-2 mb-8 lg:mb-0">{newsletterCopyImage?.title}</div>
+                        <div tw="text-px18 lg:text-px32 font-circular-bold col-span-2 mb-8 lg:mb-0 lg:mr-8">{newsletterCopyImage?.title}</div>
                     ) : (
                         ""
                     )}
