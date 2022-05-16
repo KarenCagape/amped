@@ -61,8 +61,6 @@ export default function ProductCategory({ data }) {
         autoplaySpeed: 5000,
     };
 
-    console.log(products);
-
     return (
         <Layout pageTitle={name}>
             {/* HERO */}

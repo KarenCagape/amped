@@ -24,7 +24,7 @@ Hero.Caption = function Caption({ children, ...rest }) {
 Hero.Caption.Header = function Header({ children, ...rest }) {
     return (
         <div tw="mb-4 text-px36 lg:text-px72 font-circular-book" {...rest}>
-            <span tw="leading-none">{children}</span>
+            <div tw="leading-tight">{children}</div>
         </div>
     );
 };
@@ -32,7 +32,7 @@ Hero.Caption.Header = function Header({ children, ...rest }) {
 Hero.Caption.Text = function Text({ children, ...rest }) {
     return (
         <div tw="text-px18 lg:text-px36 font-circular-book" {...rest}>
-            <span tw="leading-normal">{children}</span>
+            <div tw="leading-normal">{children}</div>
         </div>
     );
 };

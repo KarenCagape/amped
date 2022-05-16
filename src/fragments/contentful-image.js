@@ -5,6 +5,8 @@ export const query = graphql`
         file {
             url
         }
+        width
+        height
         gatsbyImageData(placeholder: BLURRED)
         id
         title

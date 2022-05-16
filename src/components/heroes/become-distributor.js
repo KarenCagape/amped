@@ -41,11 +41,11 @@ export function BecomeDistributor({ heading, image, imageMobile }) {
     return (
         <StyledBackgroundSection image={image} imageMobile={imageMobile}>
             <Hero>
-                <Caption tw="lg:w-7/12 px-4 lg:px-0">
+                <Caption tw="lg:w-6/12 px-4 lg:px-0">
                     <StoryCaption tw="font-sf-light">
                         {heading?.childMarkdownRemark?.html ? (
                             <div
-                                tw="text-px28 lg:text-6xl"
+                                tw="text-px28 lg:text-px48 2xl:text-6xl !leading-tight"
                                 css={[
                                     css`
                                         strong {

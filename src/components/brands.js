@@ -17,7 +17,7 @@ const sliderOverride = css`
     }
 `;
 
-export function Brands({ logos }) {
+export function Brands({ logos, logoGrid }) {
     const productSliderSettings = {
         infinite: true,
         speed: 500,
@@ -49,7 +49,7 @@ export function Brands({ logos }) {
                 </Slider>
             </div>
             <div tw="hidden lg:block px-2 py-6 lg:px-0 lg:py-16">
-                <div tw="flex flex-nowrap justify-between items-center gap-[8.333%]">
+                <div tw="flex flex-nowrap justify-between items-center gap-[8.333%]" css={[logoGrid]}>
                     {logos?.map(({ url, image }, index) => (
                         <Link key={index} href={url} tw="flex-1">
                             {image.gatsbyImageData ? <GatsbyImage image={image.gatsbyImageData} alt={image.title} /> : ""}
