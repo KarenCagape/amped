@@ -13,12 +13,12 @@ const BackgroundSection = ({ className, children }) => {
     const data = useStaticQuery(
         graphql`
             query {
-                desktop: file(relativePath: { eq: "banner-background-new.png" }) {
+                desktop: file(relativePath: { eq: "bg-product-gradient.png" }) {
                     childImageSharp {
                         gatsbyImageData(placeholder: BLURRED)
                     }
                 }
-                mobile: file(relativePath: { eq: "mobile-banner-solar_generato.png" }) {
+                mobile: file(relativePath: { eq: "bg-product-gradient-mobile.png" }) {
                     childImageSharp {
                         gatsbyImageData(placeholder: BLURRED)
                     }

@@ -30,7 +30,7 @@ export function NavLink({ showIcon = true, text, onClick, opened, onMouseLeave, 
             onMouseLeave={handleMouseLeave}
             href={path}
             className="group"
-            tw="text-px18 font-sf-light flex items-center lg:py-7 border-b-4"
+            tw="text-px18 font-sf-regular flex items-center lg:py-7 border-b-4 uppercase"
             css={[!opened && tw`border-transparent`, opened && tw`border-solar-100`]}
             {...rest}
         >

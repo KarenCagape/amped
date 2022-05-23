@@ -2,6 +2,7 @@ import * as React from "react";
 import "twin.macro";
 import { getImage } from "gatsby-plugin-image";
 import { convertToBgImage } from "gbimage-bridge";
+import useWindowSize from "../../helpers/window-size";
 
 import BackgroundImage from "gatsby-background-image";
 import { graphql, useStaticQuery } from "gatsby";
@@ -11,7 +12,12 @@ const BackgroundSection = ({ className, children }) => {
     const data = useStaticQuery(
         graphql`
             query {
-                desktop: file(relativePath: { eq: "bg-gradient.png" }) {
+                desktop: file(relativePath: { eq: "bg-product-gradient.png" }) {
+                    childImageSharp {
+                        gatsbyImageData(placeholder: BLURRED)
+                    }
+                }
+                mobile: file(relativePath: { eq: "bg-product-gradient-mobile.png" }) {
                     childImageSharp {
                         gatsbyImageData(placeholder: BLURRED)
                     }
@@ -20,11 +26,19 @@ const BackgroundSection = ({ className, children }) => {
         `
     );
 
-    const imageGatsby = getImage(data.desktop);
+    const windowSize = useWindowSize();
+    const { desktop, mobile } = data;
+
+    let imageGatsby = getImage(desktop);
+
+    if (windowSize.width < 1024) {
+        imageGatsby = getImage(mobile);
+    }
+
     const bgImage = convertToBgImage(imageGatsby);
 
     return (
-        <BackgroundImage Tag="section" className={className} {...bgImage}>
+        <BackgroundImage Tag="section" className={className} {...bgImage} backgroundColor={`#040e18`}>
             {children}
         </BackgroundImage>
     );
