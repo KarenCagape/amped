@@ -1,6 +1,7 @@
 import * as React from "react";
 import tw from "twin.macro";
 import { graphql } from "gatsby";
+import { useForm } from "react-hook-form";
 import Layout from "../components/layout";
 import Banner from "../components/heroes/contact-us";
 import Button from "../components/_/button";
@@ -19,9 +20,30 @@ function ContactCard({ icon, content, label }) {
     );
 }
 
-export default function ContactUs({ data }) {
+function encode(data) {
+    return Object.keys(data)
+        .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+        .join("&");
+}
+
+export default function ContactUs({ data, navigate }) {
     const { contentfulContactUsTemplate } = data;
     const { name, heroBanner, introCopy, formTitle, contactListHeading, contactList } = contentfulContactUsTemplate;
+
+    const {
+        handleSubmit,
+        register,
+        formState: { errors },
+    } = useForm();
+    const onSubmit = (data) => {
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: encode(data),
+        })
+            .then(() => navigate("/thank-you/"))
+            .catch((error) => console.error(error));
+    };
 
     return (
         <Layout pageTitle={name}>
@@ -47,43 +69,53 @@ export default function ContactUs({ data }) {
                 <div tw="grid grid-cols-1 lg:grid-cols-5">
                     {formTitle ? <div tw="col-span-2 text-px18 lg:text-px32 mb-6 lg:mb-0 font-circular-bold">{formTitle}</div> : ""}
                     <div tw="col-span-3">
-                        <div tw="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                            <div tw="mb-2 lg:mb-4">
-                                <div tw="text-px14 lg:text-px16 mb-2 lg:mb-4">First Name</div>
-                                <TextInput tw="w-full" />
+                        <form onSubmit={handleSubmit(onSubmit)} name={"contact-us"} method="POST" data-netlify data-netlify-honeypot="bot-field">
+                            <div tw="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                                <div tw="mb-2 lg:mb-4">
+                                    <div tw="text-px14 lg:text-px16 mb-2 lg:mb-4">First Name</div>
+                                    <TextInput {...register("firstName")} required tw="w-full" />
+                                    {errors["firstName"] && (
+                                        <small tw="text-[#FE3636]">{errors["firstName"]?.type === "required" && `First Name is required`}</small>
+                                    )}
+                                </div>
+                                <div tw="mb-2 lg:mb-4">
+                                    <div tw="text-px14 lg:text-px16 mb-2 lg:mb-4">Last Name</div>
+                                    <TextInput {...register("lastName")} required tw="w-full" />
+                                    {errors["lastName"] && (
+                                        <small tw="text-[#FE3636]">{errors["lastName"]?.type === "required" && `Last Name is required`}</small>
+                                    )}
+                                </div>
+                                <div tw="mb-2 lg:mb-4">
+                                    <div tw="text-px14 lg:text-px16 mb-2 lg:mb-4">Email</div>
+                                    <TextInput {...register("email")} required tw="w-full" />
+                                    {errors["email"] && <small tw="text-[#FE3636]">{errors["email"]?.type === "required" && `Email is required`}</small>}
+                                </div>
+                                <div tw="mb-2 lg:mb-4">
+                                    <div tw="text-px14 lg:text-px16 mb-2 lg:mb-4">Mobile</div>
+                                    <TextInput {...register("mobile")} tw="w-full" />
+                                </div>
                             </div>
-                            <div tw="mb-2 lg:mb-4">
-                                <div tw="text-px14 lg:text-px16 mb-2 lg:mb-4">Last Name</div>
-                                <TextInput tw="w-full" />
-                            </div>
-                            <div tw="mb-2 lg:mb-4">
-                                <div tw="text-px14 lg:text-px16 mb-2 lg:mb-4">Email</div>
-                                <TextInput tw="w-full" />
-                            </div>
-                            <div tw="mb-2 lg:mb-4">
-                                <div tw="text-px14 lg:text-px16 mb-2 lg:mb-4">Mobile</div>
-                                <TextInput tw="w-full" />
-                            </div>
-                            <div tw="mb-2 lg:mb-4">
-                                <div tw="text-px14 lg:text-px16 mb-2 lg:mb-4">Size</div>
-                                <SelectOption tw="w-full">
-                                    <option>5-100</option>
+                            <div tw="mt-4">
+                                <div tw="text-px14 lg:text-px16 mb-2 lg:mb-4">Inquire Type</div>
+                                <SelectOption {...register("inquireType")} required tw="w-full">
+                                    <option value={""}>Please select</option>
+                                    <option>Interested Customer</option>
+                                    <option>Interested Distributor</option>
+                                    <option>Investor</option>
+                                    <option>Other...</option>
                                 </SelectOption>
+                                {errors["inquireType"] && (
+                                    <small tw="text-[#FE3636]">{errors["inquireType"]?.type === "required" && `Inquire Type is required`}</small>
+                                )}
                             </div>
-                            <div>
-                                <div tw="text-px14 lg:text-px16 mb-2 lg:mb-4">Budget</div>
-                                <SelectOption tw="w-full">
-                                    <option>$1000-$2000</option>
-                                </SelectOption>
+                            <div tw="mt-4">
+                                <div tw="text-px14 lg:text-px16 mb-2 lg:mb-4">Message</div>
+                                <TextArea {...register("message")} tw="w-full" />
                             </div>
-                        </div>
-                        <div tw="mt-4">
-                            <div tw="text-px14 lg:text-px16 mb-2 lg:mb-4">Message</div>
-                            <TextArea tw="w-full" />
-                        </div>
-                        <div tw="mt-8 lg:mt-24 text-right">
-                            <Button tw="w-full lg:w-auto">SUBMIT</Button>
-                        </div>
+                            <div tw="mt-8 lg:mt-24 text-right">
+                                <Button tw="w-full lg:w-auto">SUBMIT</Button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

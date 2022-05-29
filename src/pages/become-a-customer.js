@@ -1,9 +1,10 @@
 import * as React from "react";
 import { graphql } from "gatsby";
+import { useForm } from "react-hook-form";
 
 import Layout from "../components/layout";
 import Banner from "../components/heroes/become-distributor";
-import Button from "../components/button";
+import Button from "../components/_/button";
 import TextCard from "../components/text-card";
 import { GatsbyImage } from "gatsby-plugin-image";
 import AboutInvestment from "../components/sections/about-investment";
@@ -97,7 +98,13 @@ function DownloadableContent({ media, title, actions }) {
     );
 }
 
-export default function BecomeADistributor({ data }) {
+function encode(data) {
+    return Object.keys(data)
+        .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+        .join("&");
+}
+
+export default function BecomeADistributor({ data, navigate }) {
     const { contentfulBecomeADistributor } = data;
     const {
         name,
@@ -116,6 +123,21 @@ export default function BecomeADistributor({ data }) {
     const slider1Ref = React.useRef();
     const slider3Ref = React.useRef();
     const testimonialSlides = [...testimonials, ...testimonials];
+
+    const {
+        handleSubmit,
+        register,
+        formState: { errors },
+    } = useForm();
+    const onSubmit = (data) => {
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: encode(data),
+        })
+            .then(() => navigate("/thank-you/"))
+            .catch((error) => console.error(error));
+    };
 
     return (
         <Layout pageTitle={name}>
@@ -205,14 +227,24 @@ export default function BecomeADistributor({ data }) {
 
                         <div tw="bg-sitegray p-12 text-center lg:text-left">
                             <div tw="text-px18 lg:text-px21 mb-8">{newsletterFormHeading}</div>
-                            <div tw="lg:grid lg:grid-cols-5">
-                                <input tw="text-px16 col-span-3 p-4 w-full lg:w-auto mb-8 lg:mb-0" placeholder="Enter your email address" />
-                                <Button
-                                    tw="col-span-2 lg:rounded-tl-none rounded-bl-none w-full lg:w-auto"
-                                    path="mailto:andi@ampedinnovation.com"
-                                    text="SUBSCRIBE NOW"
-                                ></Button>
-                            </div>
+                            <form
+                                onSubmit={handleSubmit(onSubmit)}
+                                name={"subscribe-now"}
+                                method="POST"
+                                data-netlify
+                                data-netlify-honeypot="bot-field"
+                            >
+                                <div tw="lg:grid lg:grid-cols-5">
+                                    <input
+                                        {...register("email")}
+                                        required
+                                        tw="text-px16 col-span-3 p-4 w-full lg:w-auto mb-8 lg:mb-0"
+                                        placeholder="Enter your email address"
+                                    />
+                                    <Button tw="col-span-2 lg:rounded-tl-none rounded-bl-none w-full lg:w-auto">SUBSCRIBE NOW</Button>
+                                </div>
+                                {errors["email"] && <small tw="text-[#FE3636]">{errors["email"]?.type === "required" && `Email is required`}</small>}
+                            </form>
                         </div>
                     </div>
                 </div>
