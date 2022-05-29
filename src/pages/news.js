@@ -171,6 +171,7 @@ export default function News({ data, navigate }) {
                                     data-netlify
                                     data-netlify-honeypot="bot-field"
                                 >
+                                    <input type="hidden" {...register("form-name")} defaultValue={`subscribe-now`} />
                                     <div tw="lg:grid lg:grid-cols-5">
                                         <input
                                             {...register("email")}

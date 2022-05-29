@@ -70,6 +70,7 @@ export default function ContactUs({ data, navigate }) {
                     {formTitle ? <div tw="col-span-2 text-px18 lg:text-px32 mb-6 lg:mb-0 font-circular-bold">{formTitle}</div> : ""}
                     <div tw="col-span-3">
                         <form onSubmit={handleSubmit(onSubmit)} name={"contact-us"} method="POST" data-netlify data-netlify-honeypot="bot-field">
+                            <input type="hidden" {...register("form-name")} defaultValue={`contact-us`} />
                             <div tw="grid grid-cols-1 lg:grid-cols-2 gap-4">
                                 <div tw="mb-2 lg:mb-4">
                                     <div tw="text-px14 lg:text-px16 mb-2 lg:mb-4">First Name</div>
@@ -88,7 +89,9 @@ export default function ContactUs({ data, navigate }) {
                                 <div tw="mb-2 lg:mb-4">
                                     <div tw="text-px14 lg:text-px16 mb-2 lg:mb-4">Email</div>
                                     <TextInput {...register("email")} required tw="w-full" />
-                                    {errors["email"] && <small tw="text-[#FE3636]">{errors["email"]?.type === "required" && `Email is required`}</small>}
+                                    {errors["email"] && (
+                                        <small tw="text-[#FE3636]">{errors["email"]?.type === "required" && `Email is required`}</small>
+                                    )}
                                 </div>
                                 <div tw="mb-2 lg:mb-4">
                                     <div tw="text-px14 lg:text-px16 mb-2 lg:mb-4">Mobile</div>
