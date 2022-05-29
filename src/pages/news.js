@@ -2,11 +2,13 @@ import * as React from "react";
 import tw, { css } from "twin.macro";
 import { graphql } from "gatsby";
 import Slider from "react-slick";
+import { useForm } from "react-hook-form";
 import { GatsbyImage } from "gatsby-plugin-image";
 import Layout from "../components/layout";
 import Banner from "../components/heroes/news";
 import SliderButton from "../components/btn-slider-arrow";
 import Button from "../components/button";
+import ButtonForm from "../components/_/button";
 
 function ContentSlider({ sliderRef, contents = [], slidesToShow = 2, ...rest }) {
     const sliderSettings = {
@@ -49,10 +51,31 @@ function DownloadableContent({ media, title, actions }) {
     );
 }
 
-export default function AmpedStory({ data }) {
+function encode(data) {
+    return Object.keys(data)
+        .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+        .join("&");
+}
+
+export default function News({ data, navigate }) {
     const slider3Ref = React.useRef();
     const { contentfulNewsTemplate } = data;
     const { name, heroBanner, newsListingHeading, newsListing, newsletterHeading, newsletterFormTitle } = contentfulNewsTemplate;
+
+    const {
+        handleSubmit,
+        register,
+        formState: { errors },
+    } = useForm();
+    const onSubmit = (data) => {
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: encode(data),
+        })
+            .then(() => navigate("/thank-you/"))
+            .catch((error) => console.error(error));
+    };
 
     return (
         <Layout pageTitle={name}>
@@ -137,15 +160,30 @@ export default function AmpedStory({ data }) {
                         <div tw="col-span-3">
                             {newsletterFormTitle ? <div tw="mb-12">{newsletterFormTitle}</div> : ""}
                             <div tw="bg-sitegray p-12">
-                                <div tw="lg:text-px21 mb-8" dangerouslySetInnerHTML={{ __html: newsletterHeading?.copy?.childMarkdownRemark?.html }} />
-                                <div tw="lg:grid lg:grid-cols-5">
-                                    <input tw="text-px16 col-span-3 p-4 w-full lg:w-auto mb-8 lg:mb-0" placeholder="Enter your email address" />
-                                    <Button
-                                        tw="col-span-2 lg:rounded-tl-none rounded-bl-none w-full lg:w-auto text-center"
-                                        text="SUBSCRIBE NOW"
-                                        path="mailto:andi@ampedinnovation.com"
-                                    ></Button>
-                                </div>
+                                <div
+                                    tw="lg:text-px21 mb-8"
+                                    dangerouslySetInnerHTML={{ __html: newsletterHeading?.copy?.childMarkdownRemark?.html }}
+                                />
+                                <form
+                                    onSubmit={handleSubmit(onSubmit)}
+                                    name={"subscribe-now"}
+                                    method="POST"
+                                    data-netlify
+                                    data-netlify-honeypot="bot-field"
+                                >
+                                    <div tw="lg:grid lg:grid-cols-5">
+                                        <input
+                                            {...register("email")}
+                                            required
+                                            tw="text-px16 col-span-3 p-4 w-full lg:w-auto mb-8 lg:mb-0"
+                                            placeholder="Enter your email address"
+                                        />
+                                        <ButtonForm tw="col-span-2 lg:rounded-tl-none rounded-bl-none w-full lg:w-auto">SUBSCRIBE NOW</ButtonForm>
+                                    </div>
+                                    {errors["email"] && (
+                                        <small tw="text-[#FE3636]">{errors["email"]?.type === "required" && `Email is required`}</small>
+                                    )}
+                                </form>
                             </div>
                         </div>
                     </div>
