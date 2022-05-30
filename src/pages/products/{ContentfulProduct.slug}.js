@@ -313,7 +313,7 @@ export default function Product({ data }) {
                             `,
                         ]}
                         products={products}
-                        heading={<div tw="container px-4 mx-auto font-sf-light text-px24 lg:text-px54 lg:mb-12">Other similar products</div>}
+                        heading={<div tw="container px-4 mx-auto font-sf-light text-px24 lg:text-px48 2xl:text-px54 lg:mb-12">Other similar products</div>}
                         reverse={true}
                         tw="lg:py-48 py-16"
                     />

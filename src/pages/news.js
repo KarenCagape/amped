@@ -7,7 +7,6 @@ import { GatsbyImage } from "gatsby-plugin-image";
 import Layout from "../components/layout";
 import Banner from "../components/heroes/news";
 import SliderButton from "../components/btn-slider-arrow";
-import Button from "../components/button";
 import ButtonForm from "../components/_/button";
 
 function ContentSlider({ sliderRef, contents = [], slidesToShow = 2, ...rest }) {
@@ -161,7 +160,7 @@ export default function News({ data, navigate }) {
                             {newsletterFormTitle ? <div tw="mb-12">{newsletterFormTitle}</div> : ""}
                             <div tw="bg-sitegray p-12">
                                 <div
-                                    tw="lg:text-px21 mb-8"
+                                    tw="lg:text-px18 2xl:text-px21 mb-8"
                                     dangerouslySetInnerHTML={{ __html: newsletterHeading?.copy?.childMarkdownRemark?.html }}
                                 />
                                 <form

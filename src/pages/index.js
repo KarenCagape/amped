@@ -2,13 +2,13 @@ import * as React from "react";
 import "twin.macro";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
-import PrimaryHero from "../components/heroes/primary-hero";
-import Brands from "../components/brands";
-import HowWeDoIt from "../components/sections/how-we-do-it";
-import MeetTheSolutions from "../components/sections/meet-the-solutions";
-import PoweringYourPossibilities from "../components/sections/powering-your-possiblities";
-import NoCompromises from "../components/sections/no-compromises";
-import AmpedImpact from "../components/sections/amped-impact";
+import PrimaryHero from "../components/home/primary-hero";
+import Brands from "../components/sections/brands";
+import HowWeDoIt from "../components/home/how-we-do-it";
+import MeetTheSolutions from "../components/home/meet-the-solutions";
+import PoweringYourPossibilities from "../components/home/powering-your-possiblities";
+import NoCompromises from "../components/home/no-compromises";
+import AmpedImpact from "../components/home/amped-impact";
 import ClimateImpact from "../components/home/climate-impact";
 
 export default function IndexPage({ data }) {

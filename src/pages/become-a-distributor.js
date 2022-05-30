@@ -60,7 +60,7 @@ function StorySliderContent({ media, caption, author }) {
     return (
         <div tw="mx-4 lg:mx-8 min-h-full flex flex-col justify-between">
             <div tw="w-full lg:h-80 ">{media}</div>
-            <div tw="lg:text-px21 p-8 my-4 lg:my-10 bg-sitegray rounded">{caption}</div>
+            <div tw="lg:text-px18 2xl:text-px21 p-8 my-4 lg:my-10 bg-sitegray rounded">{caption}</div>
             <div>{author}</div>
         </div>
     );
@@ -150,7 +150,7 @@ export default function BecomeADistributor({ data, navigate }) {
             <div tw="px-4 container mx-auto py-16 lg:py-48">
                 <div tw="grid grid-cols-1 lg:grid-cols-5 lg:mb-32">
                     {copyKeyStats?.heading ? (
-                        <div tw="text-px24 lg:text-px54 leading-tight col-span-2 mb-4 lg:mb-0">
+                        <div tw="text-px24 lg:text-px48 2xl:text-px54 leading-tight col-span-2 mb-4 lg:mb-0">
                             <span>{copyKeyStats?.heading}</span>
                         </div>
                     ) : (
@@ -159,7 +159,7 @@ export default function BecomeADistributor({ data, navigate }) {
                     <div tw="col-span-3">
                         {copyKeyStats?.subText?.childMarkdownRemark?.html ? (
                             <div
-                                tw="lg:text-px21 mb-16"
+                                tw="lg:text-px18 2xl:text-px21 mb-16"
                                 css={[
                                     css`
                                         p {
@@ -213,7 +213,7 @@ export default function BecomeADistributor({ data, navigate }) {
                         )}
                         {newsletterCopyImage?.subText?.childMarkdownRemark?.html ? (
                             <div
-                                tw="lg:text-px21 mb-10"
+                                tw="lg:text-px18 2xl:text-px21 mb-10"
                                 css={[
                                     css`
                                         p {
@@ -228,7 +228,7 @@ export default function BecomeADistributor({ data, navigate }) {
                         )}
 
                         <div tw="bg-sitegray p-12 text-center lg:text-left">
-                            <div tw="text-px18 lg:text-px21 mb-8">{newsletterFormHeading}</div>
+                            <div tw="text-px18 lg:text-px18 2xl:text-px21 mb-8">{newsletterFormHeading}</div>
                             <form
                                 onSubmit={handleSubmit(onSubmit)}
                                 name={"become-a-partner"}
@@ -340,7 +340,7 @@ export default function BecomeADistributor({ data, navigate }) {
                         <div tw="col-span-3">
                             {listCopy?.subText?.childMarkdownRemark?.html ? (
                                 <div
-                                    tw="lg:text-px21 mb-16"
+                                    tw="lg:text-px18 2xl:text-px21 mb-16"
                                     css={[
                                         css`
                                             p {
@@ -377,12 +377,12 @@ export default function BecomeADistributor({ data, navigate }) {
             <div tw="py-16 pb-10 lg:py-48 overflow-x-hidden">
                 <div tw="px-4 container mx-auto pb-16 lg:pb-32">
                     <div tw="grid grid-cols-1 lg:grid-cols-5 ">
-                        <div tw="text-px18 lg:lg:text-px54 col-span-2 font-circular-bold lg:font-circular-regular mb-4 lg:mb-0">
+                        <div tw="text-px18 lg:text-px48 2xl:text-px54 col-span-2 font-circular-bold lg:font-circular-regular mb-4 lg:mb-0">
                             {resourcesHeading?.heading}
                         </div>
                         {resourcesHeading?.copy?.childMarkdownRemark?.html ? (
                             <div
-                                tw="lg:text-px21 col-span-3"
+                                tw="lg:text-px18 2xl:text-px21 col-span-3"
                                 dangerouslySetInnerHTML={{ __html: resourcesHeading?.copy?.childMarkdownRemark?.html }}
                             />
                         ) : (
@@ -474,7 +474,7 @@ export default function BecomeADistributor({ data, navigate }) {
             {/* GALLERY */}
             {galleryItems?.length ? (
                 <div tw="px-4 container mx-auto py-16 lg:py-48">
-                    <div tw="text-px21 lg:text-px54 text-center mb-8 lg:mb-32">
+                    <div tw="text-px21 lg:text-px48 2xl:text-px54 text-center mb-8 lg:mb-32">
                         {galleryHeading ? <div tw="break-all">{galleryHeading}</div> : ""}
                     </div>
                     <div tw="gap-2 lg:gap-8 grid grid-cols-2 lg:grid-cols-4">

@@ -21,7 +21,7 @@ export default function BuyWowSolarPage({ data }) {
             <div tw="px-4 container mx-auto py-16 lg:py-48">
                 <div tw="grid grid-cols-1 lg:grid-cols-5">
                     {introCopy?.heading ? <SubHeader tw="col-span-2 mb-8 lg:mb-0 leading-normal">{introCopy?.heading}</SubHeader> : ""}
-                    <div tw="col-span-3 lg:text-px21" dangerouslySetInnerHTML={{ __html: introCopy?.copy?.childMarkdownRemark?.html }} />
+                    <div tw="col-span-3 lg:text-px18 2xl:text-px21" dangerouslySetInnerHTML={{ __html: introCopy?.copy?.childMarkdownRemark?.html }} />
                 </div>
             </div>
 
@@ -37,7 +37,7 @@ export default function BuyWowSolarPage({ data }) {
             {gallery?.length ? (
                 <div tw="px-4 container mx-auto  py-16 lg:py-48">
                     {galleryHeading ? (
-                        <div tw="text-px21 lg:text-px54 text-center mb-16 lg:mb-32">
+                        <div tw="text-px21 lg:text-px48 2xl:text-px54 text-center mb-16 lg:mb-32">
                             <div tw="break-all">{galleryHeading}</div>
                         </div>
                     ) : (

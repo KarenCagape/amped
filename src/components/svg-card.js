@@ -14,7 +14,7 @@ export function SvgCardLandscape({ title, caption, svg, ...rest }) {
     return (
         <div tw="bg-sitegray px-10 lg:px-16 py-8 lg:py-12 rounded-md text-center lg:text-left" {...rest}>
             <div tw="text-px18 lg:text-px28">{title}</div>
-            <div tw="text-px14 lg:text-px21 mt-2 lg:mt-7">{caption}</div>
+            <div tw="text-px14 lg:text-px18 2xl:text-px21 mt-2 lg:mt-7">{caption}</div>
             <div tw="flex flex-nowrap mt-7 justify-center lg:justify-start">{svg}</div>
         </div>
     );

@@ -18,21 +18,21 @@ export function AmpedImpact({ heading, subText, keyStats, cta, images }) {
             <div tw="grid grid-cols-1 lg:grid-cols-2 items-center gap-8">
                 <div tw="lg:pr-16 text-center lg:text-left">
                     <h2
-                        tw="text-px24 lg:text-px54 my-5 lg:my-8 font-sf-regular leading-tight"
+                        tw="text-px24 lg:text-px48 2xl:text-px54 my-5 lg:my-8 font-sf-regular leading-none"
                     >
                       {heading}
                     </h2>
                     <div
-                        tw="text-px16 lg:text-px21 mb-12 lg:mb-8 font-circular-regular leading-normal"
+                        tw="text-px16 lg:text-px18 2xl:text-px21 mb-12 lg:mb-8 font-circular-regular leading-normal"
                         dangerouslySetInnerHTML={{ __html: subText?.childMarkdownRemark?.html }}
                     />
-                    <div tw="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                    <div tw="flex justify-center lg:justify-start gap-8 mb-12">
                         {keyStats?.map(({ value, suffix, label }, idx) => (
                             <MetricCard
                                 key={idx}
                                 value={
-                                    <div tw="text-px16 grid grid-cols-2 gap-4 items-center justify-between">
-                                        <div tw="text-px48 ">
+                                    <div tw="text-px16 inline-flex gap-4 items-center">
+                                        <div tw="text-px48">
                                             <span tw="text-primary">{value}</span>
                                             <sup tw="text-secondary">{suffix}</sup>
                                         </div>
@@ -44,7 +44,7 @@ export function AmpedImpact({ heading, subText, keyStats, cta, images }) {
                     </div>
                     {cta?.url ? (
                         <div>
-                            <Button text={cta?.title} tw="px-4 py-2 uppercase min-w-[200px]" path={cta?.url} />
+                            <Button text={cta?.title} tw="uppercase min-w-[200px]" path={cta?.url} />
                         </div>
                     ) : (
                         ""

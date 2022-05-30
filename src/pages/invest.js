@@ -8,7 +8,7 @@ import Banner from "../components/heroes/invest";
 import { SubHeader } from "../components/_/header";
 import SliderButton from "../components/btn-slider-arrow";
 import ReachOut from "../components/sections/reach-out";
-import Brands from "../components/brands";
+import Brands from "../components/sections/brands";
 
 const sliderOverride = css`
     & .slick-list,
@@ -88,7 +88,7 @@ export default function InvestPage({ data }) {
                     <div tw="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
                         {resourcesHeading?.heading ? <SubHeader tw="col-span-2 leading-normal">{resourcesHeading?.heading}</SubHeader> : ""}
                         <div
-                            tw="col-span-3 lg:text-px21"
+                            tw="col-span-3 lg:text-px18 2xl:text-px21"
                             css={[
                                 css`
                                     p {
@@ -162,7 +162,7 @@ export default function InvestPage({ data }) {
             <div tw="px-4 container mx-auto py-16 lg:py-48">
                 <div tw="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
                     {partnersHeading?.heading ? <SubHeader tw="col-span-2 leading-normal">{partnersHeading?.heading}</SubHeader> : ""}
-                    <div tw="col-span-3 lg:text-px21">
+                    <div tw="col-span-3 lg:text-px18 2xl:text-px21">
                         {partnersHeading?.copy?.childMarkdownRemark?.html ? (
                             <div dangerouslySetInnerHTML={{ __html: partnersHeading?.copy?.childMarkdownRemark?.html }} />
                         ) : (
@@ -182,7 +182,7 @@ export default function InvestPage({ data }) {
             {gallery?.length ? (
                 <div tw="px-4 container mx-auto py-16 lg:py-48">
                     {galleryHeading ? (
-                        <div tw="text-px21 lg:text-px54 text-center mb-10 lg:mb-32">
+                        <div tw="text-px21 lg:text-px48 2xl:text-px54 text-center mb-10 lg:mb-32">
                             <div tw="break-all">{galleryHeading}</div>
                         </div>
                     ) : (

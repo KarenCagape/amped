@@ -10,7 +10,7 @@ export function HowWeDoIt({ heading, subText, button, cards }) {
                 <div tw="font-sf-regular mb-12 lg:mb-0">
                     <div
                         css={[
-                            tw`text-px36 lg:text-px72 text-white leading-tight lg:mb-32 `,
+                            tw`text-px36 lg:text-[56px] 2xl:text-px72 text-white leading-none lg:mb-32 `,
                             css`
                                 strong {
                                     ${tw`text-primary font-sf-bold`}
@@ -49,17 +49,17 @@ export function HowWeDoIt({ heading, subText, button, cards }) {
                                         </div>
                                     ))}
                                 </div>
-                                {title ? <div tw="text-px14 lg:text-px18 text-secondary">{title}</div> : ""}
+                                {title ? <div tw="text-px14 lg:text-px18 text-secondary lg:max-w-[75%]">{title}</div> : ""}
                             </div>
                         ))}
                     </div>
                     <div tw="lg:order-first">
                         <div
-                            tw="font-circular-regular text-px16 lg:text-px21 text-white mt-10 mb-9 lg:mb-16"
+                            tw="font-circular-regular text-px16 lg:text-px18 2xl:text-px21 text-white mt-10 mb-9 lg:mb-16"
                             dangerouslySetInnerHTML={{ __html: subText?.childMarkdownRemark?.html }}
                         />
 
-                        <Button tw="uppercase" text={button?.title} path={button?.url} />
+                        <Button tw="uppercase lg:min-w-[260px]" text={button?.title} path={button?.url} />
                     </div>
                 </div>
             </div>

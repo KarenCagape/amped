@@ -5,13 +5,13 @@ import { GatsbyImage } from "gatsby-plugin-image";
 import Layout from "../components/layout";
 import Banner from "../components/heroes/team";
 import Button from "../components/button";
-import Brands from "../components/brands";
+import Brands from "../components/sections/brands";
 
 function EmployeeCard({ avatar, name, position }) {
     return (
         <div tw="flex flex-col items-center justify-center">
             <div tw="mb-6 text-center">{avatar}</div>
-            <div tw="text-center text-px18 lg:text-px21 mb-1">{name}</div>
+            <div tw="text-center text-px18 2xl:text-px21 mb-1">{name}</div>
             <div tw="text-secondary text-px16 lg:text-px16 text-center">{position}</div>
         </div>
     );
@@ -30,9 +30,9 @@ export default function AmpedStory({ data }) {
             <div tw="py-16 lg:py-48">
                 <div tw="px-4 container mx-auto">
                     <div tw="grid grid-cols-1 lg:grid-cols-5 mb-20 lg:mb-64">
-                        {introSection?.heading ? <div tw="col-span-2 text-px24 lg:text-px54 mb-4 lg:mb-0">{introSection?.heading}</div> : ""}
+                        {introSection?.heading ? <div tw="col-span-2 text-px24 lg:text-px48 2xl:text-px54 mb-4 lg:mb-0">{introSection?.heading}</div> : ""}
                         {introSection?.copy?.childMarkdownRemark?.html ? (
-                            <div tw="col-span-3 lg:text-px21" dangerouslySetInnerHTML={{ __html: introSection?.copy?.childMarkdownRemark?.html }} />
+                            <div tw="col-span-3 lg:text-px18 2xl:text-px21" dangerouslySetInnerHTML={{ __html: introSection?.copy?.childMarkdownRemark?.html }} />
                         ) : (
                             ""
                         )}
@@ -79,7 +79,7 @@ export default function AmpedStory({ data }) {
                         </div>
                         <div>
                             {imageCopy?.heading?.childMarkdownRemark?.html ? (
-                                <div tw="text-px24 lg:text-px54 mb-4 lg:mb-8">
+                                <div tw="text-px24 lg:text-px48 2xl:text-px54 mb-4 lg:mb-8">
                                     <div tw="leading-tight" dangerouslySetInnerHTML={{ __html: imageCopy?.heading?.childMarkdownRemark?.html }} />
                                 </div>
                             ) : (
@@ -87,7 +87,7 @@ export default function AmpedStory({ data }) {
                             )}
                             {imageCopy?.subText?.childMarkdownRemark?.html ? (
                                 <div
-                                    tw="lg:text-px21 mb-8 lg:mb-16"
+                                    tw="lg:text-px18 2xl:text-px21 mb-8 lg:mb-16"
                                     dangerouslySetInnerHTML={{ __html: imageCopy?.subText?.childMarkdownRemark?.html }}
                                 />
                             ) : (

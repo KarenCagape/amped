@@ -3,7 +3,7 @@ import tw, { css } from "twin.macro";
 import { GatsbyImage } from "gatsby-plugin-image";
 import Slider from "react-slick";
 
-import Link from "./link";
+import Link from "../link";
 
 const sliderOverride = css`
     & .slick-track {

@@ -7,7 +7,7 @@ export function HeaderLink({ path, text }) {
   return (
     <Link
       to={path}
-      tw="font-circular-bold text-px21 mb-6 hover:text-solar-100 active:text-solar-80"
+      tw="font-circular-bold lg:text-px18 2xl:text-px21 mb-6 hover:text-solar-100 active:text-solar-80"
     >
       {text}
     </Link>

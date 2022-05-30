@@ -61,11 +61,11 @@ export default function Innovation({ data }) {
                           <div tw="container mx-auto px-4">
                               <div tw="grid grid-cols-1 lg:gap-8 lg:grid-cols-5">
                                   <div
-                                      tw="text-px24 lg:text-px54 col-span-2 leading-normal"
+                                      tw="text-px24 lg:text-px48 2xl:text-px54 col-span-2 leading-normal"
                                       dangerouslySetInnerHTML={{ __html: heading?.childMarkdownRemark?.html }}
                                   />
                                   <div
-                                      tw="text-px16 lg:text-px21 col-span-3"
+                                      tw="text-px16 lg:text-px18 2xl:text-px21 col-span-3"
                                       css={[
                                           css`
                                               p {

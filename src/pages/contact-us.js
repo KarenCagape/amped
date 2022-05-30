@@ -14,7 +14,7 @@ function ContactCard({ icon, content, label }) {
     return (
         <div tw="bg-sitegray rounded p-8 min-h-full">
             <div tw="mb-4 lg:mb-8">{icon}</div>
-            <div tw="text-px18 lg:text-px21 font-circular-bold">{content}</div>
+            <div tw="text-px18 lg:text-px18 2xl:text-px21 font-circular-bold">{content}</div>
             <div tw="text-secondary">{label}</div>
         </div>
     );
@@ -54,9 +54,9 @@ export default function ContactUs({ data, navigate }) {
             <div tw="pt-16 lg:pt-48">
                 <div tw="px-4 container mx-auto">
                     <div tw="grid grid-cols-1 lg:grid-cols-5 mb-16 lg:mb-48">
-                        {introCopy?.heading ? <div tw="col-span-2 text-px24 lg:text-px54 mb-4 lg:mb-0">{introCopy?.heading}</div> : ""}
+                        {introCopy?.heading ? <div tw="col-span-2 text-px24 lg:text-px48 2xl:text-px54 mb-4 lg:mb-0">{introCopy?.heading}</div> : ""}
                         {introCopy?.copy?.childMarkdownRemark?.html ? (
-                            <div tw="col-span-3 lg:text-px21" dangerouslySetInnerHTML={{ __html: introCopy?.copy?.childMarkdownRemark?.html }} />
+                            <div tw="col-span-3 lg:text-px18 2xl:text-px21" dangerouslySetInnerHTML={{ __html: introCopy?.copy?.childMarkdownRemark?.html }} />
                         ) : (
                             ""
                         )}

@@ -19,13 +19,13 @@ export default function AmpedStory({ data }) {
             {/* CONTENT */}
             <div tw="container px-6 lg:px-4 mx-auto">
                 <div tw="relative lg:w-7/12 mx-auto py-16 lg:py-48">
-                    <div tw="text-lg lg:text-px21 text-default lg:mb-32 mb-16 mx-auto">
+                    <div tw="text-lg lg:text-px18 2xl:text-px21 text-default lg:mb-32 mb-16 mx-auto">
                         <RichText content={content} />
                     </div>
 
                     {/* SIGNATURES */}
                     <div tw="relative">
-                        <div tw="text-2xl lg:text-px54 text-default lg:mb-24 mb-10">
+                        <div tw="text-2xl lg:text-px48 2xl:text-px54 text-default lg:mb-24 mb-10">
                             <div
                                 tw="leading-tight"
                                 css={[
@@ -41,7 +41,7 @@ export default function AmpedStory({ data }) {
                         <div tw="grid grid-cols-5 items-end">
                             <div tw="grid grid-cols-1 lg:grid-cols-2 gap-6 col-span-4">
                                 {signatures?.map(({ name, headshot, jobInfo, signature }, idx) => (
-                                    <div tw="text-px18 lg:text-px21 max-w-[75%] lg:max-w-full" key={idx}>
+                                    <div tw="text-px18 lg:text-px18 2xl:text-px21 max-w-[75%] lg:max-w-full" key={idx}>
                                         <div tw="w-6/12 mb-4 lg:mb-12">
                                             <div tw="rounded-full bg-sitegray lg:hidden w-[90px] h-[90px] mb-4">
                                                 {headshot?.gatsbyImageData ? (

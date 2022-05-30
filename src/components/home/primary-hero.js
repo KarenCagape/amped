@@ -42,7 +42,7 @@ export function PrimaryHero({ heading, subText, image, imageMobile }) {
         <div>
             <StyledBackgroundSection image={image} imageMobile={imageMobile}>
                 <Hero>
-                    <Caption>
+                    <Caption tw="w-full lg:w-[41.6667%]">
                         <Caption.Header
                             css={[
                                 css`
@@ -52,10 +52,10 @@ export function PrimaryHero({ heading, subText, image, imageMobile }) {
                                 `,
                             ]}
                         >
-                            <div tw="leading-tight" dangerouslySetInnerHTML={{ __html: heading?.childMarkdownRemark?.html }} />
+                            <div tw="leading-none" dangerouslySetInnerHTML={{ __html: heading?.childMarkdownRemark?.html }} />
                         </Caption.Header>
                         <Caption.Text tw="pt-4 lg:pt-6 lg:pb-10">
-                            <div dangerouslySetInnerHTML={{ __html: subText?.childMarkdownRemark?.html }} />
+                            <div tw="leading-[1.2]" dangerouslySetInnerHTML={{ __html: subText?.childMarkdownRemark?.html }} />
                         </Caption.Text>
                     </Caption>
                 </Hero>
