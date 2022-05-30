@@ -255,7 +255,7 @@ export default function BecomeADistributor({ data, navigate }) {
             <div tw="overflow-x-hidden py-10 lg:pt-0">
                 <div tw="px-4 container m-auto">
                     <div tw="grid grid-cols-1 lg:grid-cols-5">
-                        <div tw="text-px18 lg:text-px36 col-span-2 mb-10 lg:mb-0 font-circular-bold">{testimonialsHeading}</div>
+                        <div tw="text-px18 lg:text-px28 2xl:text-px36 col-span-2 mb-10 lg:mb-0 font-circular-bold">{testimonialsHeading}</div>
                         <div tw="col-span-3 relative" css={sliderOverride}>
                             <div
                                 tw="absolute"

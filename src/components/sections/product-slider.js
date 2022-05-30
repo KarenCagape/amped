@@ -1,12 +1,12 @@
 import * as React from "react";
 import tw, { css } from "twin.macro";
 import Slider from "react-slick";
-import ProductCardLandscape from "./product-card-landscape";
+import ProductCardLandscape from "../product-card-landscape";
 import { GatsbyImage } from "gatsby-plugin-image";
-import Button from "./_/button";
-import SliderButton from "./btn-slider-arrow";
+import Button from "../_/button";
+import SliderButton from "../btn-slider-arrow";
 
-export function LightingSlider({ heading, reverse = false, products, ...rest }) {
+function ProductSlider({ heading, reverse = false, products, ...rest }) {
     const sliderRef = React.useRef();
     const productSliderSettings = {
         infinite: true,
@@ -24,35 +24,46 @@ export function LightingSlider({ heading, reverse = false, products, ...rest }) 
     };
 
     return (
-        <div css={[reverse && tw`bg-sitegray`]} {...rest}>
-            {heading}
-            <div tw="relative grid grid-cols-1 lg:grid-cols-6">
-                <SliderButton
-                    tw="absolute hidden lg:block"
-                    onClick={() => {
-                        sliderRef.current.slickNext();
-                    }}
-                    css={[
-                        {
-                            bottom: "5%",
-                            left: "10%",
-                        },
-                    ]}
-                />
-                <div tw="hidden lg:block"></div>
-                <div tw="overflow-x-hidden lg:col-span-5">
-                    <div tw="lg:w-screen">
-                        <Slider ref={sliderRef} tw="lg:-mr-80" {...productSliderSettings}>
+        <div tw="overflow-x-hidden " css={[reverse && tw`bg-sitegray`]} {...rest}>
+            <div tw="container lg:px-4 mx-auto">
+                <div>{heading}</div>
+                <div tw="relative lg:flex lg:items-end lg:gap-8">
+                    <div tw="hidden lg:block lg:flex-[0 0 8.3333%] pb-12">
+                        <SliderButton
+                            onClick={() => {
+                                sliderRef.current.slickNext();
+                            }}
+                        />
+                    </div>
+                    <div tw="lg:flex-1">
+                        <Slider
+                            ref={sliderRef}
+                            tw="lg:-mr-80"
+                            {...productSliderSettings}
+                            css={[
+                                css`
+                                    .slick-track {
+                                        ${tw`lg:flex`}
+                                    }
+                                    .slick-slide {
+                                        ${tw`float-none h-auto`}
+
+                                        &>div {
+                                            ${tw`h-full`}
+                                        }
+                                    }
+                                `,
+                            ]}
+                        >
                             {products?.map(({ node }, idx) => (
-                                <div tw="p-4 lg:py-0" key={idx}>
+                                <div tw="p-4 lg:py-0 h-full" key={idx}>
                                     <ProductCardLandscape
-                                        css={[reverse && tw`bg-white`]}
                                         img={
                                             node?.thumbnail?.gatsbyImageData ? (
                                                 <GatsbyImage
+                                                    tw="w-full h-full"
                                                     image={node?.thumbnail?.gatsbyImageData}
                                                     alt={node?.thumbnail?.title}
-                                                    tw="max-w-[440px] max-h-[440px]"
                                                 />
                                             ) : (
                                                 ""
@@ -101,4 +112,4 @@ export function LightingSlider({ heading, reverse = false, products, ...rest }) 
     );
 }
 
-export default LightingSlider;
+export default ProductSlider;

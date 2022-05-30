@@ -1,10 +1,10 @@
 import * as React from "react";
 import "twin.macro";
-import UpgradeCard from "./upgrade-card";
+import UpgradeCard from "../upgrade-card";
 import { GatsbyImage } from "gatsby-plugin-image";
-import SliderArrow from "./btn-slider-arrow";
+import SliderArrow from "../btn-slider-arrow";
 
-export function UpgradeSteps2({ cards }) {
+function UpgradesList({ cards }) {
     return (
         <div tw="grid gap-8 lg:gap-16 lg:grid-cols-3 grid-cols-1 items-stretch">
             {cards?.map(({ title, image, subText }, idx) => (
@@ -28,4 +28,4 @@ export function UpgradeSteps2({ cards }) {
     );
 }
 
-export default UpgradeSteps2;
+export default UpgradesList;

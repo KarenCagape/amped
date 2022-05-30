@@ -1,9 +1,9 @@
 import * as React from "react";
 import tw, { css } from "twin.macro";
 import { GatsbyImage } from "gatsby-plugin-image";
-import { cellBorderStyle, cellBorderStyleAll, cellBorderStyleX } from "../helpers/table-style";
+import { cellBorderStyle } from "../../helpers/table-style";
 
-export function ComparisonTableLighting({ headers, rows }) {
+export function ComparisonTable({ headers, rows }) {
     return (
         <div
             style={{
@@ -16,7 +16,7 @@ export function ComparisonTableLighting({ headers, rows }) {
                 <thead tw="text-px14 lg:text-px16 text-left text-primary font-circular-bold">
                     <tr>
                         {headers?.map(({ label, icon }, idx) => (
-                            <th style={{ ...cellBorderStyleX }} key={idx} tw="p-3.5 font-normal">
+                            <th css={[idx !== headers?.length - 1 ? tw`border-r border-[#B5C4CA]` : ""]} key={idx} tw="p-3.5 font-normal">
                                 {icon ? (
                                     <div tw="mb-4">
                                         {icon?.gatsbyImageData && icon?.gatsbyImageData ? (
@@ -37,7 +37,13 @@ export function ComparisonTableLighting({ headers, rows }) {
                     {rows?.map(({ content }, idx) => (
                         <tr key={idx}>
                             {content.map(({ title, secondContent }, idx2) => (
-                                <td key={idx2} style={{ ...cellBorderStyleAll }}>
+                                <td
+                                    key={idx2}
+                                    css={[
+                                        idx2 !== content?.length - 1 ? tw`border-r border-[#B5C4CA]` : "",
+                                        idx !== rows?.length - 1 ? tw`border-b border-[#B5C4CA]` : "",
+                                    ]}
+                                >
                                     {title ? (
                                         <div
                                             tw="p-3.5 whitespace-nowrap"
@@ -90,4 +96,4 @@ export function ComparisonTableLighting({ headers, rows }) {
     );
 }
 
-export default ComparisonTableLighting;
+export default ComparisonTable;

@@ -9,7 +9,7 @@ import DataAndSpecSummary from "../../components/data-and-spec-summary";
 import Button from "../../components/_/button";
 import { SvgCardLandscape, SvgCard } from "../../components/svg-card";
 import ExtraInfoFill from "../../components/extra-info-fill";
-import LightingSlider from "../../components/lighting-slider";
+import ProductSlider from "../../components/sections/product-slider";
 import BecomeDistributor from "../../components/sections/become-distributor";
 import Slider from "react-slick";
 
@@ -304,7 +304,7 @@ export default function Product({ data }) {
 
             {products ? (
                 <div>
-                    <LightingSlider
+                    <ProductSlider
                         css={[
                             css`
                                 .product-card {

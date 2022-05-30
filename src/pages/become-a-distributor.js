@@ -258,7 +258,7 @@ export default function BecomeADistributor({ data, navigate }) {
                 <div tw="px-4 container m-auto">
                     <div tw="grid grid-cols-1 lg:grid-cols-5">
                         {testimonialsHeading ? (
-                            <div tw="text-px18 lg:text-px36 col-span-2 mb-10 lg:mb-0 font-circular-bold">{testimonialsHeading}</div>
+                            <div tw="text-px18 lg:text-px28 2xl:text-px36 col-span-2 mb-10 lg:mb-0 font-circular-bold">{testimonialsHeading}</div>
                         ) : (
                             ""
                         )}

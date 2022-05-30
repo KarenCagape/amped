@@ -54,15 +54,21 @@ const StyledBackgroundSection = styled(BackgroundSection)`
 
 const { Caption } = Hero;
 
-export function LightingAndPhoneCharging({ heading, subText, image }) {
+function ProductCategoryHero({ heading, subText, image }) {
     return (
         <StyledBackgroundSection>
             <Hero tw="!h-auto pb-16 lg:!h-screen">
-                <Caption>
-                    {heading ? <Caption.Header>{heading}</Caption.Header> : ""}
+                <Caption tw="lg:pr-16 w-full lg:w-[50%]">
+                    {heading ? (
+                        <Caption.Header tw="lg:mb-12">
+                            <h1>{heading}</h1>
+                        </Caption.Header>
+                    ) : (
+                        ""
+                    )}
                     <Caption.Text tw="font-sf-light mt-6">
                         <div
-                            tw="text-px16 lg:text-px36 max-w-[83.333%] lg:max-w-none mx-auto"
+                            tw="text-px16 lg:text-px28 2xl:text-px36 max-w-[83.333%] lg:max-w-none mx-auto"
                             css={[
                                 css`
                                     strong {
@@ -86,4 +92,4 @@ export function LightingAndPhoneCharging({ heading, subText, image }) {
     );
 }
 
-export default LightingAndPhoneCharging;
+export default ProductCategoryHero;
