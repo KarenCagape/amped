@@ -6,7 +6,7 @@ import { GatsbyImage } from "gatsby-plugin-image";
 
 const { Content } = Section;
 
-export function Distributor({ heading, image, cta }) {
+export function ProductBottomBanner({ heading, image, cta }) {
     return (
         <Section>
             <Content>
@@ -24,4 +24,4 @@ export function Distributor({ heading, image, cta }) {
     );
 }
 
-export default Distributor;
+export default ProductBottomBanner;

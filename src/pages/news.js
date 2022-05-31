@@ -43,7 +43,7 @@ function DownloadableContent({ media, title, actions }) {
         <div tw="mx-4 lg:mx-8">
             {media ? <div>{media}</div> : ""}
             <div>
-                {title ? <div tw="text-px18 lg:text-px28 mt-6 lg:mt-8">{title}</div> : ""}
+                {title ? <div tw="text-px18 lg:text-px21 2xl:text-px28 mt-6 lg:mt-8">{title}</div> : ""}
                 {actions ? <div tw="text-px14 lg:text-px18 text-secondary mt-2">{actions}</div> : ""}
             </div>
         </div>

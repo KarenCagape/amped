@@ -16,7 +16,7 @@ export function ExtraInfoLight({ caption }) {
                     <Logo />
                 </div>
             </div>
-            <div tw="text-px16 lg:text-px28 font-circular-book text-center items-center justify-center py-12 lg:py-24 lg:px-32 px-4">{caption}</div>
+            <div tw="text-px16 lg:text-px21 2xl:text-px28 font-circular-book text-center items-center justify-center py-12 lg:py-24 lg:px-32 px-4">{caption}</div>
         </div>
     );
 }

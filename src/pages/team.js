@@ -101,7 +101,7 @@ export default function AmpedStory({ data }) {
 
             {/* PARTNERS */}
             <div tw="py-16 lg:py-48">
-                {partnersHeading ? <div tw="px-4 container mx-auto text-px21 lg:text-px28 text-center mb-8 lg:mb-0">{partnersHeading}</div> : ""}
+                {partnersHeading ? <div tw="px-4 container mx-auto text-px21 2xl:text-px28 text-center mb-8 lg:mb-0">{partnersHeading}</div> : ""}
                 <div>
                     <Brands logos={partners} />
                 </div>

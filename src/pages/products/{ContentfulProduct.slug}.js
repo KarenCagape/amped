@@ -4,13 +4,13 @@ import { graphql } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 
 import Layout from "../../components/layout";
-import WowSolarHero from "../../components/heroes/wowsolar-hero";
-import DataAndSpecSummary from "../../components/data-and-spec-summary";
+import ProductHero from "../../components/product/product-hero";
+import DataAndSpecSummary from "../../components/product/data-and-spec-summary";
 import Button from "../../components/_/button";
 import { SvgCardLandscape, SvgCard } from "../../components/svg-card";
 import ExtraInfoFill from "../../components/extra-info-fill";
 import ProductSlider from "../../components/sections/product-slider";
-import BecomeDistributor from "../../components/sections/become-distributor";
+import ProductBottomBanner from "../../components/product/product-bottom-banner";
 import Slider from "react-slick";
 
 const svgSliderSettings = {
@@ -54,13 +54,14 @@ export default function Product({ data }) {
     return (
         <Layout pageTitle={pageTitle}>
             <div tw="relative">
+                {/* HERO */}
                 <div tw="hidden lg:sticky top-0 lg:flex lg:justify-end lg:items-center lg:z-10 lg:pointer-events-none lg:min-h-screen">
                     <div tw="w-full lg:w-1/2 p-16">
                         {thumbnail?.gatsbyImageData ? <GatsbyImage image={thumbnail?.gatsbyImageData} alt={thumbnail?.title} /> : ""}
                     </div>
                 </div>
                 <div tw="lg:absolute lg:top-0 lg:left-0 lg:min-h-screen w-full">
-                    <WowSolarHero
+                    <ProductHero
                         detailRef={detailRef}
                         bannerLogo={
                             logo?.gatsbyImageData ? (
@@ -78,7 +79,7 @@ export default function Product({ data }) {
                         }
                         wowsolar={
                             <div
-                                tw="text-lg lg:text-px28"
+                                tw="text-lg lg:text-px21 2xl:text-px28"
                                 css={[
                                     css`
                                         strong {
@@ -112,6 +113,7 @@ export default function Product({ data }) {
                     />
                 </div>
 
+                {/* DATA and SPEC */}
                 <div tw="overflow-hidden" ref={detailRef}>
                     <div tw="px-4 container mx-auto lg:py-48 py-16">
                         <DataAndSpecSummary
@@ -140,12 +142,7 @@ export default function Product({ data }) {
                                 <div tw="flex gap-4">
                                     {ctAsIntro?.map(({ title, url }, idx) => (
                                         <div tw="w-auto">
-                                            <Button
-                                                key={idx}
-                                                css={[idx % 2 !== 0 ? tw`bg-secondary` : ""]}
-                                                as="a"
-                                                href={url}
-                                            >
+                                            <Button key={idx} css={[idx % 2 !== 0 ? tw`bg-secondary` : ""]} as="a" href={url}>
                                                 {title}
                                             </Button>
                                         </div>
@@ -154,7 +151,7 @@ export default function Product({ data }) {
                             }
                         />
                         <div tw="lg:mb-32 mb-8 mt-14 lg:w-1/2">
-                            <div tw="text-px16 lg:text-px28 lg:mb-16 mb-8">
+                            <div tw="text-px16 lg:text-px21 2xl:text-px28 lg:mb-16 mb-8">
                                 <span
                                     css={[
                                         css`
@@ -208,7 +205,7 @@ export default function Product({ data }) {
                             ))}
                         </div>
                         <div tw="lg:w-1/2 py-10 lg:py-0">
-                            <div tw="text-2xl lg:text-px28 lg:mb-16 mb-8">{headingWhatsIncluded}</div>
+                            <div tw="text-2xl lg:text-px21 2xl:text-px28 lg:mb-12 mb-8">{headingWhatsIncluded}</div>
 
                             <div tw="hidden lg:grid grid-cols-1 lg:grid-cols-3 gap-8 lg:mb-16 mb-6">
                                 {cardsWhatsIncluded?.map(({ title, image }, idx) => (
@@ -272,6 +269,7 @@ export default function Product({ data }) {
                 </div>
             </div>
 
+            {/* TEXT BANNER */}
             <div tw="pb-24" css={[products ? tw`lg:pb-48` : ""]}>
                 <div tw="container px-4 mx-auto">
                     <ExtraInfoFill
@@ -302,6 +300,7 @@ export default function Product({ data }) {
                 </div>
             </div>
 
+            {/* PRODUCT SLIDER */}
             {products ? (
                 <div>
                     <ProductSlider
@@ -313,7 +312,9 @@ export default function Product({ data }) {
                             `,
                         ]}
                         products={products}
-                        heading={<div tw="container px-4 mx-auto font-sf-light text-px24 lg:text-px48 2xl:text-px54 lg:mb-12">Other similar products</div>}
+                        heading={
+                            <div tw="container px-4 mx-auto font-sf-light text-px24 lg:text-px48 2xl:text-px54 lg:mb-12">Other similar products</div>
+                        }
                         reverse={true}
                         tw="lg:py-48 py-16"
                     />
@@ -322,7 +323,7 @@ export default function Product({ data }) {
                 ""
             )}
             <div>
-                <BecomeDistributor {...imagecopyBanner} />
+                <ProductBottomBanner {...imagecopyBanner} />
             </div>
         </Layout>
     );

@@ -3,7 +3,7 @@ import tw, { css } from "twin.macro";
 import Layout from "../components/layout";
 import { graphql } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
-import BecomeDistributor from "../components/sections/become-distributor";
+import ProductBottomBanner from "../components/product/product-bottom-banner";
 import { SubHeader } from "../components/_/header";
 
 import ProductCategoryHero from "../components/product-category/product-cat-hero";
@@ -116,7 +116,7 @@ export default function ProductCategory({ data }) {
             )}
 
             {/* Image - Copy Banner */}
-            {imageCopy ? <BecomeDistributor {...imageCopy} /> : ""}
+            {imageCopy ? <ProductBottomBanner {...imageCopy} /> : ""}
         </Layout>
     );
 }

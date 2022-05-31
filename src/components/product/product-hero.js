@@ -44,7 +44,7 @@ const BackgroundSection = ({ className, children }) => {
     );
 };
 
-export function WowsolarHero({ detailRef, wowsolar, bannerLogo, caption, image, ...rest }) {
+function ProductHero({ detailRef, wowsolar, bannerLogo, caption, image, ...rest }) {
     return (
         <BackgroundSection tw="w-full bg-center bg-no-repeat bg-cover bg-fixed">
             <div tw="relative">
@@ -53,16 +53,16 @@ export function WowsolarHero({ detailRef, wowsolar, bannerLogo, caption, image, 
                         <div tw="lg:order-last mb-4">{image}</div>
                         <div>
                             <div tw="mb-6 lg:mb-12 lg:block flex justify-center">{wowsolar}</div>
-                            <div tw="text-px24 text-center lg:text-left lg:text-px48 font-book lg:w-3/4">
+                            <div tw="text-px24 text-center lg:text-left lg:text-px36 2xl:text-px48 font-book lg:w-3/4">
                                 <span tw="leading-tight">{caption}</span>
                             </div>
                         </div>
                         <div
-                            tw="absolute hidden xl:block"
+                            tw="absolute hidden xl:block max-w-[7%]"
                             css={[
                                 {
                                     bottom: "-12%",
-                                    left: "-10%",
+                                    left: "-8%",
                                 },
                             ]}
                         >
@@ -87,4 +87,4 @@ export function WowsolarHero({ detailRef, wowsolar, bannerLogo, caption, image, 
     );
 }
 
-export default WowsolarHero;
+export default ProductHero;

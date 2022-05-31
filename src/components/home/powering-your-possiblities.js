@@ -54,7 +54,7 @@ function Card({ img, heading, text, button, ...rest }) {
                 <div tw="flex justify-center items-center">
                     <div tw="w-10/12">{img}</div>
                 </div>
-                <div tw="text-px18 lg:text-px28 font-circular-bold mt-8 lg:mt-12 mb-6 lg:mb-8" css={[{ color: "#1C212B" }]}>
+                <div tw="text-px18 lg:text-px21 2xl:text-px28 font-circular-bold mt-8 lg:mt-12 mb-6 lg:mb-8" css={[{ color: "#1C212B" }]}>
                     {heading}
                 </div>
                 <div tw="text-px16 lg:text-px18 2xl:text-px21 mb-10 lg:mb-16 font-circular-regular">{text}</div>

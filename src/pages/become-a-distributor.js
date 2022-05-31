@@ -71,7 +71,7 @@ function StoryAuthor({ image, name, address }) {
         <div tw="flex items-center">
             <div tw="rounded-full w-16 h-16 lg:w-24 lg:h-24 bg-gray-200 mr-4">{image}</div>
             <div tw="flex-1">
-                <div tw="lg:text-px28">{name}</div>
+                <div tw="lg:text-px21 2xl:text-px28">{name}</div>
                 <div tw="text-px16 text-secondary">{address}</div>
             </div>
         </div>
@@ -438,7 +438,7 @@ export default function BecomeADistributor({ data, navigate }) {
                                         }
                                         title={
                                             <div
-                                                tw="text-lg lg:text-px28"
+                                                tw="text-lg lg:text-px21 2xl:text-px28"
                                                 css={[
                                                     css`
                                                         strong {
