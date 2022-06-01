@@ -6,13 +6,13 @@ import { GatsbyImage } from "gatsby-plugin-image";
 
 const { Content } = Section;
 
-export function Distributor2({ heading, image, cta }) {
+export function ImageCopy({ heading, image, cta }) {
     return (
         <Section>
             <Content>
                 <div tw="text-center lg:text-left pb-8 lg:pb-0">
                     {heading?.childMarkdownRemark?.html ? (
-                        <Content.Title tw="lg:mb-16">
+                        <Content.Title tw="lg:mb-16 leading-[1.3]">
                             <div dangerouslySetInnerHTML={{ __html: heading?.childMarkdownRemark?.html }} />
                         </Content.Title>
                     ) : (
@@ -28,4 +28,4 @@ export function Distributor2({ heading, image, cta }) {
     );
 }
 
-export default Distributor2;
+export default ImageCopy;

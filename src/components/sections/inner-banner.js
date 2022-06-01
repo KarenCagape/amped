@@ -37,7 +37,7 @@ const StyledBackgroundSection = styled(BackgroundSection)`
 
 const { Caption } = Hero;
 
-export function BecomeDistributor({ heading, image, imageMobile }) {
+function InnerBanner({ heading, image, imageMobile }) {
     return (
         <StyledBackgroundSection image={image} imageMobile={imageMobile}>
             <Hero>
@@ -45,7 +45,7 @@ export function BecomeDistributor({ heading, image, imageMobile }) {
                     <StoryCaption tw="font-sf-light">
                         {heading?.childMarkdownRemark?.html ? (
                             <div
-                                tw="text-px28 lg:text-px48 2xl:text-6xl !leading-tight"
+                                tw="text-px28 lg:text-px48 2xl:text-px54 leading-[1.2]"
                                 css={[
                                     css`
                                         strong {
@@ -65,4 +65,4 @@ export function BecomeDistributor({ heading, image, imageMobile }) {
     );
 }
 
-export default BecomeDistributor;
+export default InnerBanner;
