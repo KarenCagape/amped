@@ -10,7 +10,7 @@ function encode(data) {
         .join("&");
 }
 
-export default function Newsletter({ title, image, subText, formHeading, formSlug, formSubmit, navigate }) {
+export default function Newsletter({ title, image, subText, formHeading, formSlug, formSubmit, navigate, ...rest }) {
     const {
         handleSubmit,
         register,
@@ -27,7 +27,7 @@ export default function Newsletter({ title, image, subText, formHeading, formSlu
     };
 
     return (
-        <div tw="px-4 container mx-auto pt-10 pb-20 lg:py-16 lg:pb-32 2xl:pb-48">
+        <div tw="px-4 container mx-auto pt-10 pb-20 lg:py-16 lg:pb-32 2xl:pb-48" {...rest}>
             <div tw="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-8 2xl:gap-x-16">
                 {title ? <div tw="text-px18 lg:text-px32 font-circular-bold col-span-2 mb-8 lg:mb-0 lg:mr-8">{title}</div> : ""}
                 <div tw="col-span-3">
@@ -50,12 +50,45 @@ export default function Newsletter({ title, image, subText, formHeading, formSlu
                             ]}
                             dangerouslySetInnerHTML={{ __html: subText.childMarkdownRemark.html }}
                         />
+                    ) : subText ? (
+                        <div
+                            tw="lg:text-px18 2xl:text-px21 mb-10"
+                            css={[
+                                css`
+                                    p {
+                                        ${tw`my-6`}
+                                    }
+                                `,
+                            ]}
+                        >
+                            {subText}
+                        </div>
                     ) : (
                         ""
                     )}
 
                     <div tw="bg-sitegray p-12 text-center lg:text-left">
-                        <div tw="text-px18 lg:text-px18 2xl:text-px21 mb-8">{formHeading}</div>
+                        {formHeading?.childMarkdownRemark?.html ? (
+                            <div
+                                tw="text-px18 lg:text-px18 2xl:text-px21 mb-8"
+                                dangerouslySetInnerHTML={{ __html: formHeading.childMarkdownRemark.html }}
+                            />
+                        ) : formHeading ? (
+                            <div
+                                tw="text-px18 lg:text-px18 2xl:text-px21 mb-8"
+                                css={[
+                                    css`
+                                        p {
+                                            ${tw`my-6`}
+                                        }
+                                    `,
+                                ]}
+                            >
+                                {formHeading}
+                            </div>
+                        ) : (
+                            ""
+                        )}
                         <form onSubmit={handleSubmit(onSubmit)} name={formSlug} method="POST" data-netlify data-netlify-honeypot="bot-field">
                             <input type="hidden" {...register("form-name")} defaultValue={formSlug} />
                             <div tw="lg:grid lg:grid-cols-5">

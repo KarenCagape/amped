@@ -2,7 +2,7 @@ import * as React from "react";
 import { graphql } from "gatsby";
 import tw, { css } from "twin.macro";
 import Layout from "../components/layout";
-import Banner from "../components/heroes/amped-story";
+import Banner from "../components/sections/inner-banner";
 import { GatsbyImage } from "gatsby-plugin-image";
 import WowSolarPortraitLogo from "../assets/logo-wowsolar.svg";
 import RichText from "../components/rich-text";
@@ -18,7 +18,7 @@ export default function AmpedStory({ data }) {
 
             {/* CONTENT */}
             <div tw="container px-6 lg:px-4 mx-auto">
-                <div tw="relative lg:w-7/12 mx-auto py-16 lg:py-48">
+                <div tw="relative lg:w-7/12 mx-auto py-14 lg:py-32">
                     <div tw="text-lg lg:text-px18 2xl:text-px21 text-default lg:mb-32 mb-16 mx-auto">
                         <RichText content={content} />
                     </div>

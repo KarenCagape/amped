@@ -3,10 +3,10 @@ import tw, { css } from "twin.macro";
 
 import TextCard from "../text-card";
 
-export default function OverviewKeyStats({ heading, subText, keyStats }) {
+export default function OverviewKeyStats({ heading, subText, keyStats, ...rest }) {
     return (
-        <div tw="px-4 container mx-auto pt-16 lg:pt-32 2xl:pt-48">
-            <div tw="grid grid-cols-1 lg:grid-cols-5 lg:mb-32 lg:gap-x-8 2xl:gap-x-16">
+        <div tw="px-4 container mx-auto pt-16 lg:pt-32 2xl:pt-48 lg:pb-32" {...rest}>
+            <div tw="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-8 2xl:gap-x-16">
                 {heading ? (
                     <div tw="text-px24 lg:text-px48 2xl:text-px54 leading-tight col-span-2 mb-4 lg:mb-0">
                         <span>{heading}</span>

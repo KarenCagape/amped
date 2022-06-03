@@ -5,22 +5,13 @@ import { GatsbyImage } from "gatsby-plugin-image";
 import Slider from "react-slick";
 import SliderButton from "../btn-slider-arrow";
 
-function ContentSlider({ sliderRef, contents = [], slidesToShow = 2, ...rest }) {
+function ContentSlider({ sliderRef, contents = [], slidesToShow = 1, ...rest }) {
     const sliderSettings = {
         infinite: true,
         speed: 500,
         slidesToShow,
         slidesToScroll: 1,
         arrows: false,
-        responsive: [
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-        ],
     };
 
     return (
@@ -36,54 +27,33 @@ function ContentSlider({ sliderRef, contents = [], slidesToShow = 2, ...rest }) 
 
 function DownloadableContent({ media, title, actions }) {
     return (
-        <div tw="mx-4 lg:mx-6">
-            <div
-                css={[
-                    {
-                        minHeight: 250,
-                    },
-                ]}
-            >
-                {media}
-            </div>
+        <div tw="mx-4 lg:mx-8">
+            {media ? <div>{media}</div> : ""}
             <div>
-                <div tw="text-px28 mt-8">{title}</div>
-                <div tw="font-circular-bold lg:font-circular-regular lg:text-px18 text-secondary mt-3">{actions}</div>
+                {title ? <div tw="text-px18 lg:text-px21 2xl:text-px28 leading-normal mt-6 lg:mt-8">{title}</div> : ""}
+                {actions ? <div tw="text-px14 lg:text-px18 text-secondary mt-2">{actions}</div> : ""}
             </div>
         </div>
     );
 }
 
-export default function ResourcesSlider({ heading, copy, resources, ...rest }) {
+export default function NewsSlider({ heading, copy, resources, ...rest }) {
     const sliderRef = React.useRef();
 
     return (
-        <div tw="py-16 pb-10 lg:py-32 overflow-x-hidden" {...rest}>
-            {heading || copy?.childMarkdownRemark?.html ? (
-                <div tw="px-4 container mx-auto pb-16 lg:pb-32">
-                    <div tw="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-8 2xl:gap-x-16">
+        <div tw="py-16 pb-10 lg:py-32 2xl:py-48 overflow-x-hidden bg-sitegray" {...rest}>
+            <div tw="container px-4 mx-auto">
+                <div tw="grid grid-cols-1 lg:grid-cols-5">
+                    <div tw="lg:block col-span-2 mb-10 lg:mb-0 bg-sitegray relative z-10 before:lg:content-[''] before:top-0 before:right-0 before:w-[50vw] before:h-full before:absolute before:bg-sitegray lg:pr-[12%] 2xl:pr-[20%] lg:flex lg:flex-row">
                         {heading ? (
-                            <div tw="text-px18 lg:text-px28 relative 2xl:text-px36 col-span-2 font-circular-bold mb-4 lg:mb-0 lg:pr-[8.333%] 2xl:pr-[20%]">
+                            <div tw="relative text-px24 lg:text-px48 2xl:text-px54 leading-tight col-span-2 mb-4 lg:mb-0">
                                 {heading}
                             </div>
                         ) : (
                             ""
                         )}
-                        {copy?.childMarkdownRemark?.html ? (
-                            <div tw="lg:text-px18 2xl:text-px21 col-span-3" dangerouslySetInnerHTML={{ __html: copy?.childMarkdownRemark?.html }} />
-                        ) : (
-                            ""
-                        )}
-                    </div>
-                </div>
-            ) : (
-                ""
-            )}
-            <div tw="container px-4 mx-auto">
-                <div tw="grid grid-cols-1 lg:grid-cols-5">
-                    <div tw="hidden lg:block col-span-2 mb-10 lg:mb-0 bg-white relative z-10 before:lg:content-[''] before:top-0 before:right-0 before:w-[50vw] before:h-full before:absolute before:bg-white lg:pr-[12%] 2xl:pr-[20%] lg:flex lg:flex-row">
                         {resources?.length > 2 ? (
-                            <div tw="relative lg:flex lg:items-end lg:justify-end lg:flex-1 pb-16">
+                            <div tw="relative hidden lg:flex lg:items-end lg:justify-end lg:flex-1 pb-16">
                                 <SliderButton
                                     onClick={() => {
                                         sliderRef.current.slickNext();
@@ -118,7 +88,6 @@ export default function ResourcesSlider({ heading, copy, resources, ...rest }) {
                                     }
                                     title={
                                         <div
-                                            tw="text-lg lg:text-px21 2xl:text-px28"
                                             css={[
                                                 css`
                                                     strong {
@@ -137,7 +106,7 @@ export default function ResourcesSlider({ heading, copy, resources, ...rest }) {
                                             dangerouslySetInnerHTML={{ __html: title?.childMarkdownRemark?.html }}
                                         />
                                     }
-                                    actions={<a href={url}>Download Now</a>}
+                                    actions={<a href={url}>Read More</a>}
                                 />
                             ))}
                         />

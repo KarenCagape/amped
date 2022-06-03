@@ -17,13 +17,9 @@ export function SubMenu({ submenu, ...rest }) {
                                   links={
                                       <>
                                           <HeaderLink path={url} text={name} />
-                                          {subLinks?.map((item, i) => (
-                                              <Link
-                                                  key={i}
-                                                  to={item?.url}
-                                                  tw="text-px16 mb-6 inline-block hover:text-solar-100 active:text-solar-80 font-circular-regular"
-                                              >
-                                                  {item?.label ? (
+                                          {subLinks?.map((item, i) =>
+                                              item?.url === "coming-soon" ? (
+                                                  <div tw="flex flex-wrap gap-4">
                                                       <span
                                                           css={[
                                                               css`
@@ -42,11 +38,41 @@ export function SubMenu({ submenu, ...rest }) {
                                                           ]}
                                                           dangerouslySetInnerHTML={{ __html: item?.label?.childMarkdownRemark?.html }}
                                                       />
-                                                  ) : (
-                                                      ""
-                                                  )}
-                                              </Link>
-                                          ))}
+                                                      <span tw="font-kallisto font-bold text-px12 rounded bg-sky-gray px-4 py-1 text-white">
+                                                          Coming Soon
+                                                      </span>
+                                                  </div>
+                                              ) : (
+                                                  <Link
+                                                      key={i}
+                                                      to={item?.url}
+                                                      tw="text-px16 mb-6 inline-block hover:text-solar-100 active:text-solar-80 font-circular-regular"
+                                                  >
+                                                      {item?.label ? (
+                                                          <span
+                                                              css={[
+                                                                  css`
+                                                                      strong {
+                                                                          ${tw`font-circular-bold`}
+                                                                      }
+                                                                      em {
+                                                                          font-style: normal;
+                                                                          ${tw`font-circular-light`}
+                                                                      }
+                                                                      del {
+                                                                          text-decoration: none;
+                                                                          ${tw`font-kallisto font-bold`}
+                                                                      }
+                                                                  `,
+                                                              ]}
+                                                              dangerouslySetInnerHTML={{ __html: item?.label?.childMarkdownRemark?.html }}
+                                                          />
+                                                      ) : (
+                                                          ""
+                                                      )}
+                                                  </Link>
+                                              )
+                                          )}
                                       </>
                                   }
                               />

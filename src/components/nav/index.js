@@ -192,7 +192,7 @@ export function Nav() {
                                                                 <NavLink
                                                                     tw="uppercase text-px18 font-circular-book"
                                                                     text={name}
-                                                                    path={url}
+                                                                    path={url !== "coming-soon" ? url : ""}
                                                                     showIcon={false}
                                                                 />
                                                                 {subLinks?.length ? <ToggleButton open={isOpen} onClick={toggleParent} /> : ""}
@@ -206,7 +206,11 @@ export function Nav() {
                                                                                     <>
                                                                                         <div tw="flex justify-between items-center py-2">
                                                                                             <Link
-                                                                                                to={subgroup?.url}
+                                                                                                to={
+                                                                                                    subgroup?.url !== "coming-soon"
+                                                                                                        ? subgroup?.url
+                                                                                                        : ""
+                                                                                                }
                                                                                                 tw="text-px16 font-circular-book"
                                                                                             >
                                                                                                 {subgroup?.label ? (
@@ -234,7 +238,11 @@ export function Nav() {
                                                                                                 {subgroup?.subLinks?.map((subSubGroup, idx3) => (
                                                                                                     <Link
                                                                                                         tw="mb-4 items-center flex gap-4"
-                                                                                                        to={subSubGroup?.url}
+                                                                                                        to={
+                                                                                                            subSubGroup?.url !== "coming-soon"
+                                                                                                                ? subSubGroup?.url
+                                                                                                                : ""
+                                                                                                        }
                                                                                                         key={idx3}
                                                                                                     >
                                                                                                         {subSubGroup?.icon?.gatsbyImageData ? (
@@ -269,6 +277,13 @@ export function Nav() {
                                                                                                                     ?.childMarkdownRemark?.html,
                                                                                                             }}
                                                                                                         />
+                                                                                                        {subSubGroup?.url === "coming-soon" ? (
+                                                                                                            <span tw="font-kallisto font-bold ml-4 text-px12 rounded bg-sky-gray px-4 py-1 text-white">
+                                                                                                                Coming Soon
+                                                                                                            </span>
+                                                                                                        ) : (
+                                                                                                            ""
+                                                                                                        )}
                                                                                                     </Link>
                                                                                                 ))}
                                                                                             </div>
