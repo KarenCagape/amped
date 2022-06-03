@@ -1,12 +1,12 @@
 import * as React from "react";
 import "twin.macro";
 import { graphql } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
 import Layout from "../components/layout";
-import Banner from "../components/heroes/buy-wowsolar";
-import BuyWowSolar from "../components/sections/buy-wowsolar";
-import { SubHeader } from "../components/_/header";
+import Banner from "../components/sections/inner-banner";
+import OverviewKeyStats from "../components/become-a/overview-keystats";
 import BuyWowSolarCountries from "../components/buy-wowsolar-countries/buy-wowsolar-countries";
+import ImageCopy from "../components/become-a/image-copy";
+import Gallery from "../components/become-a/gallery";
 
 export default function BuyWowSolarPage({ data }) {
     const { contentfulBuyWowSolar } = data;
@@ -18,42 +18,18 @@ export default function BuyWowSolarPage({ data }) {
             <Banner {...heroBanner} />
 
             {/* INTRO SECTION */}
-            <div tw="px-4 container mx-auto py-16 lg:py-48">
-                <div tw="grid grid-cols-1 lg:grid-cols-5">
-                    {introCopy?.heading ? <SubHeader tw="col-span-2 mb-8 lg:mb-0 leading-normal">{introCopy?.heading}</SubHeader> : ""}
-                    <div tw="col-span-3 lg:text-px21" dangerouslySetInnerHTML={{ __html: introCopy?.copy?.childMarkdownRemark?.html }} />
-                </div>
-            </div>
+            <OverviewKeyStats heading={introCopy?.heading} subText={introCopy?.copy} />
 
             {/* COUNTRY LIST */}
             <BuyWowSolarCountries heading={countryListHeading} countries={countryList} />
 
             {/* IMAGE - COPY */}
             <div tw="bg-sitegray">
-                <BuyWowSolar {...imageCopy} />
+                <ImageCopy {...imageCopy} />
             </div>
 
             {/* GALLERY */}
-            {gallery?.length ? (
-                <div tw="px-4 container mx-auto  py-16 lg:py-48">
-                    {galleryHeading ? (
-                        <div tw="text-px21 lg:text-px54 text-center mb-16 lg:mb-32">
-                            <div tw="break-all">{galleryHeading}</div>
-                        </div>
-                    ) : (
-                        ""
-                    )}
-                    <div tw="gap-6 lg:gap-8 grid grid-cols-1 lg:grid-cols-4">
-                        {gallery.map((image, idx) => (
-                            <div key={idx}>
-                                {image?.gatsbyImageData ? <GatsbyImage tw="w-full" image={image?.gatsbyImageData} alt={image?.title} /> : ""}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            ) : (
-                ""
-            )}
+            <Gallery heading={galleryHeading} items={gallery} />
         </Layout>
     );
 }

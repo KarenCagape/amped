@@ -32,7 +32,7 @@ Section.Content = function Content({ children, ...rest }) {
 
 Section.Content.Title = function Title({ children, ...rest }) {
   return (
-    <div tw="text-2xl lg:text-5xl mb-8" css={[{ color: '#1C212B' }]} {...rest}>
+    <div tw="text-px24 lg:text-px48 2xl:text-px54 mb-8" css={[{ color: '#1C212B' }]} {...rest}>
       {children}
     </div>
   );

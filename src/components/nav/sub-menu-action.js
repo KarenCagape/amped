@@ -5,7 +5,7 @@ import { Link } from "gatsby";
 export function SubMenuAction({ submenu, ...rest }) {
     return (
         <div tw="absolute z-20 w-full left-0 top-full bg-white" {...rest}>
-            <div tw="font-circular-book w-10/12 mx-auto py-16 flex items-center justify-between text-px21">
+            <div tw="font-circular-book w-10/12 mx-auto py-16 flex items-center justify-between lg:text-px18 2xl:text-px21">
                 {submenu?.map(({ label, url }, idx) => (
                     <React.Fragment key={idx}>
                         <Link tw="hover:text-solar-100 active:text-solar-80" to={url}>

@@ -12,7 +12,7 @@ function ContactCard({ email, contact, label }) {
                     <IcoPhone />
                 </div>
             </div>
-            <div tw="text-px18 lg:text-px21 font-bold">
+            <div tw="text-px18 2xl:text-px21 font-bold">
                 <div tw="mb-4 lg:mb-6">
                     <div>{email}</div>
                     {contact ? <div tw="mt-4">{contact}</div> : ""}
@@ -30,18 +30,18 @@ export function BuyWowSolarCountries({ heading, countries }) {
         <div tw="px-4 container mx-auto lg:pt-16 pb-16 lg:pb-48">
             <div tw="grid grid-cols-1 lg:grid-cols-5">
                 {heading?.heading ? (
-                    <div tw="text-px21 lg:text-px32 font-circular-bold col-span-2 mb-8 lg:mb-0 lg:pr-16 leading-normal">{heading?.heading}</div>
+                    <div tw="lg:text-px18 lg:text-px21 2xl:text-px36 font-circular-bold col-span-2 mb-8 lg:mb-0 lg:pr-16 leading-normal">{heading?.heading}</div>
                 ) : (
                     ""
                 )}
-                <div tw="col-span-3 lg:text-px21">
+                <div tw="col-span-3 lg:text-px18 2xl:text-px21">
                     {heading?.copy?.childMarkdownRemark?.html ? (
                         <div tw="mb-8" dangerouslySetInnerHTML={{ __html: heading?.copy?.childMarkdownRemark?.html }} />
                     ) : (
                         ""
                     )}
                     <div tw="mb-4">
-                        <div tw="mb-4">Select a Country</div>
+                        <div tw="mb-4 text-px16">Select a Country</div>
                         <SelectOption
                             tw="w-full"
                             name="selectedCountry"

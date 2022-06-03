@@ -48,7 +48,7 @@ export function Vision() {
     const { heading, image, imageMobile } = footerBanner;
     return (
         <StyledBackgroundSection image={image} imageMobile={imageMobile}>
-            <div tw="container px-4 mx-auto h-full font-circular-bold text-px28 lg:text-px36 flex justify-center items-center text-center">
+            <div tw="container px-4 mx-auto h-full font-circular-bold text-px28 2xl:text-px36 flex justify-center items-center text-center">
                 <div>
                     <div
                         tw="leading-tight font-circular-light"

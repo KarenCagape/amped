@@ -3,7 +3,8 @@ import tw from "twin.macro";
 import { graphql } from "gatsby";
 import { useForm } from "react-hook-form";
 import Layout from "../components/layout";
-import Banner from "../components/heroes/contact-us";
+import Banner from "../components/sections/inner-banner";
+import OverviewKeyStats from "../components/become-a/overview-keystats";
 import Button from "../components/_/button";
 import TextInput from "../components/text-input";
 import SelectOption from "../components/select-option";
@@ -14,7 +15,7 @@ function ContactCard({ icon, content, label }) {
     return (
         <div tw="bg-sitegray rounded p-8 min-h-full">
             <div tw="mb-4 lg:mb-8">{icon}</div>
-            <div tw="text-px18 lg:text-px21 font-circular-bold">{content}</div>
+            <div tw="text-px18 lg:text-px18 2xl:text-px21 font-circular-bold">{content}</div>
             <div tw="text-secondary">{label}</div>
         </div>
     );
@@ -51,23 +52,12 @@ export default function ContactUs({ data, navigate }) {
             <Banner {...heroBanner} />
 
             {/* INTRO SECTION */}
-            <div tw="pt-16 lg:pt-48">
-                <div tw="px-4 container mx-auto">
-                    <div tw="grid grid-cols-1 lg:grid-cols-5 mb-16 lg:mb-48">
-                        {introCopy?.heading ? <div tw="col-span-2 text-px24 lg:text-px54 mb-4 lg:mb-0">{introCopy?.heading}</div> : ""}
-                        {introCopy?.copy?.childMarkdownRemark?.html ? (
-                            <div tw="col-span-3 lg:text-px21" dangerouslySetInnerHTML={{ __html: introCopy?.copy?.childMarkdownRemark?.html }} />
-                        ) : (
-                            ""
-                        )}
-                    </div>
-                </div>
-            </div>
+            <OverviewKeyStats heading={introCopy?.heading} subText={introCopy?.copy} tw="lg:pb-48" />
 
             {/* CONTACT FORM */}
             <div tw="px-4 container mx-auto">
-                <div tw="grid grid-cols-1 lg:grid-cols-5">
-                    {formTitle ? <div tw="col-span-2 text-px18 lg:text-px32 mb-6 lg:mb-0 font-circular-bold">{formTitle}</div> : ""}
+                <div tw="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-8 2xl:gap-x-16">
+                    {formTitle ? <div tw="col-span-2 text-px18 lg:text-px36 mb-6 lg:mb-0 font-circular-bold">{formTitle}</div> : ""}
                     <div tw="col-span-3">
                         <form onSubmit={handleSubmit(onSubmit)} name={"contact-us"} method="POST" data-netlify data-netlify-honeypot="bot-field">
                             <input type="hidden" {...register("form-name")} defaultValue={`contact-us`} />
@@ -127,9 +117,9 @@ export default function ContactUs({ data, navigate }) {
             {contactList?.length ? (
                 <div tw="pb-16 lg:pb-48 pt-24 lg:pt-32">
                     <div tw="px-4 container mx-auto">
-                        <div tw="grid grid-cols-1 lg:grid-cols-5">
+                        <div tw="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-8 2xl:gap-x-16">
                             {contactListHeading ? (
-                                <div tw="col-span-2 text-px18 lg:text-px32 mb-8 font-circular-bold lg:mb-0">{contactListHeading}</div>
+                                <div tw="col-span-2 text-px18 lg:text-px36 mb-8 font-circular-bold lg:mb-0">{contactListHeading}</div>
                             ) : (
                                 ""
                             )}

@@ -1,6 +1,6 @@
 import tw from 'twin.macro';
 
-export const Text = tw.div`text-px16 lg:text-px21 font-sans text-default`;
+export const Text = tw.div`text-px16 lg:text-px18 2xl:text-px21 font-sans text-default`;
 export const TextV1 = tw.div`text-px21 font-sans text-default `;
 export const BaseText = tw.div`text-px16 font-sans text-default`;
 export const BaseTextV1 = tw.div`text-px18 font-book text-default`;

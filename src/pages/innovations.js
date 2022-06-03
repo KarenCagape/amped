@@ -49,23 +49,24 @@ export default function Innovation({ data }) {
         <Layout pageTitle="Innovations">
             <Submenu refs={refs} sections={sections} />
 
+            {/* IMAGE COPY SECTIONS */}
             {sections?.length
                 ? sections.map(({ heading, subText, image }, idx) => (
                       <div
                           ref={refs[idx]}
                           key={idx}
                           id={_.kebabCase(heading?.childMarkdownRemark?.html.replace(/<[^>]+>/g, ""))}
-                          tw="py-16 lg:py-48"
-                          css={[idx % 2 === 0 ? tw`bg-sitegray` : ""]}
+                          tw="py-14 lg:py-32 2xl:py-48"
+                          css={[idx % 2 === 0 ? tw`bg-sitegray` : "", idx === sections?.length - 1 ? tw`pb-8 lg:pb-16 2xl:pb-24` : ""]}
                       >
                           <div tw="container mx-auto px-4">
-                              <div tw="grid grid-cols-1 lg:gap-8 lg:grid-cols-5">
+                              <div tw="grid grid-cols-1 lg:gap-x-16 lg:grid-cols-5">
                                   <div
-                                      tw="text-px24 lg:text-px54 col-span-2 leading-normal"
+                                      tw="text-px24 lg:text-px48 2xl:text-px54 col-span-2 leading-normal"
                                       dangerouslySetInnerHTML={{ __html: heading?.childMarkdownRemark?.html }}
                                   />
                                   <div
-                                      tw="text-px16 lg:text-px21 col-span-3"
+                                      tw="text-px16 lg:text-px18 2xl:text-px21 col-span-3"
                                       css={[
                                           css`
                                               p {
@@ -77,7 +78,7 @@ export default function Innovation({ data }) {
                                   />
                               </div>
                               {image?.gatsbyImageData ? (
-                                  <div tw="flex items-center justify-center relative  mt-8 lg:mt-20">
+                                  <div tw="flex items-center justify-center relative lg:max-w-[83.333%] mx-auto mt-8 lg:mt-20">
                                       <GatsbyImage image={image?.gatsbyImageData} alt={image?.title} />
                                   </div>
                               ) : (
@@ -88,8 +89,9 @@ export default function Innovation({ data }) {
                   ))
                 : ""}
 
+            {/* GALLERY */}
             {gallery?.length ? (
-                <div tw="py-16 lg:py-48">
+                <div tw="pb-16 lg:pb-48 bg-sitegray">
                     <div tw="container mx-auto px-4">
                         <div tw="overflow-auto">
                             <div tw="flex gap-4">
