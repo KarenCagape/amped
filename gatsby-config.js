@@ -3,6 +3,12 @@ require("dotenv").config({
 });
 
 module.exports = {
+    siteMetadata: {
+        title: `Amped Innovation`,
+        description: `Powering new possibilities`,
+        author: `Amped Innovation`,
+        siteUrl: `https://www.ampedinnovation.com/`,
+    },
     plugins: [
         {
             resolve: `gatsby-source-contentful`,
@@ -19,6 +25,14 @@ module.exports = {
         `gatsby-transformer-sharp`,
         "gatsby-plugin-styled-components",
         `gatsby-plugin-sharp`,
+        `gatsby-plugin-robots-txt`,
+        {
+            resolve: `gatsby-plugin-canonical-urls`,
+            options: {
+                siteUrl: `https://www.ampedinnovation.com/`,
+                stripQueryString: true,
+            },
+        },
         {
             resolve: `gatsby-source-filesystem`,
             options: {
@@ -58,6 +72,18 @@ module.exports = {
                 // theme_color: `#663399`,
                 display: `minimal-ui`,
                 icon: `src/images/ico-logo.png`, // This path is relative to the root of the site.
+            },
+        },
+        {
+            resolve: `gatsby-plugin-netlify`,
+            options: {
+                headers: {
+                    "/public/*": ["cache-control: public, max-age=0, must-revalidate"],
+                    "/public/static/*": ["cache-control: public, max-age=31536000, immutable"],
+                    "/public/*.js": ["cache-control: public, max-age=31536000, immutable"],
+                    "/public/*.css": ["cache-control: public, max-age=31536000, immutable"],
+                    "/public/sw.js": ["cache-control: public, max-age=0, must-revalidate"],
+                },
             },
         },
     ],
