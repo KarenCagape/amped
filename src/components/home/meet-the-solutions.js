@@ -4,7 +4,7 @@ import { GatsbyImage } from "gatsby-plugin-image";
 
 export function MeetTheSolutions({ heading, imageCopies }) {
     return (
-        <div tw="pt-12 lg:pt-40 pb-20 lg:pb-28">
+        <div tw="pt-12 lg:pt-32 2xl:pt-40 pb-20 lg:pb-28">
             <div tw="container px-4 mx-auto">
                 <div tw="mb-8">
                     <div

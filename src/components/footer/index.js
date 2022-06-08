@@ -70,8 +70,8 @@ export function Footer() {
     return (
         <div tw="p-4 lg:p-0 bg-default">
             <div tw="container px-4 mx-auto">
-                <div tw="lg:flex justify-between pt-12 lg:pt-40">
-                    <div tw="text-center lg:text-left lg:mb-0 text-center mb-8">
+                <div tw="xl:flex justify-between pt-12 lg:pt-24 xl:pt-40">
+                    <div tw="text-center lg:text-left lg:mb-0 text-center mb-8 flex-[0 0 auto] xl:pr-8 lg:mb-16 xl:mb-0">
                         <Link tw="inline-block" to="/">
                             {footerLogo?.gatsbyImageData ? (
                                 <GatsbyImage tw="w-full" image={footerLogo?.gatsbyImageData} alt={footerLogo?.title} />
@@ -80,7 +80,7 @@ export function Footer() {
                             )}
                         </Link>
                     </div>
-                    <div tw="lg:flex justify-between lg:w-8/12">
+                    <div tw="lg:flex justify-between xl:flex-[1] lg:gap-6">
                         {footerNav?.length
                             ? footerNav?.map(({ name, url, subLinks }, idx) => (
                                   <div key={idx}>

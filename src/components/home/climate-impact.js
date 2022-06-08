@@ -14,7 +14,7 @@ const MetricCard = ({ value, label }) => {
 
 function ClimateImpact({ heading, subText, cta, keyStats }) {
     return (
-        <div tw="py-16 lg:pt-0 lg:pb-48">
+        <div tw="py-16 lg:pt-0 lg:py-32 2xl:py-48">
             <div tw="container px-4 mx-auto">
                 <ExtraInfoFill
                     caption={

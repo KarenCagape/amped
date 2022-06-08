@@ -106,14 +106,16 @@ export function Nav() {
             >
                 <div tw="container px-4 mx-auto">
                     <div tw="flex justify-between items-center">
-                        <Link to="/">
-                            {logo?.gatsbyImageData ? (
-                                <GatsbyImage tw="w-full" image={logo?.gatsbyImageData} alt={logo?.title} />
-                            ) : (
-                                <img src={logo?.file?.url} alt={logo?.title} width={logo?.width} height={logo?.height} />
-                            )}
-                        </Link>
-                        <div tw="flex justify-between w-6/12">
+                        <div tw="flex-[0 0 auto]">
+                            <Link to="/" tw="inline-block">
+                                {logo?.gatsbyImageData ? (
+                                    <GatsbyImage tw="w-full" image={logo?.gatsbyImageData} alt={logo?.title} />
+                                ) : (
+                                    <img src={logo?.file?.url} alt={logo?.title} width={logo?.width} height={logo?.height} />
+                                )}
+                            </Link>
+                        </div>
+                        <div tw="flex justify-between pl-8 flex-[1] lg:flex-[0 0 66.667%] 2xl:flex-[0 0 50%]">
                             {headerNav?.length
                                 ? headerNav?.map(({ name, url, subLinks }, idx) => (
                                       <div key={idx}>
@@ -237,7 +239,7 @@ export function Nav() {
                                                                                             <div tw="flex flex-col justify-between">
                                                                                                 {subgroup?.subLinks?.map((subSubGroup, idx3) => (
                                                                                                     <Link
-                                                                                                        tw="mb-4 items-center flex gap-4"
+                                                                                                        tw="mb-4 items-center flex gap-2"
                                                                                                         to={
                                                                                                             subSubGroup?.url !== "coming-soon"
                                                                                                                 ? subSubGroup?.url

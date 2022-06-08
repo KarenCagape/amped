@@ -157,7 +157,7 @@ export default function Innovation({ data }) {
 
 export const query = graphql`
     query {
-        contentfulInnovationsTemplate(name: { eq: "Innovations" }) {
+        contentfulInnovationsTemplate(name: { eq: "Innovation" }) {
             sections {
                 ...ImageCopy
             }

@@ -86,5 +86,12 @@ module.exports = {
                 },
             },
         },
+        {
+            resolve: `gatsby-plugin-schema-snapshot`,
+            options: {
+                path: `schema.gql`,
+                update: false,
+            },
+        },
     ],
 };

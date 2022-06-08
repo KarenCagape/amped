@@ -14,7 +14,6 @@ function ProductSlider({ heading, reverse = false, products, ...rest }) {
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,
-        variableWidth: true,
         responsive: [
             {
                 breakpoint: 1023,
@@ -27,21 +26,23 @@ function ProductSlider({ heading, reverse = false, products, ...rest }) {
         <div tw="overflow-x-hidden " css={[reverse && tw`bg-sitegray`]} {...rest}>
             <div tw="container lg:px-4 mx-auto">
                 <div>{heading}</div>
-                <div tw="relative lg:flex lg:items-end lg:gap-8">
-                    <div tw="hidden lg:block lg:flex-[0 0 8.3333%] pb-12">
+                <div tw="relative lg:flex lg:gap-8">
+                    <div css={[reverse ? tw`bg-sitegray before:bg-sitegray` : tw`bg-white before:bg-white`]} tw="hidden lg:flex lg:items-end lg:flex-[0 0 8.3333%] pb-12 relative z-10 before:lg:content-[''] before:top-0 before:-right-12 2xl:before:-right-8 before:w-[50vw] before:h-full before:absolute">
                         <SliderButton
                             onClick={() => {
                                 sliderRef.current.slickNext();
                             }}
                         />
                     </div>
-                    <div tw="lg:flex-1">
+                    <div tw="lg:flex-1 lg:max-w-[88%] 2xl:max-w-[75%]">
                         <Slider
                             ref={sliderRef}
-                            tw="lg:-mr-80"
                             {...productSliderSettings}
                             css={[
                                 css`
+                                    .slick-list {
+                                        ${tw`overflow-visible`}
+                                    }
                                     .slick-track {
                                         ${tw`lg:flex`}
                                     }
@@ -61,7 +62,7 @@ function ProductSlider({ heading, reverse = false, products, ...rest }) {
                                         img={
                                             node?.thumbnail?.gatsbyImageData ? (
                                                 <GatsbyImage
-                                                    tw="w-full h-full"
+                                                    tw="w-full"
                                                     image={node?.thumbnail?.gatsbyImageData}
                                                     alt={node?.thumbnail?.title}
                                                 />
@@ -96,7 +97,7 @@ function ProductSlider({ heading, reverse = false, products, ...rest }) {
                                                     COMING SOON
                                                 </Button>
                                             ) : (
-                                                <Button tw="text-px16" as="a" href={node?.slug}>
+                                                <Button tw="text-px16" as="a" href={`/products/${node?.slug}`}>
                                                     VIEW PRODUCT
                                                 </Button>
                                             )

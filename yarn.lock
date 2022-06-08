@@ -6501,10 +6501,10 @@ gatsby-plugin-robots-txt@^1.7.1:
     "@babel/runtime" "^7.16.7"
     generate-robotstxt "^8.0.3"
 
-gatsby-plugin-schema-snapshot@^3.15.0:
-  version "3.15.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-schema-snapshot/-/gatsby-plugin-schema-snapshot-3.15.0.tgz#93dd4713d4a066eac544e0c7da52afb0de080938"
-  integrity sha512-iZixuI6rnMrIMSMOyhLp2Om+K4YQdwReX3VeIutUyg6Yc0GrToOzgXUXFvVPMNmmrevrOG/oEVq+QtjWxmsNjw==
+gatsby-plugin-schema-snapshot@^3.16.0:
+  version "3.16.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-schema-snapshot/-/gatsby-plugin-schema-snapshot-3.16.0.tgz#882592773598fd3cdec56a7a6775482a964ba9bf"
+  integrity sha512-SJyL5q2RJS39VQtuCpxhKRxAles9y7yrsdGavv0Ejy11ZxUhmpib5RZlM4EvKvbFFDp07qeU+1VLZOcXWQypjg==
   dependencies:
     "@babel/runtime" "^7.15.4"
 

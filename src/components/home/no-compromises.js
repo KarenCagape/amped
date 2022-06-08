@@ -25,7 +25,7 @@ export function NoCompromises({ heading, copySliders }) {
     const slider2Ref = React.useRef();
 
     return (
-        <div tw="rounded py-12 lg:pt-48 lg:pb-40 bg-sitegray">
+        <div tw="rounded py-12 lg:pt-32 2xl:pt-48 lg:pb-16 2xl:pb-24 bg-sitegray">
             <div tw="container px-4 mx-auto">
                 <div tw="mb-12 lg:mb-32">
                     <div

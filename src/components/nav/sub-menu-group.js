@@ -3,9 +3,9 @@ import "twin.macro";
 
 export function SubMenuGroup({ image, links, ...rest }) {
     return (
-        <div tw="grid grid-cols-7 justify-between gap-8 " {...rest}>
-            {image ? <div tw="col-span-2 pointer-events-none">{image}</div> : ""}
-            {links ? <div tw="col-span-5 flex-none flex flex-col pt-4">{links}</div> : ""}
+        <div tw="xl:grid xl:grid-cols-7 justify-between gap-4 2xl:gap-6 lg:px-4" {...rest}>
+            {image ? <div tw="xl:col-span-2 pointer-events-none max-w-[33.333%] xl:max-w-full mx-auto">{image}</div> : ""}
+            {links ? <div tw="xl:col-span-5 flex-none flex flex-col pt-4">{links}</div> : ""}
         </div>
     );
 }
