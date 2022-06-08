@@ -33,7 +33,7 @@ const svgSliderSettings = {
 export default function Overview({ overview, featureCards }) {
     return (
         <div tw="w-full overflow-hidden">
-            <div tw="px-4 py-12 lg:px-0 md:py-16 lg:py-48 container mx-auto px-4">
+            <div tw="py-12 md:py-16 lg:py-48 container mx-auto px-4">
                 <div tw="grid grid-cols-1 lg:grid-cols-5">
                     <SubHeader tw="font-sf-light mb-6 col-span-2">Overview</SubHeader>
                     <div tw="col-span-3">

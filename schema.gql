@@ -1,0 +1,2185 @@
+### Type definitions saved at 2022-06-08T00:33:17.579Z ###
+
+enum RemoteFileFit {
+  COVER
+  FILL
+  OUTSIDE
+  CONTAIN
+}
+
+enum RemoteFileFormat {
+  AUTO
+  JPG
+  PNG
+  WEBP
+  AVIF
+}
+
+enum RemoteFileLayout {
+  FIXED
+  FULL_WIDTH
+  CONSTRAINED
+}
+
+enum RemoteFilePlaceholder {
+  DOMINANT_COLOR
+  BLURRED
+  NONE
+}
+
+enum RemoteFileCropFocus {
+  CENTER
+  TOP
+  RIGHT
+  BOTTOM
+  LEFT
+  ENTROPY
+  EDGES
+  FACES
+}
+
+type RemoteFileResize {
+  width: Int
+  height: Int
+  src: String
+}
+
+"""Remote Interface"""
+interface RemoteFile {
+  id: ID!
+  mimeType: String!
+  filename: String!
+  filesize: Int
+  width: Int
+  height: Int
+  publicUrl: String!
+  resize(
+    width: Int
+    height: Int
+    aspectRatio: Float
+    fit: RemoteFileFit = COVER
+
+    """
+    
+    The image formats to generate. Valid values are AUTO (meaning the same
+    format as the source image), JPG, PNG, WEBP and AVIF.
+    The default value is [AUTO, WEBP, AVIF], and you should rarely need to
+    change this. Take care if you specify JPG or PNG when you do
+    not know the formats of the source images, as this could lead to unwanted
+    results such as converting JPEGs to PNGs. Specifying
+    both PNG and JPG is not supported and will be ignored.
+    """
+    format: RemoteFileFormat = AUTO
+    cropFocus: [RemoteFileCropFocus]
+    quality: Int = 75
+  ): RemoteFileResize
+
+  """
+  Data used in the <GatsbyImage /> component. See https://gatsby.dev/img for more info.
+  """
+  gatsbyImage(
+    """
+    
+    The layout for the image.
+    FIXED: A static image sized, that does not resize according to the screen width
+    FULL_WIDTH: The image resizes to fit its container. Pass a "sizes" option if
+    it isn't going to be the full width of the screen.
+    CONSTRAINED: Resizes to fit its container, up to a maximum width, at which point it will remain fixed in size.
+    
+    """
+    layout: RemoteFileLayout = CONSTRAINED
+
+    """
+    
+    The display width of the generated image for layout = FIXED, and the display
+    width of the largest image for layout = CONSTRAINED.
+    The actual largest image resolution will be this value multiplied by the largest value in outputPixelDensities
+    Ignored if layout = FLUID.
+    
+    """
+    width: Int
+
+    """
+    
+    If set, the height of the generated image. If omitted, it is calculated from
+    the supplied width, matching the aspect ratio of the source image.
+    """
+    height: Int
+
+    """
+    
+    Format of generated placeholder image, displayed while the main image loads.
+    BLURRED: a blurred, low resolution image, encoded as a base64 data URI (default)
+    DOMINANT_COLOR: a solid color, calculated from the dominant color of the image.
+    TRACED_SVG: a low-resolution traced SVG of the image.
+    NONE: no placeholder. Set the argument "backgroundColor" to use a fixed background color.
+    """
+    placeholder: RemoteFilePlaceholder = DOMINANT_COLOR
+
+    """
+    
+    If set along with width or height, this will set the value of the other
+    dimension to match the provided aspect ratio, cropping the image if needed.
+    If neither width or height is provided, height will be set based on the intrinsic width of the source image.
+    
+    """
+    aspectRatio: Float
+
+    """
+    
+    The image formats to generate. Valid values are AUTO (meaning the same
+    format as the source image), JPG, PNG, WEBP and AVIF.
+    The default value is [AUTO, WEBP, AVIF], and you should rarely need to
+    change this. Take care if you specify JPG or PNG when you do
+    not know the formats of the source images, as this could lead to unwanted
+    results such as converting JPEGs to PNGs. Specifying
+    both PNG and JPG is not supported and will be ignored.
+    
+    """
+    formats: [RemoteFileFormat!] = [AUTO, WEBP, AVIF]
+
+    """
+    
+    A list of image pixel densities to generate for FIXED and CONSTRAINED
+    images. You should rarely need to change this. It will never generate images
+    larger than the source, and will always include a 1x image.
+    Default is [ 1, 2 ] for fixed images, meaning 1x, 2x, and [0.25, 0.5, 1, 2]
+    for fluid. In this case, an image with a fluid layout and width = 400 would
+    generate images at 100, 200, 400 and 800px wide.
+    
+    """
+    outputPixelDensities: [Float] = [0.25, 0.5, 1, 2]
+
+    """
+    
+    Specifies the image widths to generate. You should rarely need to change
+    this. For FIXED and CONSTRAINED images it is better to allow these to be
+    determined automatically,
+    based on the image size. For FULL_WIDTH images this can be used to override
+    the default, which is [750, 1080, 1366, 1920].
+    It will never generate any images larger than the source.
+    
+    """
+    breakpoints: [Int] = [750, 1080, 1366, 1920]
+
+    """
+    
+    The "sizes" property, passed to the img tag. This describes the display size of the image.
+    This does not affect the generated images, but is used by the browser to
+    decide which images to download. You can leave this blank for fixed images,
+    or if the responsive image
+    container will be the full width of the screen. In these cases we will generate an appropriate value.
+    
+    """
+    sizes: String
+
+    """
+    Background color applied to the wrapper, or when "letterboxing" an image to another aspect ratio.
+    """
+    backgroundColor: String
+    fit: RemoteFileFit = COVER
+    cropFocus: [RemoteFileCropFocus]
+    quality: Int = 75
+  ): JSON
+}
+
+type File implements Node @dontInfer {
+  sourceInstanceName: String!
+  absolutePath: String!
+  relativePath: String!
+  extension: String!
+  size: Int!
+  prettySize: String!
+  modifiedTime: Date! @dateformat
+  accessTime: Date! @dateformat
+  changeTime: Date! @dateformat
+  birthTime: Date! @dateformat
+  root: String!
+  dir: String!
+  base: String!
+  ext: String!
+  name: String!
+  relativeDirectory: String!
+  dev: Int!
+  mode: Int!
+  nlink: Int!
+  uid: Int!
+  gid: Int!
+  rdev: Int!
+  ino: Float!
+  atimeMs: Float!
+  mtimeMs: Float!
+  ctimeMs: Float!
+  atime: Date! @dateformat
+  mtime: Date! @dateformat
+  ctime: Date! @dateformat
+  birthtime: Date @deprecated(reason: "Use `birthTime` instead")
+  birthtimeMs: Float @deprecated(reason: "Use `birthTime` instead")
+  blksize: Int
+  blocks: Int
+}
+
+type Directory implements Node @dontInfer {
+  sourceInstanceName: String!
+  absolutePath: String!
+  relativePath: String!
+  extension: String!
+  size: Int!
+  prettySize: String!
+  modifiedTime: Date! @dateformat
+  accessTime: Date! @dateformat
+  changeTime: Date! @dateformat
+  birthTime: Date! @dateformat
+  root: String!
+  dir: String!
+  base: String!
+  ext: String!
+  name: String!
+  relativeDirectory: String!
+  dev: Int!
+  mode: Int!
+  nlink: Int!
+  uid: Int!
+  gid: Int!
+  rdev: Int!
+  ino: Float!
+  atimeMs: Float!
+  mtimeMs: Float!
+  ctimeMs: Float!
+  atime: Date! @dateformat
+  mtime: Date! @dateformat
+  ctime: Date! @dateformat
+  birthtime: Date @deprecated(reason: "Use `birthTime` instead")
+  birthtimeMs: Float @deprecated(reason: "Use `birthTime` instead")
+}
+
+type Site implements Node @dontInfer {
+  buildTime: Date @dateformat
+  siteMetadata: SiteSiteMetadata
+  port: Int
+  host: String
+  polyfill: Boolean
+  pathPrefix: String
+  jsxRuntime: String
+  trailingSlash: String
+}
+
+type SiteSiteMetadata {
+  title: String
+  description: String
+  author: String
+  siteUrl: String
+}
+
+type SiteFunction implements Node @dontInfer {
+  functionRoute: String!
+  pluginName: String!
+  originalAbsoluteFilePath: String!
+  originalRelativeFilePath: String!
+  relativeCompiledFilePath: String!
+  absoluteCompiledFilePath: String!
+  matchPath: String
+}
+
+type SitePage implements Node @dontInfer {
+  path: String!
+  component: String!
+  internalComponentName: String!
+  componentChunkName: String!
+  matchPath: String
+  pageContext: JSON @proxy(from: "context", fromNode: false)
+  pluginCreator: SitePlugin @link(by: "id", from: "pluginCreatorId")
+}
+
+type SitePlugin implements Node @dontInfer {
+  resolve: String
+  name: String
+  version: String
+  nodeAPIs: [String]
+  browserAPIs: [String]
+  ssrAPIs: [String]
+  pluginFilepath: String
+  pluginOptions: JSON
+  packageJson: JSON
+}
+
+type SiteBuildMetadata implements Node @dontInfer {
+  buildTime: Date @dateformat
+}
+
+interface ContentfulEntry implements Node {
+  contentful_id: String!
+  id: ID!
+  node_locale: String!
+}
+
+interface ContentfulReference {
+  contentful_id: String!
+  id: ID!
+}
+
+enum ImageResizingBehavior {
+  NO_CHANGE
+
+  """
+  Same as the default resizing, but adds padding so that the generated image has the specified dimensions.
+  """
+  PAD
+
+  """Crop a part of the original image to match the specified size."""
+  CROP
+
+  """
+  Crop the image to the specified dimensions, if the original image is smaller
+  than these dimensions, then the image will be upscaled.
+  """
+  FILL
+
+  """
+  When used in association with the f parameter below, creates a thumbnail from the image based on a focus area.
+  """
+  THUMB
+
+  """Scale the image regardless of the original aspect ratio."""
+  SCALE
+}
+
+enum ContentfulImageCropFocus {
+  TOP
+  TOP_LEFT
+  TOP_RIGHT
+  BOTTOM
+  BOTTOM_RIGHT
+  BOTTOM_LEFT
+  RIGHT
+  LEFT
+  FACE
+  FACES
+  CENTER
+}
+
+type ContentfulAsset implements ContentfulReference & Node & RemoteFile @derivedTypes @dontInfer {
+  contentful_id: String!
+  gatsbyImageData(
+    """
+    The layout for the image.
+    FIXED: A static image sized, that does not resize according to the screen width
+    FULL_WIDTH: The image resizes to fit its container. Pass a "sizes" option if
+    it isn't going to be the full width of the screen.
+    CONSTRAINED: Resizes to fit its container, up to a maximum width, at which point it will remain fixed in size.
+    """
+    layout: GatsbyImageLayout
+
+    """
+    The display width of the generated image for layout = FIXED, and the display
+    width of the largest image for layout = CONSTRAINED.
+    The actual largest image resolution will be this value multiplied by the largest value in outputPixelDensities
+    Ignored if layout = FLUID.
+    """
+    width: Int
+
+    """
+    If set, the height of the generated image. If omitted, it is calculated from
+    the supplied width, matching the aspect ratio of the source image.
+    """
+    height: Int
+
+    """
+    If set along with width or height, this will set the value of the other
+    dimension to match the provided aspect ratio, cropping the image if needed.
+    If neither width or height is provided, height will be set based on the intrinsic width of the source image.
+    """
+    aspectRatio: Float
+
+    """
+    Format of generated placeholder image, displayed while the main image loads.
+    BLURRED: a blurred, low resolution image, encoded as a base64 data URI (default)
+    DOMINANT_COLOR: a solid color, calculated from the dominant color of the image.
+    TRACED_SVG: a low-resolution traced SVG of the image.
+    NONE: no placeholder. Set the argument "backgroundColor" to use a fixed background color.
+    """
+    placeholder: GatsbyImagePlaceholder
+
+    """
+    The image formats to generate. Valid values are AUTO (meaning the same
+    format as the source image), JPG, PNG, WEBP and AVIF.
+    The default value is [AUTO, WEBP], and you should rarely need to change
+    this. Take care if you specify JPG or PNG when you do
+    not know the formats of the source images, as this could lead to unwanted
+    results such as converting JPEGs to PNGs. Specifying
+    both PNG and JPG is not supported and will be ignored.
+    """
+    formats: [GatsbyImageFormat] = [NO_CHANGE, WEBP]
+
+    """
+    A list of image pixel densities to generate for FIXED and CONSTRAINED
+    images. You should rarely need to change this. It will never generate images
+    larger than the source, and will always include a 1x image.
+    Default is [ 1, 2 ] for fixed images, meaning 1x, 2x, 3x, and [0.25, 0.5, 1,
+    2] for fluid. In this case, an image with a fluid layout and width = 400
+    would generate images at 100, 200, 400 and 800px wide.
+    """
+    outputPixelDensities: [Float]
+
+    """
+    Specifies the image widths to generate. You should rarely need to change
+    this. For FIXED and CONSTRAINED images it is better to allow these to be
+    determined automatically,
+    based on the image size. For FULL_WIDTH images this can be used to override
+    the default, which is [750, 1080, 1366, 1920].
+    It will never generate any images larger than the source.
+    """
+    breakpoints: [Int]
+
+    """
+    The "sizes" property, passed to the img tag. This describes the display size of the image.
+    This does not affect the generated images, but is used by the browser to
+    decide which images to download. You can leave this blank for fixed images,
+    or if the responsive image
+    container will be the full width of the screen. In these cases we will generate an appropriate value.
+    """
+    sizes: String
+
+    """
+    Background color applied to the wrapper, or when "letterboxing" an image to another aspect ratio.
+    """
+    backgroundColor: String
+    jpegProgressive: Boolean = true
+    resizingBehavior: ImageResizingBehavior
+    cropFocus: ContentfulImageCropFocus
+
+    """
+    Desired corner radius in pixels. Results in an image with rounded corners.
+    Pass `-1` for a full circle/ellipse.
+    """
+    cornerRadius: Int
+    quality: Int = 50
+  ): JSON!
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  file: ContentfulAssetFile
+  title: String
+  description: String
+  node_locale: String
+  sys: ContentfulAssetSys
+  url: String
+  placeholderUrl: String
+  mimeType: String
+  filename: String
+  width: Int
+  height: Int
+  size: Int
+}
+
+enum GatsbyImageLayout {
+  FIXED
+  FULL_WIDTH
+  CONSTRAINED
+}
+
+enum GatsbyImagePlaceholder {
+  DOMINANT_COLOR
+  TRACED_SVG
+  BLURRED
+  NONE
+}
+
+enum GatsbyImageFormat {
+  NO_CHANGE
+  AUTO
+  JPG
+  PNG
+  WEBP
+  AVIF
+}
+
+type ContentfulAssetFile @derivedTypes {
+  url: String
+  details: ContentfulAssetFileDetails
+  fileName: String
+  contentType: String
+}
+
+type ContentfulAssetFileDetails @derivedTypes {
+  size: Int
+  image: ContentfulAssetFileDetailsImage
+}
+
+type ContentfulAssetFileDetailsImage {
+  width: Int
+  height: Int
+}
+
+type ContentfulAssetSys {
+  type: String
+  revision: Int
+}
+
+type ContentfulImageCopy implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  image: ContentfulAsset @link(by: "id", from: "image___NODE")
+  imageMobile: ContentfulAsset @link(by: "id", from: "imageMobile___NODE")
+  news_template: [ContentfulNewsTemplate] @link(by: "id", from: "news template___NODE") @proxy(from: "news template___NODE")
+  heading: contentfulImageCopyHeadingTextNode @link(by: "id", from: "heading___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulImageCopySys
+  cta: ContentfulButton @link(by: "id", from: "cta___NODE")
+  buy_wowsolar: [ContentfulBuyWowSolar] @link(by: "id", from: "buy wowsolar___NODE") @proxy(from: "buy wowsolar___NODE")
+  innovations_template: [ContentfulInnovationsTemplate] @link(by: "id", from: "innovations template___NODE") @proxy(from: "innovations template___NODE")
+  subText: contentfulImageCopySubTextTextNode @link(by: "id", from: "subText___NODE")
+  our_team: [ContentfulOurTeam] @link(by: "id", from: "our team___NODE") @proxy(from: "our team___NODE")
+  home_template: [ContentfulHomeTemplate] @link(by: "id", from: "home template___NODE") @proxy(from: "home template___NODE")
+  become_a_distributor: [ContentfulBecomeADistributor] @link(by: "id", from: "become a distributor___NODE") @proxy(from: "become a distributor___NODE")
+  product: [ContentfulProduct] @link(by: "id", from: "product___NODE")
+  contact_us_template: [ContentfulContactUsTemplate] @link(by: "id", from: "contact us template___NODE") @proxy(from: "contact us template___NODE")
+  invest: [ContentfulInvest] @link(by: "id", from: "invest___NODE")
+  global_settings: [ContentfulGlobalSettings] @link(by: "id", from: "global settings___NODE") @proxy(from: "global settings___NODE")
+  amped_story: [ContentfulAmpedStory] @link(by: "id", from: "amped story___NODE") @proxy(from: "amped story___NODE")
+  product_category: [ContentfulProductCategory] @link(by: "id", from: "product category___NODE") @proxy(from: "product category___NODE")
+}
+
+type ContentfulNewsTemplate implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  name: String
+  newsListingHeading: String
+  newsletterFormTitle: String
+  heroBanner: ContentfulImageCopy @link(by: "id", from: "heroBanner___NODE")
+  newsListing: [ContentfulLinkedImage] @link(by: "id", from: "newsListing___NODE")
+  newsletterHeading: ContentfulHeadingCopy @link(by: "id", from: "newsletterHeading___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulNewsTemplateSys
+}
+
+type ContentfulLinkedImage implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  url: String
+  image: ContentfulAsset @link(by: "id", from: "image___NODE")
+  news_template: [ContentfulNewsTemplate] @link(by: "id", from: "news template___NODE") @proxy(from: "news template___NODE")
+  title: contentfulLinkedImageTitleTextNode @link(by: "id", from: "title___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulLinkedImageSys
+  home_template: [ContentfulHomeTemplate] @link(by: "id", from: "home template___NODE") @proxy(from: "home template___NODE")
+  invest: [ContentfulInvest] @link(by: "id", from: "invest___NODE")
+  our_team: [ContentfulOurTeam] @link(by: "id", from: "our team___NODE") @proxy(from: "our team___NODE")
+  become_a_distributor: [ContentfulBecomeADistributor] @link(by: "id", from: "become a distributor___NODE") @proxy(from: "become a distributor___NODE")
+}
+
+type contentfulLinkedImageTitleTextNode implements Node @derivedTypes @childOf(types: ["ContentfulLinkedImage"]) @dontInfer {
+  title: String
+  sys: contentfulLinkedImageTitleTextNodeSys
+}
+
+type contentfulLinkedImageTitleTextNodeSys {
+  type: String
+}
+
+type ContentfulLinkedImageSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulLinkedImageSysContentType
+}
+
+type ContentfulLinkedImageSysContentType @derivedTypes {
+  sys: ContentfulLinkedImageSysContentTypeSys
+}
+
+type ContentfulLinkedImageSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulHomeTemplate implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  name: String
+  heroBanner: ContentfulImageCopy @link(by: "id", from: "heroBanner___NODE")
+  logos: [ContentfulLinkedImage] @link(by: "id", from: "logos___NODE")
+  copyCtaOffGridProducts: ContentfulCopyCta @link(by: "id", from: "copyCtaOffGridProducts___NODE")
+  cardsOffGridProducts: [ContentfulCard] @link(by: "id", from: "cardsOffGridProducts___NODE")
+  imageCopySolutions: [ContentfulImageCopy] @link(by: "id", from: "imageCopySolutions___NODE")
+  productSlider: [ContentfulProductCategory] @link(by: "id", from: "productSlider___NODE")
+  copySliderShowcase: [ContentfulCopySlider] @link(by: "id", from: "copySliderShowcase___NODE")
+  ampedImpact: ContentfulCopyKeyStats @link(by: "id", from: "ampedImpact___NODE")
+  mapImagesAmpedImpacts: [ContentfulAsset] @link(by: "id", from: "mapImagesAmpedImpacts___NODE")
+  climateImpact: ContentfulCopyKeyStats @link(by: "id", from: "climateImpact___NODE")
+  headingOffGridProducts: contentfulHomeTemplateHeadingOffGridProductsTextNode @link(by: "id", from: "headingOffGridProducts___NODE")
+  headingSolutions: contentfulHomeTemplateHeadingSolutionsTextNode @link(by: "id", from: "headingSolutions___NODE")
+  headingProductSlider: contentfulHomeTemplateHeadingProductSliderTextNode @link(by: "id", from: "headingProductSlider___NODE")
+  headingShowcase: contentfulHomeTemplateHeadingShowcaseTextNode @link(by: "id", from: "headingShowcase___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulHomeTemplateSys
+}
+
+type ContentfulCopyCta implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  cta: ContentfulButton @link(by: "id", from: "cta___NODE")
+  home_template: [ContentfulHomeTemplate] @link(by: "id", from: "home template___NODE") @proxy(from: "home template___NODE")
+  subText: contentfulCopyCtaSubTextTextNode @link(by: "id", from: "subText___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulCopyCtaSys
+}
+
+type ContentfulButton implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  title: String
+  url: String
+  product: [ContentfulProduct] @link(by: "id", from: "product___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulButtonSys
+  image___copy: [ContentfulImageCopy] @link(by: "id", from: "image - copy___NODE") @proxy(from: "image - copy___NODE")
+  copy___cta: [ContentfulCopyCta] @link(by: "id", from: "copy - cta___NODE") @proxy(from: "copy - cta___NODE")
+  copy___key_stats: [ContentfulCopyKeyStats] @link(by: "id", from: "copy - key stats___NODE") @proxy(from: "copy - key stats___NODE")
+}
+
+type ContentfulProduct implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  pageTitle: String
+  slug: String
+  headingWhatsIncluded: String
+  footnoteWhatsIncluded: String
+  logo: ContentfulAsset @link(by: "id", from: "logo___NODE")
+  thumbnail: ContentfulAsset @link(by: "id", from: "thumbnail___NODE")
+  category: ContentfulProductCategory @link(by: "id", from: "category___NODE")
+  ctAsIntro: [ContentfulButton] @link(by: "id", from: "ctAsIntro___NODE")
+  cardsConfigurations: [ContentfulCardIcon] @link(by: "id", from: "cardsConfigurations___NODE")
+  cardsWhatsIncluded: [ContentfulCardSimple] @link(by: "id", from: "cardsWhatsIncluded___NODE")
+  relatedProducts: [ContentfulProduct] @link(by: "id", from: "relatedProducts___NODE")
+  imagecopyBanner: ContentfulImageCopy @link(by: "id", from: "imagecopyBanner___NODE")
+  product: [ContentfulProduct] @link(by: "id", from: "product___NODE")
+  name: contentfulProductNameTextNode @link(by: "id", from: "name___NODE")
+  summary: contentfulProductSummaryTextNode @link(by: "id", from: "summary___NODE")
+  intro: contentfulProductIntroTextNode @link(by: "id", from: "intro___NODE")
+  headingConfigurations: contentfulProductHeadingConfigurationsTextNode @link(by: "id", from: "headingConfigurations___NODE")
+  textBanner: contentfulProductTextBannerTextNode @link(by: "id", from: "textBanner___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulProductSys
+  notAvailable: Boolean
+}
+
+type ContentfulProductCategory implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  name: String
+  slug: String
+  pageTitle: String
+  thumbnail: ContentfulAsset @link(by: "id", from: "thumbnail___NODE")
+  featureCards: [ContentfulCardSimple] @link(by: "id", from: "featureCards___NODE")
+  comparisonTableHeader: [ContentfulTableHeader] @link(by: "id", from: "comparisonTableHeader___NODE")
+  comparisonTableBody: [ContentfulTableRow] @link(by: "id", from: "comparisonTableBody___NODE")
+  gallery: [ContentfulAsset] @link(by: "id", from: "gallery___NODE")
+  imageCopy: ContentfulImageCopy @link(by: "id", from: "imageCopy___NODE")
+  home_template: [ContentfulHomeTemplate] @link(by: "id", from: "home template___NODE") @proxy(from: "home template___NODE")
+  product: [ContentfulProduct] @link(by: "id", from: "product___NODE")
+  summary: contentfulProductCategorySummaryTextNode @link(by: "id", from: "summary___NODE")
+  overview: contentfulProductCategoryOverviewTextNode @link(by: "id", from: "overview___NODE")
+  textBanner: contentfulProductCategoryTextBannerTextNode @link(by: "id", from: "textBanner___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulProductCategorySys
+  upgrades: [ContentfulCardSimple] @link(by: "id", from: "upgrades___NODE")
+}
+
+type ContentfulCardSimple implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  title: String
+  image: ContentfulAsset @link(by: "id", from: "image___NODE")
+  product_category: [ContentfulProductCategory] @link(by: "id", from: "product category___NODE") @proxy(from: "product category___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulCardSimpleSys
+  become_a_distributor: [ContentfulBecomeADistributor] @link(by: "id", from: "become a distributor___NODE") @proxy(from: "become a distributor___NODE")
+  subText: contentfulCardSimpleSubTextTextNode @link(by: "id", from: "subText___NODE")
+  product: [ContentfulProduct] @link(by: "id", from: "product___NODE")
+}
+
+type ContentfulCardSimpleSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulCardSimpleSysContentType
+}
+
+type ContentfulCardSimpleSysContentType @derivedTypes {
+  sys: ContentfulCardSimpleSysContentTypeSys
+}
+
+type ContentfulCardSimpleSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulBecomeADistributor implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  name: String
+  newsletterFormHeading: String
+  testimonialsHeading: String
+  galleryHeading: String
+  heroBanner: ContentfulImageCopy @link(by: "id", from: "heroBanner___NODE")
+  copyKeyStats: ContentfulCopyKeyStats @link(by: "id", from: "copyKeyStats___NODE")
+  newsletterCopyImage: ContentfulCardSimple @link(by: "id", from: "newsletterCopyImage___NODE")
+  testimonials: [ContentfulTestimonial] @link(by: "id", from: "testimonials___NODE")
+  resourcesHeading: ContentfulHeadingCopy @link(by: "id", from: "resourcesHeading___NODE")
+  resourcesGallery: [ContentfulLinkedImage] @link(by: "id", from: "resourcesGallery___NODE")
+  imageCopy: ContentfulImageCopy @link(by: "id", from: "imageCopy___NODE")
+  galleryItems: [ContentfulAsset] @link(by: "id", from: "galleryItems___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulBecomeADistributorSys
+  resourcesGalleryHeading: String
+  listCopy: ContentfulCopyKeyStats @link(by: "id", from: "listCopy___NODE")
+}
+
+type ContentfulCopyKeyStats implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  heading: String
+  keyStats: [ContentfulKeyStats] @link(by: "id", from: "keyStats___NODE")
+  home_template: [ContentfulHomeTemplate] @link(by: "id", from: "home template___NODE") @proxy(from: "home template___NODE")
+  subText: contentfulCopyKeyStatsSubTextTextNode @link(by: "id", from: "subText___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulCopyKeyStatsSys
+  become_a_distributor: [ContentfulBecomeADistributor] @link(by: "id", from: "become a distributor___NODE") @proxy(from: "become a distributor___NODE")
+  cta: ContentfulButton @link(by: "id", from: "cta___NODE")
+}
+
+type ContentfulKeyStats implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  value: String
+  suffix: String
+  label: String
+  copy___key_stats: [ContentfulCopyKeyStats] @link(by: "id", from: "copy - key stats___NODE") @proxy(from: "copy - key stats___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulKeyStatsSys
+}
+
+type ContentfulKeyStatsSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulKeyStatsSysContentType
+}
+
+type ContentfulKeyStatsSysContentType @derivedTypes {
+  sys: ContentfulKeyStatsSysContentTypeSys
+}
+
+type ContentfulKeyStatsSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type contentfulCopyKeyStatsSubTextTextNode implements Node @derivedTypes @childOf(types: ["ContentfulCopyKeyStats"]) @dontInfer {
+  subText: String
+  sys: contentfulCopyKeyStatsSubTextTextNodeSys
+}
+
+type contentfulCopyKeyStatsSubTextTextNodeSys {
+  type: String
+}
+
+type ContentfulCopyKeyStatsSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulCopyKeyStatsSysContentType
+}
+
+type ContentfulCopyKeyStatsSysContentType @derivedTypes {
+  sys: ContentfulCopyKeyStatsSysContentTypeSys
+}
+
+type ContentfulCopyKeyStatsSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulTestimonial implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  name: String
+  jobInfo: String
+  headshot: ContentfulAsset @link(by: "id", from: "headshot___NODE")
+  image: ContentfulAsset @link(by: "id", from: "image___NODE")
+  become_a_distributor: [ContentfulBecomeADistributor] @link(by: "id", from: "become a distributor___NODE") @proxy(from: "become a distributor___NODE")
+  quote: contentfulTestimonialQuoteTextNode @link(by: "id", from: "quote___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulTestimonialSys
+}
+
+type contentfulTestimonialQuoteTextNode implements Node @derivedTypes @childOf(types: ["ContentfulTestimonial"]) @dontInfer {
+  quote: String
+  sys: contentfulTestimonialQuoteTextNodeSys
+}
+
+type contentfulTestimonialQuoteTextNodeSys {
+  type: String
+}
+
+type ContentfulTestimonialSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulTestimonialSysContentType
+}
+
+type ContentfulTestimonialSysContentType @derivedTypes {
+  sys: ContentfulTestimonialSysContentTypeSys
+}
+
+type ContentfulTestimonialSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulHeadingCopy implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  heading: String
+  our_team: [ContentfulOurTeam] @link(by: "id", from: "our team___NODE") @proxy(from: "our team___NODE")
+  copy: contentfulHeadingCopyCopyTextNode @link(by: "id", from: "copy___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulHeadingCopySys
+  become_a_distributor: [ContentfulBecomeADistributor] @link(by: "id", from: "become a distributor___NODE") @proxy(from: "become a distributor___NODE")
+  contact_us_template: [ContentfulContactUsTemplate] @link(by: "id", from: "contact us template___NODE") @proxy(from: "contact us template___NODE")
+  buy_wowsolar: [ContentfulBuyWowSolar] @link(by: "id", from: "buy wowsolar___NODE") @proxy(from: "buy wowsolar___NODE")
+  invest: [ContentfulInvest] @link(by: "id", from: "invest___NODE")
+  news_template: [ContentfulNewsTemplate] @link(by: "id", from: "news template___NODE") @proxy(from: "news template___NODE")
+}
+
+type ContentfulOurTeam implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  name: String
+  partnersHeading: String
+  heroBanner: ContentfulImageCopy @link(by: "id", from: "heroBanner___NODE")
+  introSection: ContentfulHeadingCopy @link(by: "id", from: "introSection___NODE")
+  teams: [ContentfulTeam] @link(by: "id", from: "teams___NODE")
+  imageCopy: ContentfulImageCopy @link(by: "id", from: "imageCopy___NODE")
+  partners: [ContentfulLinkedImage] @link(by: "id", from: "partners___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulOurTeamSys
+}
+
+type ContentfulTeam implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  label: String
+  members: [ContentfulPersonCard] @link(by: "id", from: "members___NODE")
+  our_team: [ContentfulOurTeam] @link(by: "id", from: "our team___NODE") @proxy(from: "our team___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulTeamSys
+}
+
+type ContentfulPersonCard implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  name: String
+  jobInfo: String
+  headshot: ContentfulAsset @link(by: "id", from: "headshot___NODE")
+  team: [ContentfulTeam] @link(by: "id", from: "team___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulPersonCardSys
+  signature: ContentfulAsset @link(by: "id", from: "signature___NODE")
+  amped_story: [ContentfulAmpedStory] @link(by: "id", from: "amped story___NODE") @proxy(from: "amped story___NODE")
+}
+
+type ContentfulPersonCardSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulPersonCardSysContentType
+}
+
+type ContentfulPersonCardSysContentType @derivedTypes {
+  sys: ContentfulPersonCardSysContentTypeSys
+}
+
+type ContentfulPersonCardSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulAmpedStory implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  name: String
+  content: ContentfulAmpedStoryContent
+  heroBanner: ContentfulImageCopy @link(by: "id", from: "heroBanner___NODE")
+  logo: ContentfulAsset @link(by: "id", from: "logo___NODE")
+  signatures: [ContentfulPersonCard] @link(by: "id", from: "signatures___NODE")
+  bottomHeading: contentfulAmpedStoryBottomHeadingTextNode @link(by: "id", from: "bottomHeading___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulAmpedStorySys
+}
+
+type ContentfulAmpedStoryContent {
+  raw: String
+  references: [ContentfulAsset] @link(by: "id", from: "references___NODE")
+}
+
+type contentfulAmpedStoryBottomHeadingTextNode implements Node @derivedTypes @childOf(types: ["ContentfulAmpedStory"]) @dontInfer {
+  bottomHeading: String
+  sys: contentfulAmpedStoryBottomHeadingTextNodeSys
+}
+
+type contentfulAmpedStoryBottomHeadingTextNodeSys {
+  type: String
+}
+
+type ContentfulAmpedStorySys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulAmpedStorySysContentType
+}
+
+type ContentfulAmpedStorySysContentType @derivedTypes {
+  sys: ContentfulAmpedStorySysContentTypeSys
+}
+
+type ContentfulAmpedStorySysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulTeamSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulTeamSysContentType
+}
+
+type ContentfulTeamSysContentType @derivedTypes {
+  sys: ContentfulTeamSysContentTypeSys
+}
+
+type ContentfulTeamSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulOurTeamSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulOurTeamSysContentType
+}
+
+type ContentfulOurTeamSysContentType @derivedTypes {
+  sys: ContentfulOurTeamSysContentTypeSys
+}
+
+type ContentfulOurTeamSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type contentfulHeadingCopyCopyTextNode implements Node @derivedTypes @childOf(types: ["ContentfulHeadingCopy"]) @dontInfer {
+  copy: String
+  sys: contentfulHeadingCopyCopyTextNodeSys
+}
+
+type contentfulHeadingCopyCopyTextNodeSys {
+  type: String
+}
+
+type ContentfulHeadingCopySys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulHeadingCopySysContentType
+}
+
+type ContentfulHeadingCopySysContentType @derivedTypes {
+  sys: ContentfulHeadingCopySysContentTypeSys
+}
+
+type ContentfulHeadingCopySysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulContactUsTemplate implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  name: String
+  formTitle: String
+  contactListHeading: String
+  heroBanner: ContentfulImageCopy @link(by: "id", from: "heroBanner___NODE")
+  introCopy: ContentfulHeadingCopy @link(by: "id", from: "introCopy___NODE")
+  contactList: [ContentfulContactCard] @link(by: "id", from: "contactList___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulContactUsTemplateSys
+}
+
+type ContentfulContactCard implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  name: String
+  emailAddress: String
+  icon: ContentfulAsset @link(by: "id", from: "icon___NODE")
+  contact_us_template: [ContentfulContactUsTemplate] @link(by: "id", from: "contact us template___NODE") @proxy(from: "contact us template___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulContactCardSys
+  phoneNumber: String
+  country_contact: [ContentfulCountryContact] @link(by: "id", from: "country contact___NODE") @proxy(from: "country contact___NODE")
+  address: String
+}
+
+type ContentfulContactCardSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulContactCardSysContentType
+}
+
+type ContentfulContactCardSysContentType @derivedTypes {
+  sys: ContentfulContactCardSysContentTypeSys
+}
+
+type ContentfulContactCardSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulCountryContact implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  name: String
+  image: ContentfulAsset @link(by: "id", from: "image___NODE")
+  contacs: [ContentfulContactCard] @link(by: "id", from: "contacs___NODE")
+  buy_wowsolar: [ContentfulBuyWowSolar] @link(by: "id", from: "buy wowsolar___NODE") @proxy(from: "buy wowsolar___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulCountryContactSys
+}
+
+type ContentfulBuyWowSolar implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  name: String
+  galleryHeading: String
+  heroBanner: ContentfulImageCopy @link(by: "id", from: "heroBanner___NODE")
+  introCopy: ContentfulHeadingCopy @link(by: "id", from: "introCopy___NODE")
+  countryListHeading: ContentfulHeadingCopy @link(by: "id", from: "countryListHeading___NODE")
+  countryList: [ContentfulCountryContact] @link(by: "id", from: "countryList___NODE")
+  imageCopy: ContentfulImageCopy @link(by: "id", from: "imageCopy___NODE")
+  gallery: [ContentfulAsset] @link(by: "id", from: "gallery___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulBuyWowSolarSys
+}
+
+type ContentfulBuyWowSolarSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulBuyWowSolarSysContentType
+}
+
+type ContentfulBuyWowSolarSysContentType @derivedTypes {
+  sys: ContentfulBuyWowSolarSysContentTypeSys
+}
+
+type ContentfulBuyWowSolarSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulCountryContactSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulCountryContactSysContentType
+}
+
+type ContentfulCountryContactSysContentType @derivedTypes {
+  sys: ContentfulCountryContactSysContentTypeSys
+}
+
+type ContentfulCountryContactSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulContactUsTemplateSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulContactUsTemplateSysContentType
+}
+
+type ContentfulContactUsTemplateSysContentType @derivedTypes {
+  sys: ContentfulContactUsTemplateSysContentTypeSys
+}
+
+type ContentfulContactUsTemplateSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulInvest implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  name: String
+  galleryHeading: String
+  heroBanner: ContentfulImageCopy @link(by: "id", from: "heroBanner___NODE")
+  resourcesHeading: ContentfulHeadingCopy @link(by: "id", from: "resourcesHeading___NODE")
+  resources: [ContentfulLinkedImage] @link(by: "id", from: "resources___NODE")
+  partnersHeading: ContentfulHeadingCopy @link(by: "id", from: "partnersHeading___NODE")
+  partners: [ContentfulLinkedImage] @link(by: "id", from: "partners___NODE")
+  imageCopy: ContentfulImageCopy @link(by: "id", from: "imageCopy___NODE")
+  gallery: [ContentfulAsset] @link(by: "id", from: "gallery___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulInvestSys
+}
+
+type ContentfulInvestSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulInvestSysContentType
+}
+
+type ContentfulInvestSysContentType @derivedTypes {
+  sys: ContentfulInvestSysContentTypeSys
+}
+
+type ContentfulInvestSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulBecomeADistributorSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulBecomeADistributorSysContentType
+}
+
+type ContentfulBecomeADistributorSysContentType @derivedTypes {
+  sys: ContentfulBecomeADistributorSysContentTypeSys
+}
+
+type ContentfulBecomeADistributorSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type contentfulCardSimpleSubTextTextNode implements Node @derivedTypes @childOf(types: ["ContentfulCardSimple"]) @dontInfer {
+  subText: String
+  sys: contentfulCardSimpleSubTextTextNodeSys
+}
+
+type contentfulCardSimpleSubTextTextNodeSys {
+  type: String
+}
+
+type ContentfulTableHeader implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  label: String
+  icon: ContentfulAsset @link(by: "id", from: "icon___NODE")
+  product_category: [ContentfulProductCategory] @link(by: "id", from: "product category___NODE") @proxy(from: "product category___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulTableHeaderSys
+}
+
+type ContentfulTableHeaderSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulTableHeaderSysContentType
+}
+
+type ContentfulTableHeaderSysContentType @derivedTypes {
+  sys: ContentfulTableHeaderSysContentTypeSys
+}
+
+type ContentfulTableHeaderSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulTableRow implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  title: String
+  content: [ContentfulTableContent] @link(by: "id", from: "content___NODE")
+  product_category: [ContentfulProductCategory] @link(by: "id", from: "product category___NODE") @proxy(from: "product category___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulTableRowSys
+}
+
+type ContentfulTableContent implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  table_row: [ContentfulTableRow] @link(by: "id", from: "table row___NODE") @proxy(from: "table row___NODE")
+  title: contentfulTableContentTitleTextNode @link(by: "id", from: "title___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulTableContentSys
+  secondContent: contentfulTableContentSecondContentTextNode @link(by: "id", from: "secondContent___NODE")
+}
+
+type contentfulTableContentTitleTextNode implements Node @derivedTypes @childOf(types: ["ContentfulTableContent"]) @dontInfer {
+  title: String
+  sys: contentfulTableContentTitleTextNodeSys
+}
+
+type contentfulTableContentTitleTextNodeSys {
+  type: String
+}
+
+type ContentfulTableContentSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulTableContentSysContentType
+}
+
+type ContentfulTableContentSysContentType @derivedTypes {
+  sys: ContentfulTableContentSysContentTypeSys
+}
+
+type ContentfulTableContentSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type contentfulTableContentSecondContentTextNode implements Node @derivedTypes @childOf(types: ["ContentfulTableContent"]) @dontInfer {
+  secondContent: String
+  sys: contentfulTableContentSecondContentTextNodeSys
+}
+
+type contentfulTableContentSecondContentTextNodeSys {
+  type: String
+}
+
+type ContentfulTableRowSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulTableRowSysContentType
+}
+
+type ContentfulTableRowSysContentType @derivedTypes {
+  sys: ContentfulTableRowSysContentTypeSys
+}
+
+type ContentfulTableRowSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type contentfulProductCategorySummaryTextNode implements Node @derivedTypes @childOf(types: ["ContentfulProductCategory"]) @dontInfer {
+  summary: String
+  sys: contentfulProductCategorySummaryTextNodeSys
+}
+
+type contentfulProductCategorySummaryTextNodeSys {
+  type: String
+}
+
+type contentfulProductCategoryOverviewTextNode implements Node @derivedTypes @childOf(types: ["ContentfulProductCategory"]) @dontInfer {
+  overview: String
+  sys: contentfulProductCategoryOverviewTextNodeSys
+}
+
+type contentfulProductCategoryOverviewTextNodeSys {
+  type: String
+}
+
+type contentfulProductCategoryTextBannerTextNode implements Node @derivedTypes @childOf(types: ["ContentfulProductCategory"]) @dontInfer {
+  textBanner: String
+  sys: contentfulProductCategoryTextBannerTextNodeSys
+}
+
+type contentfulProductCategoryTextBannerTextNodeSys {
+  type: String
+}
+
+type ContentfulProductCategorySys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulProductCategorySysContentType
+}
+
+type ContentfulProductCategorySysContentType @derivedTypes {
+  sys: ContentfulProductCategorySysContentTypeSys
+}
+
+type ContentfulProductCategorySysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulCardIcon implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  icons: [ContentfulAsset] @link(by: "id", from: "icons___NODE")
+  product: [ContentfulProduct] @link(by: "id", from: "product___NODE")
+  title: contentfulCardIconTitleTextNode @link(by: "id", from: "title___NODE")
+  subText: contentfulCardIconSubTextTextNode @link(by: "id", from: "subText___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulCardIconSys
+}
+
+type contentfulCardIconTitleTextNode implements Node @derivedTypes @childOf(types: ["ContentfulCardIcon"]) @dontInfer {
+  title: String
+  sys: contentfulCardIconTitleTextNodeSys
+}
+
+type contentfulCardIconTitleTextNodeSys {
+  type: String
+}
+
+type contentfulCardIconSubTextTextNode implements Node @derivedTypes @childOf(types: ["ContentfulCardIcon"]) @dontInfer {
+  subText: String
+  sys: contentfulCardIconSubTextTextNodeSys
+}
+
+type contentfulCardIconSubTextTextNodeSys {
+  type: String
+}
+
+type ContentfulCardIconSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulCardIconSysContentType
+}
+
+type ContentfulCardIconSysContentType @derivedTypes {
+  sys: ContentfulCardIconSysContentTypeSys
+}
+
+type ContentfulCardIconSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type contentfulProductNameTextNode implements Node @derivedTypes @childOf(types: ["ContentfulProduct"]) @dontInfer {
+  name: String
+  sys: contentfulProductNameTextNodeSys
+}
+
+type contentfulProductNameTextNodeSys {
+  type: String
+}
+
+type contentfulProductSummaryTextNode implements Node @derivedTypes @childOf(types: ["ContentfulProduct"]) @dontInfer {
+  summary: String
+  sys: contentfulProductSummaryTextNodeSys
+}
+
+type contentfulProductSummaryTextNodeSys {
+  type: String
+}
+
+type contentfulProductIntroTextNode implements Node @derivedTypes @childOf(types: ["ContentfulProduct"]) @dontInfer {
+  intro: String
+  sys: contentfulProductIntroTextNodeSys
+}
+
+type contentfulProductIntroTextNodeSys {
+  type: String
+}
+
+type contentfulProductHeadingConfigurationsTextNode implements Node @derivedTypes @childOf(types: ["ContentfulProduct"]) @dontInfer {
+  headingConfigurations: String
+  sys: contentfulProductHeadingConfigurationsTextNodeSys
+}
+
+type contentfulProductHeadingConfigurationsTextNodeSys {
+  type: String
+}
+
+type contentfulProductTextBannerTextNode implements Node @derivedTypes @childOf(types: ["ContentfulProduct"]) @dontInfer {
+  textBanner: String
+  sys: contentfulProductTextBannerTextNodeSys
+}
+
+type contentfulProductTextBannerTextNodeSys {
+  type: String
+}
+
+type ContentfulProductSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulProductSysContentType
+}
+
+type ContentfulProductSysContentType @derivedTypes {
+  sys: ContentfulProductSysContentTypeSys
+}
+
+type ContentfulProductSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulButtonSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulButtonSysContentType
+}
+
+type ContentfulButtonSysContentType @derivedTypes {
+  sys: ContentfulButtonSysContentTypeSys
+}
+
+type ContentfulButtonSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type contentfulCopyCtaSubTextTextNode implements Node @derivedTypes @childOf(types: ["ContentfulCopyCta"]) @dontInfer {
+  subText: String
+  sys: contentfulCopyCtaSubTextTextNodeSys
+}
+
+type contentfulCopyCtaSubTextTextNodeSys {
+  type: String
+}
+
+type ContentfulCopyCtaSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulCopyCtaSysContentType
+}
+
+type ContentfulCopyCtaSysContentType @derivedTypes {
+  sys: ContentfulCopyCtaSysContentTypeSys
+}
+
+type ContentfulCopyCtaSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulCard implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  title: String
+  logo: ContentfulAsset @link(by: "id", from: "logo___NODE")
+  image: ContentfulAsset @link(by: "id", from: "image___NODE")
+  icons: [ContentfulAsset] @link(by: "id", from: "icons___NODE")
+  home_template: [ContentfulHomeTemplate] @link(by: "id", from: "home template___NODE") @proxy(from: "home template___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulCardSys
+}
+
+type ContentfulCardSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulCardSysContentType
+}
+
+type ContentfulCardSysContentType @derivedTypes {
+  sys: ContentfulCardSysContentTypeSys
+}
+
+type ContentfulCardSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulCopySlider implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  heading: String
+  images: [ContentfulAsset] @link(by: "id", from: "images___NODE")
+  home_template: [ContentfulHomeTemplate] @link(by: "id", from: "home template___NODE") @proxy(from: "home template___NODE")
+  subText: contentfulCopySliderSubTextTextNode @link(by: "id", from: "subText___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulCopySliderSys
+}
+
+type contentfulCopySliderSubTextTextNode implements Node @derivedTypes @childOf(types: ["ContentfulCopySlider"]) @dontInfer {
+  subText: String
+  sys: contentfulCopySliderSubTextTextNodeSys
+}
+
+type contentfulCopySliderSubTextTextNodeSys {
+  type: String
+}
+
+type ContentfulCopySliderSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulCopySliderSysContentType
+}
+
+type ContentfulCopySliderSysContentType @derivedTypes {
+  sys: ContentfulCopySliderSysContentTypeSys
+}
+
+type ContentfulCopySliderSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type contentfulHomeTemplateHeadingOffGridProductsTextNode implements Node @derivedTypes @childOf(types: ["ContentfulHomeTemplate"]) @dontInfer {
+  headingOffGridProducts: String
+  sys: contentfulHomeTemplateHeadingOffGridProductsTextNodeSys
+}
+
+type contentfulHomeTemplateHeadingOffGridProductsTextNodeSys {
+  type: String
+}
+
+type contentfulHomeTemplateHeadingSolutionsTextNode implements Node @derivedTypes @childOf(types: ["ContentfulHomeTemplate"]) @dontInfer {
+  headingSolutions: String
+  sys: contentfulHomeTemplateHeadingSolutionsTextNodeSys
+}
+
+type contentfulHomeTemplateHeadingSolutionsTextNodeSys {
+  type: String
+}
+
+type contentfulHomeTemplateHeadingProductSliderTextNode implements Node @derivedTypes @childOf(types: ["ContentfulHomeTemplate"]) @dontInfer {
+  headingProductSlider: String
+  sys: contentfulHomeTemplateHeadingProductSliderTextNodeSys
+}
+
+type contentfulHomeTemplateHeadingProductSliderTextNodeSys {
+  type: String
+}
+
+type contentfulHomeTemplateHeadingShowcaseTextNode implements Node @derivedTypes @childOf(types: ["ContentfulHomeTemplate"]) @dontInfer {
+  headingShowcase: String
+  sys: contentfulHomeTemplateHeadingShowcaseTextNodeSys
+}
+
+type contentfulHomeTemplateHeadingShowcaseTextNodeSys {
+  type: String
+}
+
+type ContentfulHomeTemplateSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulHomeTemplateSysContentType
+}
+
+type ContentfulHomeTemplateSysContentType @derivedTypes {
+  sys: ContentfulHomeTemplateSysContentTypeSys
+}
+
+type ContentfulHomeTemplateSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulNewsTemplateSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulNewsTemplateSysContentType
+}
+
+type ContentfulNewsTemplateSysContentType @derivedTypes {
+  sys: ContentfulNewsTemplateSysContentTypeSys
+}
+
+type ContentfulNewsTemplateSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type contentfulImageCopyHeadingTextNode implements Node @derivedTypes @childOf(types: ["ContentfulImageCopy"]) @dontInfer {
+  heading: String
+  sys: contentfulImageCopyHeadingTextNodeSys
+}
+
+type contentfulImageCopyHeadingTextNodeSys {
+  type: String
+}
+
+type ContentfulImageCopySys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulImageCopySysContentType
+}
+
+type ContentfulImageCopySysContentType @derivedTypes {
+  sys: ContentfulImageCopySysContentTypeSys
+}
+
+type ContentfulImageCopySysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulInnovationsTemplate implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  name: String
+  sections: [ContentfulImageCopy] @link(by: "id", from: "sections___NODE")
+  gallery: [ContentfulAsset] @link(by: "id", from: "gallery___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulInnovationsTemplateSys
+}
+
+type ContentfulInnovationsTemplateSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulInnovationsTemplateSysContentType
+}
+
+type ContentfulInnovationsTemplateSysContentType @derivedTypes {
+  sys: ContentfulInnovationsTemplateSysContentTypeSys
+}
+
+type ContentfulInnovationsTemplateSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type contentfulImageCopySubTextTextNode implements Node @derivedTypes @childOf(types: ["ContentfulImageCopy"]) @dontInfer {
+  subText: String
+  sys: contentfulImageCopySubTextTextNodeSys
+}
+
+type contentfulImageCopySubTextTextNodeSys {
+  type: String
+}
+
+type ContentfulGlobalSettings implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  name: String
+  logo: ContentfulAsset @link(by: "id", from: "logo___NODE")
+  headerNav: [ContentfulNavGroup] @link(by: "id", from: "headerNav___NODE")
+  footerBanner: ContentfulImageCopy @link(by: "id", from: "footerBanner___NODE")
+  footerLogo: ContentfulAsset @link(by: "id", from: "footerLogo___NODE")
+  footerNav: [ContentfulNavGroup] @link(by: "id", from: "footerNav___NODE")
+  legalLinks: [ContentfulNavLink] @link(by: "id", from: "legalLinks___NODE")
+  copyright: contentfulGlobalSettingsCopyrightTextNode @link(by: "id", from: "copyright___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulGlobalSettingsSys
+}
+
+type ContentfulNavGroup implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  name: String
+  url: String
+  icon: ContentfulAsset @link(by: "id", from: "icon___NODE")
+  subLinks: [ContentfulNavGroupContentfulNavLinkUnion] @link(by: "id", from: "subLinks___NODE")
+  nav_group: [ContentfulNavGroup] @link(by: "id", from: "nav group___NODE") @proxy(from: "nav group___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulNavGroupSys
+  global_settings: [ContentfulGlobalSettings] @link(by: "id", from: "global settings___NODE") @proxy(from: "global settings___NODE")
+}
+
+union ContentfulNavGroupContentfulNavLinkUnion = ContentfulNavGroup | ContentfulNavLink
+
+type ContentfulNavGroupSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulNavGroupSysContentType
+}
+
+type ContentfulNavGroupSysContentType @derivedTypes {
+  sys: ContentfulNavGroupSysContentTypeSys
+}
+
+type ContentfulNavGroupSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulNavLink implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+  contentful_id: String!
+  node_locale: String!
+  url: String
+  nav_group: [ContentfulNavGroup] @link(by: "id", from: "nav group___NODE") @proxy(from: "nav group___NODE")
+  label: contentfulNavLinkLabelTextNode @link(by: "id", from: "label___NODE")
+  spaceId: String
+  createdAt: Date @dateformat
+  updatedAt: Date @dateformat
+  sys: ContentfulNavLinkSys
+  icon: ContentfulAsset @link(by: "id", from: "icon___NODE")
+  global_settings: [ContentfulGlobalSettings] @link(by: "id", from: "global settings___NODE") @proxy(from: "global settings___NODE")
+}
+
+type contentfulNavLinkLabelTextNode implements Node @derivedTypes @childOf(types: ["ContentfulNavLink"]) @dontInfer {
+  label: String
+  sys: contentfulNavLinkLabelTextNodeSys
+}
+
+type contentfulNavLinkLabelTextNodeSys {
+  type: String
+}
+
+type ContentfulNavLinkSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulNavLinkSysContentType
+}
+
+type ContentfulNavLinkSysContentType @derivedTypes {
+  sys: ContentfulNavLinkSysContentTypeSys
+}
+
+type ContentfulNavLinkSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type contentfulGlobalSettingsCopyrightTextNode implements Node @derivedTypes @childOf(types: ["ContentfulGlobalSettings"]) @dontInfer {
+  copyright: String
+  sys: contentfulGlobalSettingsCopyrightTextNodeSys
+}
+
+type contentfulGlobalSettingsCopyrightTextNodeSys {
+  type: String
+}
+
+type ContentfulGlobalSettingsSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulGlobalSettingsSysContentType
+}
+
+type ContentfulGlobalSettingsSysContentType @derivedTypes {
+  sys: ContentfulGlobalSettingsSysContentTypeSys
+}
+
+type ContentfulGlobalSettingsSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type MarkdownHeading {
+  id: String
+  value: String
+  depth: Int
+}
+
+enum MarkdownHeadingLevels {
+  h1
+  h2
+  h3
+  h4
+  h5
+  h6
+}
+
+enum MarkdownExcerptFormats {
+  PLAIN
+  HTML
+  MARKDOWN
+}
+
+type MarkdownWordCount {
+  paragraphs: Int
+  sentences: Int
+  words: Int
+}
+
+type MarkdownRemark implements Node @childOf(mimeTypes: ["text/markdown", "text/x-markdown"], types: ["contentfulTestimonialQuoteTextNode", "contentfulTableContentTitleTextNode", "contentfulTableContentSecondContentTextNode", "contentfulProductTextBannerTextNode", "contentfulProductSummaryTextNode", "contentfulProductNameTextNode", "contentfulProductIntroTextNode", "contentfulProductHeadingConfigurationsTextNode", "contentfulProductCategoryTextBannerTextNode", "contentfulProductCategorySummaryTextNode", "contentfulProductCategoryOverviewTextNode", "contentfulNavLinkLabelTextNode", "contentfulLinkedImageTitleTextNode", "contentfulImageCopySubTextTextNode", "contentfulImageCopyHeadingTextNode", "contentfulHomeTemplateHeadingSolutionsTextNode", "contentfulHomeTemplateHeadingShowcaseTextNode", "contentfulHomeTemplateHeadingProductSliderTextNode", "contentfulHomeTemplateHeadingOffGridProductsTextNode", "contentfulHeadingCopyCopyTextNode", "contentfulGlobalSettingsCopyrightTextNode", "contentfulCopySliderSubTextTextNode", "contentfulCopyKeyStatsSubTextTextNode", "contentfulCopyCtaSubTextTextNode", "contentfulCardSimpleSubTextTextNode", "contentfulCardIconTitleTextNode", "contentfulCardIconSubTextTextNode", "contentfulAmpedStoryBottomHeadingTextNode"]) @derivedTypes @dontInfer {
+  frontmatter: MarkdownRemarkFrontmatter
+  excerpt: String
+  rawMarkdownBody: String
+}
+
+type MarkdownRemarkFrontmatter {
+  title: String
+}
+
+enum ImageFormat {
+  NO_CHANGE
+  AUTO
+  JPG
+  PNG
+  WEBP
+  AVIF
+}
+
+enum ImageFit {
+  COVER
+  CONTAIN
+  FILL
+  INSIDE
+  OUTSIDE
+}
+
+enum ImageLayout {
+  FIXED
+  FULL_WIDTH
+  CONSTRAINED
+}
+
+enum ImageCropFocus {
+  CENTER
+  NORTH
+  NORTHEAST
+  EAST
+  SOUTHEAST
+  SOUTH
+  SOUTHWEST
+  WEST
+  NORTHWEST
+  ENTROPY
+  ATTENTION
+}
+
+input DuotoneGradient {
+  highlight: String!
+  shadow: String!
+  opacity: Int
+}
+
+enum PotraceTurnPolicy {
+  TURNPOLICY_BLACK
+  TURNPOLICY_WHITE
+  TURNPOLICY_LEFT
+  TURNPOLICY_RIGHT
+  TURNPOLICY_MINORITY
+  TURNPOLICY_MAJORITY
+}
+
+input Potrace {
+  turnPolicy: PotraceTurnPolicy
+  turdSize: Float
+  alphaMax: Float
+  optCurve: Boolean
+  optTolerance: Float
+  threshold: Int
+  blackOnWhite: Boolean
+  color: String
+  background: String
+}
+
+type ImageSharpFixed {
+  base64: String
+  tracedSVG: String
+  aspectRatio: Float
+  width: Float!
+  height: Float!
+  src: String!
+  srcSet: String!
+  srcWebp: String
+  srcSetWebp: String
+  originalName: String
+}
+
+type ImageSharpFluid {
+  base64: String
+  tracedSVG: String
+  aspectRatio: Float!
+  src: String!
+  srcSet: String!
+  srcWebp: String
+  srcSetWebp: String
+  sizes: String!
+  originalImg: String
+  originalName: String
+  presentationWidth: Int!
+  presentationHeight: Int!
+}
+
+enum ImagePlaceholder {
+  DOMINANT_COLOR
+  TRACED_SVG
+  BLURRED
+  NONE
+}
+
+input BlurredOptions {
+  """Width of the generated low-res preview. Default is 20px"""
+  width: Int
+
+  """
+  Force the output format for the low-res preview. Default is to use the same
+  format as the input. You should rarely need to change this
+  """
+  toFormat: ImageFormat
+}
+
+input JPGOptions {
+  quality: Int
+  progressive: Boolean = true
+}
+
+input PNGOptions {
+  quality: Int
+  compressionSpeed: Int = 4
+}
+
+input WebPOptions {
+  quality: Int
+}
+
+input AVIFOptions {
+  quality: Int
+  lossless: Boolean
+  speed: Int
+}
+
+input TransformOptions {
+  grayscale: Boolean
+  duotone: DuotoneGradient
+  rotate: Int
+  trim: Float
+  cropFocus: ImageCropFocus = ATTENTION
+  fit: ImageFit = COVER
+}
+
+type ImageSharpOriginal {
+  width: Float
+  height: Float
+  src: String
+}
+
+type ImageSharpResize {
+  src: String
+  tracedSVG: String
+  width: Int
+  height: Int
+  aspectRatio: Float
+  originalName: String
+}
+
+type ImageSharp implements Node @childOf(types: ["File"]) @dontInfer {
+  fixed(width: Int, height: Int, base64Width: Int, jpegProgressive: Boolean = true, pngCompressionSpeed: Int = 4, grayscale: Boolean, duotone: DuotoneGradient, traceSVG: Potrace, quality: Int, jpegQuality: Int, pngQuality: Int, webpQuality: Int, toFormat: ImageFormat, toFormatBase64: ImageFormat, cropFocus: ImageCropFocus = ATTENTION, fit: ImageFit = COVER, background: String = "rgba(0,0,0,1)", rotate: Int, trim: Float): ImageSharpFixed
+  fluid(
+    maxWidth: Int
+    maxHeight: Int
+    base64Width: Int
+    grayscale: Boolean
+    jpegProgressive: Boolean = true
+    pngCompressionSpeed: Int = 4
+    duotone: DuotoneGradient
+    traceSVG: Potrace
+    quality: Int
+    jpegQuality: Int
+    pngQuality: Int
+    webpQuality: Int
+    toFormat: ImageFormat
+    toFormatBase64: ImageFormat
+    cropFocus: ImageCropFocus = ATTENTION
+    fit: ImageFit = COVER
+    background: String = "rgba(0,0,0,1)"
+    rotate: Int
+    trim: Float
+    sizes: String
+
+    """
+    A list of image widths to be generated. Example: [ 200, 340, 520, 890 ]
+    """
+    srcSetBreakpoints: [Int] = []
+  ): ImageSharpFluid
+  gatsbyImageData(
+    """
+    The layout for the image.
+    FIXED: A static image sized, that does not resize according to the screen width
+    FULL_WIDTH: The image resizes to fit its container. Pass a "sizes" option if
+    it isn't going to be the full width of the screen.
+    CONSTRAINED: Resizes to fit its container, up to a maximum width, at which point it will remain fixed in size.
+    """
+    layout: ImageLayout = CONSTRAINED
+
+    """
+    The display width of the generated image for layout = FIXED, and the maximum
+    display width of the largest image for layout = CONSTRAINED.
+    Ignored if layout = FLUID.
+    """
+    width: Int
+
+    """
+    The display height of the generated image for layout = FIXED, and the
+    maximum display height of the largest image for layout = CONSTRAINED.
+    The image will be cropped if the aspect ratio does not match the source
+    image. If omitted, it is calculated from the supplied width,
+    matching the aspect ratio of the source image.
+    """
+    height: Int
+
+    """
+    If set along with width or height, this will set the value of the other
+    dimension to match the provided aspect ratio, cropping the image if needed.
+    If neither width or height is provided, height will be set based on the intrinsic width of the source image.
+    """
+    aspectRatio: Float
+
+    """
+    Format of generated placeholder image, displayed while the main image loads.
+    BLURRED: a blurred, low resolution image, encoded as a base64 data URI (default)
+    DOMINANT_COLOR: a solid color, calculated from the dominant color of the image.
+    TRACED_SVG: a low-resolution traced SVG of the image.
+    NONE: no placeholder. Set "background" to use a fixed background color.
+    """
+    placeholder: ImagePlaceholder
+
+    """
+    Options for the low-resolution placeholder image. Set placeholder to "BLURRED" to use this
+    """
+    blurredOptions: BlurredOptions
+
+    """
+    Options for traced placeholder SVGs. You also should set placeholder to "TRACED_SVG".
+    """
+    tracedSVGOptions: Potrace
+
+    """
+    The image formats to generate. Valid values are "AUTO" (meaning the same
+    format as the source image), "JPG", "PNG", "WEBP" and "AVIF".
+    The default value is [AUTO, WEBP], and you should rarely need to change
+    this. Take care if you specify JPG or PNG when you do
+    not know the formats of the source images, as this could lead to unwanted
+    results such as converting JPEGs to PNGs. Specifying
+    both PNG and JPG is not supported and will be ignored.
+    """
+    formats: [ImageFormat]
+
+    """
+    A list of image pixel densities to generate. It will never generate images
+    larger than the source, and will always include a 1x image.
+    Default is [ 1, 2 ] for FIXED images, meaning 1x and 2x and [0.25, 0.5, 1,
+    2] for CONSTRAINED. In this case, an image with a constrained layout
+    and width = 400 would generate images at 100, 200, 400 and 800px wide.
+    Ignored for FULL_WIDTH images, which use breakpoints instead
+    """
+    outputPixelDensities: [Float]
+
+    """
+    Specifies the image widths to generate. For FIXED and CONSTRAINED images it
+    is better to allow these to be determined automatically,
+    based on the image size. For FULL_WIDTH images this can be used to override
+    the default, which is [750, 1080, 1366, 1920].
+    It will never generate any images larger than the source.
+    """
+    breakpoints: [Int]
+
+    """
+    The "sizes" property, passed to the img tag. This describes the display size of the image.
+    This does not affect the generated images, but is used by the browser to decide which images to download.
+    You should usually leave this blank, and a suitable value will be calculated. The exception is if a FULL_WIDTH image
+    does not actually span the full width of the screen, in which case you should pass the correct size here.
+    """
+    sizes: String
+
+    """The default quality. This is overridden by any format-specific options"""
+    quality: Int
+
+    """Options to pass to sharp when generating JPG images."""
+    jpgOptions: JPGOptions
+
+    """Options to pass to sharp when generating PNG images."""
+    pngOptions: PNGOptions
+
+    """Options to pass to sharp when generating WebP images."""
+    webpOptions: WebPOptions
+
+    """Options to pass to sharp when generating AVIF images."""
+    avifOptions: AVIFOptions
+
+    """
+    Options to pass to sharp to control cropping and other image manipulations.
+    """
+    transformOptions: TransformOptions
+
+    """
+    Background color applied to the wrapper. Also passed to sharp to use as a
+    background when "letterboxing" an image to another aspect ratio.
+    """
+    backgroundColor: String
+  ): JSON!
+  original: ImageSharpOriginal
+  resize(width: Int, height: Int, quality: Int, jpegQuality: Int, pngQuality: Int, webpQuality: Int, jpegProgressive: Boolean = true, pngCompressionLevel: Int = 9, pngCompressionSpeed: Int = 4, grayscale: Boolean, duotone: DuotoneGradient, base64: Boolean, traceSVG: Potrace, toFormat: ImageFormat, cropFocus: ImageCropFocus = ATTENTION, fit: ImageFit = COVER, background: String = "rgba(0,0,0,1)", rotate: Int, trim: Float): ImageSharpResize
+}
+
+type ContentfulContentType implements Node @derivedTypes @dontInfer {
+  name: String
+  displayField: String
+  description: String
+  sys: ContentfulContentTypeSys
+}
+
+type ContentfulContentTypeSys {
+  type: String
+}

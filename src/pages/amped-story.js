@@ -9,7 +9,7 @@ import RichText from "../components/rich-text";
 
 export default function AmpedStory({ data }) {
     const { contentfulAmpedStory } = data;
-    const { name, heroBanner, content, bottomHeading, signatures } = contentfulAmpedStory;
+    const { name, heroBanner, logo, content, bottomHeading, signatures } = contentfulAmpedStory;
 
     return (
         <Layout pageTitle={name}>
@@ -18,7 +18,21 @@ export default function AmpedStory({ data }) {
 
             {/* CONTENT */}
             <div tw="container px-6 lg:px-4 mx-auto">
-                <div tw="relative lg:w-7/12 mx-auto py-14 lg:py-32">
+                <div tw="relative lg:w-7/12 mx-auto py-20 lg:py-32">
+                    {/* LOGO */}
+                    {logo?.gatsbyImageData ? (
+                        <div tw="pb-14 lg:pb-24">
+                            <GatsbyImage tw="w-[80%] lg:w-auto" image={logo?.gatsbyImageData} alt={logo?.title} />
+                        </div>
+                    ) : logo?.file?.url ? (
+                        <div tw="pb-16 lg:pb-20">
+                            <img tw="w-[80%] lg:w-auto" loading="lazy" width={logo?.width} height={logo?.height} src={logo?.file?.url} alt={logo?.title} />
+                        </div>
+                    ) : (
+                        ""
+                    )}
+
+                    {/* RICH TEXT */}
                     <div tw="text-lg lg:text-px18 2xl:text-px21 text-default lg:mb-32 mb-16 mx-auto">
                         <RichText content={content} />
                     </div>
@@ -89,6 +103,9 @@ export const query = graphql`
             name
             heroBanner {
                 ...ImageCopy
+            }
+            logo {
+                ...Image
             }
             content {
                 raw

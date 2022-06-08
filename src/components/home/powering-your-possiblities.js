@@ -73,7 +73,7 @@ export function PoweringYourPossibilities({ heading, categories }) {
     }
 
     return (
-        <div tw="pb-0 mb-8 lg:pb-48">
+        <div tw="pb-0 mb-8 lg:pb-32 2xl:pb-48">
             <div>
                 <div tw="container px-4 mx-auto text-px36 lg:text-[56px] 2xl:text-px72 font-sf-light">
                     <div

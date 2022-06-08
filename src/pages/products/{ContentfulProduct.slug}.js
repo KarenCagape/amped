@@ -45,6 +45,7 @@ export default function Product({ data }) {
     const [products, setProducts] = React.useState();
 
     const detailRef = React.useRef();
+
     React.useEffect(() => {
         if (relatedProducts) {
             setProducts(() => relatedProducts.map((item) => ({ node: { ...item } })));
@@ -194,10 +195,10 @@ export default function Product({ data }) {
                                                     key={idx2}
                                                     image={icon?.gatsbyImageData}
                                                     alt={icon?.title}
-                                                    tw="max-w-[44px] lg:max-w-[72px]"
+                                                    tw="w-[44px] lg:w-[72px]"
                                                 />
                                             ) : (
-                                                <img key={idx2} src={icon?.file?.url} alt={icon?.title} tw="max-w-[44px] lg:max-w-[72px]" />
+                                                <img key={idx2} src={icon?.file?.url} alt={icon?.title} tw="w-[44px] lg:w-[72px]" />
                                             )
                                         )}
                                     />
@@ -213,9 +214,9 @@ export default function Product({ data }) {
                                         tw="w-full h-full"
                                         icon={
                                             image?.gatsbyImageData ? (
-                                                <GatsbyImage image={image?.gatsbyImageData} alt={image?.title} tw="max-w-[72px]" />
+                                                <GatsbyImage image={image?.gatsbyImageData} alt={image?.title} tw="w-[72px]" />
                                             ) : (
-                                                <img src={image?.file?.url} alt={image?.title} tw="max-w-[72px]" />
+                                                <img src={image?.file?.url} alt={image?.title} tw="w-[72px]" />
                                             )
                                         }
                                         content={title}

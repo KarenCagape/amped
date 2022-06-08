@@ -69,7 +69,7 @@ export default function Testimonials({ heading, testimonials }) {
     const sliderRef = React.useRef();
 
     return (
-        <div tw="overflow-x-hidden py-10 lg:pt-0 lg:pb-48">
+        <div tw="overflow-x-hidden py-10 lg:pt-0 lg:pb-24 2xl:pb-36">
             <div tw="px-4 container m-auto">
                 <div tw="grid grid-cols-1 lg:grid-cols-5">
                     <div tw="col-span-2 mb-10 lg:mb-0 bg-white relative z-10 before:lg:content-[''] before:top-0 before:right-0 before:w-[50vw] before:h-full before:absolute before:bg-white lg:pr-[12%] 2xl:pr-[20%] lg:flex lg:flex-row">

@@ -5,7 +5,7 @@ import { GatsbyImage } from "gatsby-plugin-image";
 
 export function HowWeDoIt({ heading, subText, button, cards }) {
     return (
-        <div tw="rounded py-16 lg:py-48 bg-default">
+        <div tw="rounded py-16 lg:py-32 2xl:py-48 bg-default">
             <div tw="container px-4 mx-auto">
                 <div tw="font-sf-regular mb-12 lg:mb-0">
                     <div
