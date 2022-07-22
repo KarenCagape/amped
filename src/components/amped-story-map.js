@@ -31,8 +31,6 @@ export default function AmpedStoryMap({ images, ...rest }) {
         dotsIndicator.current.style.opacity = 0;
     }
 
-    console.log(images[currentDotIdx - 1])
-
     function handleMouseOut(e) {
         imageContainerRef.current.style.opacity = 0;
         isHovering.current = false;
