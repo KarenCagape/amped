@@ -1,4 +1,4 @@
-const React = require("react");
+/* const React = require("react");
 
 const PreBodyComponents = [
     <div style={{ position: "relative", width: "100%", outline: "1px solid #00f", overflow: "hidden" }}>
@@ -16,3 +16,4 @@ const PreBodyComponents = [
 exports.onRenderBody = ({ setPreBodyComponents }) => {
     setPreBodyComponents(PreBodyComponents);
 };
+ */
