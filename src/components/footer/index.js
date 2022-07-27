@@ -3,6 +3,11 @@ import "twin.macro";
 import LinkCategory from "./link-category";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
+import addToMailchimp from "gatsby-plugin-mailchimp";
+import { useForm } from "react-hook-form";
+
+import Button from "../_/button";
+import TextInput from "../text-input";
 
 function CategorizedLink({ name = "", links = [] }) {
     if (!links.length) {
@@ -66,12 +71,33 @@ export function Footer() {
     `);
     const { contentfulGlobalSettings } = data;
     const { footerLogo, footerNav, copyright, legalLinks } = contentfulGlobalSettings;
+    const [isMcSubmitted, setMcSubmitted] = React.useState(false);
+    const [isAlertVisible, setIsAlertVisible] = React.useState(false);
+
+    const {
+        handleSubmit,
+        register,
+        formState: { errors },
+        reset,
+    } = useForm();
+    const onSubmit = (data) => {
+        if (data?.email) {
+            addToMailchimp(data.email).then((data) => {
+                setMcSubmitted(data);
+                setIsAlertVisible(true);
+                setTimeout(() => {
+                    setIsAlertVisible(false);
+                    reset();
+                }, 3000);
+            });
+        }
+    };
 
     return (
         <div tw="p-4 lg:p-0 bg-default">
             <div tw="container px-4 mx-auto">
                 <div tw="xl:flex justify-between pt-12 lg:pt-24 xl:pt-40">
-                    <div tw="text-center lg:text-left lg:mb-0 text-center mb-8 flex-[0 0 auto] xl:pr-8 lg:mb-16 xl:mb-0">
+                    <div tw="text-center lg:text-left lg:mb-0 text-center mb-8 flex-[1] xl:pr-8 lg:mb-16 xl:mb-0">
                         <Link tw="inline-block" to="/">
                             {footerLogo?.gatsbyImageData ? (
                                 <GatsbyImage tw="w-full" image={footerLogo?.gatsbyImageData} alt={footerLogo?.title} />
@@ -80,20 +106,55 @@ export function Footer() {
                             )}
                         </Link>
                     </div>
-                    <div tw="lg:flex justify-between xl:flex-[1] lg:gap-6">
-                        {footerNav?.length
-                            ? footerNav?.map(({ name, url, subLinks }, idx) => (
-                                  <div key={idx}>
-                                      <CategorizedLink
-                                          name={<span tw="uppercase">{name}</span>}
-                                          links={subLinks?.map((sub) => ({
-                                              text: sub?.label?.childMarkdownRemark?.html.replace(/<[^>]+>/g, ""),
-                                              path: sub?.url,
-                                          }))}
-                                      />
-                                  </div>
-                              ))
-                            : ""}
+                    <div tw="xl:flex-[0 0 auto]">
+                        <div tw="lg:flex lg:justify-end lg:gap-24 xl:gap-28">
+                            {footerNav?.length
+                                ? footerNav?.map(({ name, url, subLinks }, idx) => (
+                                      <div key={idx}>
+                                          <CategorizedLink
+                                              name={<span tw="uppercase">{name}</span>}
+                                              links={subLinks?.map((sub) => ({
+                                                  text: sub?.label?.childMarkdownRemark?.html.replace(/<[^>]+>/g, ""),
+                                                  path: sub?.url,
+                                              }))}
+                                          />
+                                      </div>
+                                  ))
+                                : ""}
+                        </div>
+                        <div tw="px-10 py-10 bg-black bg-opacity-30 text-white my-10">
+                            <form tw="" onSubmit={handleSubmit(onSubmit)}>
+                                <div tw="text-px14 lg:text-px16 mb-2 lg:mb-4">
+                                    Be the first to get the latest updates and special offers from Amped
+                                </div>
+                                <div tw="md:flex md:gap-8 mb-2 lg:justify-end items-end">
+                                    <div tw="md:flex-1 mb-3 md:mb-0">
+                                        <TextInput
+                                            {...register("email")}
+                                            required
+                                            tw="w-full py-3 bg-charcoal-70 bg-opacity-10"
+                                            placeholder="Enter you email"
+                                        />
+                                        {errors["email"] && (
+                                            <small tw="text-[#FE3636]">{errors["email"]?.type === "required" && `Email is required`}</small>
+                                        )}
+                                    </div>
+                                    <div tw="md:flex-[0 0 auto]">
+                                        <Button tw="w-full lg:w-auto bg-white text-black">SUBSCRIBE</Button>
+                                    </div>
+                                </div>
+                                {isMcSubmitted?.result === "success" && isAlertVisible ? (
+                                    <div tw="bg-green-400 px-4 py-2 text-white">Form successfully submitted!</div>
+                                ) : (
+                                    ""
+                                )}
+                                {isMcSubmitted?.result === "error" && isAlertVisible ? (
+                                    <div tw="bg-red-400 px-4 py-2 text-white">There was an error when submitting the form.</div>
+                                ) : (
+                                    ""
+                                )}
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div>
