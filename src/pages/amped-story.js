@@ -109,11 +109,6 @@ export const query = graphql`
             }
             content {
                 raw
-                references {
-                    __typename
-                    contentful_id
-                    ...Image
-                }
             }
             bottomHeading {
                 childMarkdownRemark {
