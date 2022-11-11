@@ -1,7 +1,7 @@
 const React = require("react");
 
 const PreBodyComponents = [
-    <div style={{ position: "relative", width: "100%", outline: "1px solid #00f", overflow: "hidden" }}>
+    <div key={0} style={{ position: "relative", width: "100%", outline: "1px solid #00f", overflow: "hidden" }}>
         <div style={{ position: "relative", float: "left", height: "67px", padding: "0", margin: "0", border: "0", width: "250px" }}></div>
         <div style={{ position: "relative", float: "left", height: "54px", padding: "0", margin: "0", border: "0", width: "250px" }}></div>
         <div style={{ position: "relative", clear: "both", height: "1px", padding: "0", margin: "0", border: "0", width: "100%" }}></div>
@@ -14,7 +14,7 @@ const PreBodyComponents = [
 ];
 
 const HeadComponents = [
-    <script
+    <script key={0}
         dangerouslySetInnerHTML={{
             __html: ` !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
