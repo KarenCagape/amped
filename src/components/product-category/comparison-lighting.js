@@ -28,7 +28,7 @@ export function ComparisonTable({ headers, rows }) {
                                 ) : (
                                     ""
                                 )}
-                                {label ? <div>{label}</div> : ""}
+                                {label ? <div dangerouslySetInnerHTML={{ __html: label }} /> : ""}
                             </th>
                         ))}
                     </tr>
