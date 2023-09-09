@@ -69,7 +69,7 @@ export default function Overview({ overview, featureCards }) {
                                                 <img src={image?.file?.url} alt={image?.title} tw="max-w-[96px]" />
                                             )
                                         }
-                                        content={<div>{title}</div>}
+                                        content={title}
                                     />
                                 );
                             })}
@@ -107,7 +107,7 @@ export default function Overview({ overview, featureCards }) {
                                                     <img src={image?.file?.url} alt={image?.title} tw="max-w-[96px]" />
                                                 )
                                             }
-                                            content={<div>{title}</div>}
+                                            content={title}
                                         />
                                     );
                                 })}

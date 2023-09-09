@@ -6,7 +6,27 @@ import ProductSlider from "../sections/product-slider";
 import { SubHeader } from "../_/header";
 import Button from "../_/button";
 
+const sortProductsByName = (a, b) => {
+    const nameA = a.node?.name?.childMarkdownRemark?.excerpt?.toUpperCase();
+    const nameB = b.node?.name?.childMarkdownRemark?.excerpt?.toUpperCase();
+    const numberA = a.node?.name?.childMarkdownRemark?.excerpt?.replace(/\D/g, "");
+    const numberB = b.node?.name?.childMarkdownRemark?.excerpt?.replace(/\D/g, "");
+
+    if (numberA === numberB) {
+        if (nameA > nameB) {
+            return 1;
+        } else if (nameA < nameB) {
+            return -1;
+        }
+
+        return 0;
+    } else {
+        return numberA - numberB;
+    }
+};
+
 export default function ProductList({ products }) {
+    const sorted = products.sort(sortProductsByName);
     return (
         <div tw="pb-12 pt-12 lg:pt-0 px-4 lg:px-0 lg:pb-48">
             {products?.length > 1 ? (
@@ -14,7 +34,7 @@ export default function ProductList({ products }) {
                     <div tw="container px-4 mx-auto">
                         <SubHeader tw="mb-6 lg:mb-16">Products</SubHeader>
                     </div>
-                    <ProductSlider products={products} />
+                    <ProductSlider products={sorted} />
                 </>
             ) : products?.length === 1 ? (
                 <div tw="container px-4 mx-auto">
