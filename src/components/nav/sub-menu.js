@@ -9,7 +9,7 @@ export function SubMenu({ submenu, ...rest }) {
     return (
         <div tw="absolute z-20 w-full left-0 top-full bg-white" {...rest}>
             <div tw="container px-4 mx-auto">
-                <div tw="py-16 2xl:py-20 grid grid-cols-4 gap-4 2xl:gap-8">
+                <div tw="py-16 2xl:py-20 grid grid-cols-5 gap-4 2xl:gap-6">
                     {submenu?.length
                         ? submenu?.map(({ name, url, icon, subLinks }, idx) => (
                               <div tw="flex gap-4" key={idx}>

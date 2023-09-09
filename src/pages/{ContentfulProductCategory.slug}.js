@@ -170,6 +170,7 @@ export const query = graphql`
                     name {
                         childMarkdownRemark {
                             html
+                            excerpt
                         }
                     }
                     summary {

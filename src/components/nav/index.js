@@ -120,7 +120,7 @@ export function Nav() {
                                 ? headerNav?.map(({ name, url, subLinks }, idx) => (
                                       <div key={idx}>
                                           <NavLink
-                                              opened={false}
+                                              opened={showSubmenu[idx]}
                                               text={name}
                                               path={url}
                                               onClick={!url ? (e) => e.preventDefault() : ""}
